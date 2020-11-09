@@ -1,0 +1,145 @@
+1- event/caterer/party/resturant/etc donate excessive food
+2- donate money to site(general or specific)
+
+4- donate food on special ocassion(general or specific)
+5- quality checking (1)donate food 2)bio-gas-plant)
+6- volunteer registration
+7- charity events 
+8- admin can register slum areas
+9- donor/receiver registration
+
+
+[3- re-sells grocery foods approaching their best-before date at a discount *]
+
+
+panel- admin, donor, receiver 
+
+1-->Role
+-id -int
+-name(admin,donor,reciver,volunteer) -varchar
+-isDeleted -boolean
+-updatedAt -boolean
+-createdAt -boolean
+
+2-->user
+-id 
+-name
+-username
+-email
+-password
+-phone number
+-address
+-landmark id
+-pincode
+-role id
+-isDeleted
+-updatedAt
+-createdAt
+
+3-->volunteer
+-id
+-user id
+-DOB
+-gender
+-profession
+-skillset
+-weekdays (morning,afternoon,evening,night)
+-weekends
+-vehicle mode
+-isDeleted
+-updatedAt
+-createdAt
+
+4-->reciever category
+-id
+-name(old aged home,orphnage,goverment school/hospital,slums,homeless,bio-gas plant)
+-isDeleted
+-updatedAt
+-createdAt
+
+5-->reciever
+-id
+-category id
+-user id
+-population
+-isDeleted
+-updatedAt
+-createdAt
+
+6-->food listing
+-id
+-date
+-time(morning,noon,night)
+-donor-id
+-event
+-reciever-id
+-plates
+-isDeleted
+-updatedAt
+-createdAt
+
+7-->food delivery
+-id
+-food listing id
+-volunteer id
+-status
+-isDeleted
+-updatedAt
+-createdAt
+
+8-->food request
+-id
+-date
+-time
+-plates
+-reciever id
+-isDeleted
+-updatedAt
+-createdAt
+
+9-->donation
+-id
+-date
+-amount
+-reciever-id
+-isDeleted
+-updatedAt
+-createdAt
+
+10-->charity event
+-id
+-title
+-date
+-time
+-location
+-purpose
+-description
+-banner
+-recieved funds
+-isDeleted
+-updatedAt
+-createdAt
+
+11-->landmark
+-id
+-name
+-pincode
+-latitude
+-longitude
+-isDeleted
+-updatedAt
+-createdAt
+
+12-->landmark manager
+-id
+-volunteer id
+-landmark id
+-isDeleted
+-updatedAt
+-createdAt
+
+
+
+
+
+
