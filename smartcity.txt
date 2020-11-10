@@ -12,7 +12,7 @@
 [3- re-sells grocery foods approaching their best-before date at a discount *]
 
 
-panel- admin, donor, receiver 
+panel- admin, donor, volunteer
 
 1-->Role
 -id -int
@@ -65,6 +65,8 @@ panel- admin, donor, receiver
 -isDeleted
 -updatedAt
 -createdAt
+
+
 
 6-->food listing
 -id
@@ -138,7 +140,99 @@ panel- admin, donor, receiver
 -updatedAt
 -createdAt
 
+13-->portfolio
+-id
+-image
+-description
+-isDeleted
+-updatedAt
+-createdAt
 
+14-->donor category
+-id
+-category(event , caterer , resturant ,other....)
+-isDeleted
+-updatedAt
+-createdAt
+
+15-->donor
+-id
+-donor category id
+-userid
+-isDeleted
+-updatedAt
+-createdAt
+
+
+------------------------Admin panel----------------
+
+login-logout
+edit profile
+change password
+forget password
+dashboard
+-volunteers
+	list of volunteer
+	assign area to volunteer (landmark manager)
+-reciever category management
+	add
+	list
+-food request
+	enter food request (requested by reciever via phone)
+	list of food request
+-donation
+	list of food donate
+	list of money donation
+
+-list of food delivered
+-event management
+	add event
+	list of event(edit,delete)
+-portfolio management
+	add
+	list
+-graph
+-report
+
+----------------volunteer--------------------
+login-logout
+edit profile
+change password
+forget password
+dashboard
+-reciever mangement
+	add
+	list
+-food managemnt
+	list of request
+	list of donate food
+	quality checking + redirect food to reciever
+-manage delivery
+	list of volunteers (area) + assign pickup and delivery
+-portfolio management
+	add
+	list
+-graph
+-report
+
+--------------------donor------------------
+
+-menu
+	home
+	events
+	portfolio
+	team
+	volunteer
+	contact
+	donate  (donate food , donate money page display) (donate food -> login/signup)
+
+-sidebar (only if donor login)
+	donation history
+	new donation (donor category wise form)
+	logout
+	
+		
+	
 
 
 
