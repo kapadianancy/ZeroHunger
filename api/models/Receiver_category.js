@@ -25,6 +25,12 @@ const recieverCatSchema=mongoose.Schema({
     timestamps: true,
   });
 
-const Reciever_category = mongoose.model("Reciever_category", recieverCatSchema);
+ recieverCatSchema.virtual('Receiver', {
+    ref: 'Receiver',
+    localField: '_id',
+    foreignField: 'category_id'
+})
 
-module.exports = Reciever_category;
+const Receiver_category = mongoose.model("Receiver_category", recieverCatSchema);
+
+module.exports = Receiver_category;

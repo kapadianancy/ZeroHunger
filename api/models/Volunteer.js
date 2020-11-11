@@ -54,6 +54,18 @@ const volunteerSchema=mongoose.Schema({
     timestamps: true,
   });
 
+
+volunteerSchema.virtual('Food_delivery', {
+    ref: 'Food_delivery',
+    localField: '_id',
+    foreignField: 'volunteer_id'
+})
+
+volunteerSchema.virtual('Landmark_manager', {
+    ref: 'Landmark_manager',
+    localField: '_id',
+    foreignField: 'volunteer_id'
+})
 const Volunteer = mongoose.model("Volunteer", volunteerSchema);
 
 module.exports = Volunteer;

@@ -75,6 +75,24 @@ const UserSchema=mongoose.Schema({
     timestamps: true,
   });
 
+UserSchema.virtual('Donor', {
+    ref: 'Donor',
+    localField: '_id',
+    foreignField: 'user_id'
+})
+
+UserSchema.virtual('Receiver', {
+    ref: 'Receiver',
+    localField: '_id',
+    foreignField: 'user_id'
+})
+
+UserSchema.virtual('Volunteer', {
+    ref: 'Volunteer',
+    localField: '_id',
+    foreignField: 'user_id'
+})
+
 const User = mongoose.model("User", UserSchema);
 
 module.exports = User;

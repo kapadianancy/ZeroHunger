@@ -19,13 +19,13 @@ const donorcategorySchema = mongoose.Schema(
   }
 );
 
-donorcategorySchema.virtual('donor', {
-  ref: 'donor',
+donorcategorySchema.virtual('Donor', {
+  ref: 'Donor',
   localField: '_id',
-  foreignField: 'donorCategoryId'
+  foreignField: 'donor_category_id'
 })
 
-const DonorCategory = mongoose.model("donorcategory", donorcategorySchema);
+const DonorCategory = mongoose.model("Donor_category", donorcategorySchema);
 
 
 module.exports = DonorCategory;

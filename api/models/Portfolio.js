@@ -22,6 +22,6 @@ const portfolioSchema = mongoose.Schema(
         timestamps: true,
     }
 );
-const Portfolio = mongoose.model("portfolio", portfolioSchema);
+const Portfolio = mongoose.model("Portfolio", portfolioSchema);
 
 module.exports = Portfolio;

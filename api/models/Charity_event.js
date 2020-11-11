@@ -6,8 +6,6 @@ const CharityEventSchema = mongoose.Schema(
             required: true,
         },
 
-        // -banner
-        // -recieved funds
         title : {
             type:String,
             required:true
@@ -45,6 +43,6 @@ const CharityEventSchema = mongoose.Schema(
         timestamps: true,
     }
 );
-const CharityEvent = mongoose.model("charityevent", CharityEventSchema);
+const CharityEvent = mongoose.model("Charity_event", CharityEventSchema);
 
 module.exports = CharityEvent;

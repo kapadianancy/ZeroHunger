@@ -5,13 +5,13 @@ const donorSchema = mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             required: true,
         },
-        donorCategoryId: {
+        donor_category_id: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'donorcategory'
+            ref: 'Donor_category'
         },
-        userId: {
+        user_id: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'user'
+            ref: 'User'
         },
         isDeleted: {
             type: Boolean,
@@ -22,6 +22,11 @@ const donorSchema = mongoose.Schema(
         timestamps: true,
     }
 );
-const Donor = mongoose.model("donor", donorSchema);
+donorSchema.virtual('Food_listing', {
+    ref: 'Food_listing',
+    localField: '_id',
+    foreignField: 'donor_id'
+})
+const Donor = mongoose.model("Donor", donorSchema);
 
 module.exports = Donor;

@@ -6,12 +6,14 @@ const landmarkmanagerSchema = mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             required: true,
         },
-        volunteerId:{
+        volunteer_id:{
             type : mongoose.Schema.Types.ObjectId,
+            required:true,
             ref : 'volunteer'
         },
-        landmarkId:{
+        landmark_id:{
             type : mongoose.Schema.Types.ObjectId,
+            required:true,
             ref : 'landmark'
         },
        
@@ -24,6 +26,6 @@ const landmarkmanagerSchema = mongoose.Schema(
         timestamps: true,
     }
 );
-const LandmarkManager = mongoose.model("landmarkmanager", landmarkmanagerSchema);
+const LandmarkManager = mongoose.model("Landmark_manager", landmarkmanagerSchema);
 
 module.exports = LandmarkManager;

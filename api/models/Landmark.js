@@ -13,11 +13,8 @@ const landmarkSchema = mongoose.Schema(
         pincode:{
             type:Number,
             required:true,
-            validate(value) {
-                if (value.length < 6) {
-                    throw new Error('pincode is invalid')
-                }
-            }
+            minlength:6,
+            maxlength:6
 
         },
         latitude:{
@@ -38,12 +35,19 @@ const landmarkSchema = mongoose.Schema(
     }
 );
 
-landmarkSchema.virtual('landmarkmanager', {
-    ref: 'landmarkmanager',
+landmarkSchema.virtual('Landmark_manager', {
+    ref: 'Landmark_manager',
     localField: '_id',
-    foreignField: 'landmarkId'
+    foreignField: 'landmark_id'
 })
 
-const Landmark = mongoose.model("landmark", landmarkSchema);
+landmarkSchema.virtual('User', {
+    ref: 'User',
+    localField: '_id',
+    foreignField: 'landmark_id'
+})
+
+
+const Landmark = mongoose.model("Landmark", landmarkSchema);
 
 module.exports = Landmark;

@@ -17,7 +17,7 @@ const foodRequestSchema = mongoose.Schema(
             type: Number,
             required: true
         },
-        receiverId: {
+        receiver_id: {
             type : mongoose.Schema.Types.ObjectId,
             ref : 'receiver'
         },
@@ -30,6 +30,6 @@ const foodRequestSchema = mongoose.Schema(
         timestamps: true,
     }
 );
-const FoodRequest = mongoose.model("foodrequest", foodRequestSchema);
+const FoodRequest = mongoose.model("Food_request", foodRequestSchema);
 
 module.exports = FoodRequest;

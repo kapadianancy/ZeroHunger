@@ -1,7 +1,7 @@
 const mongoose=require("mongoose");
 const validator=require("validator");
 
-const recieverSchema=mongoose.Schema({
+const receiverSchema=mongoose.Schema({
     _id:
     {
         type:mongoose.Schema.Types.ObjectId,
@@ -35,6 +35,24 @@ const recieverSchema=mongoose.Schema({
     timestamps: true,
   });
 
-const Reciever = mongoose.model("Reciever", recieverSchema);
+receiverSchema.virtual('Donation', {
+    ref: 'Donation',
+    localField: '_id',
+    foreignField: 'receiver_id'
+}) 
 
-module.exports = Reciever;
+receiverSchema.virtual('Food_listing', {
+    ref: 'Food_listing',
+    localField: '_id',
+    foreignField: 'receiver_id'
+}) 
+
+receiverSchema.virtual('Food_request', {
+    ref: 'Food_request',
+    localField: '_id',
+    foreignField: 'receiver_id'
+}) 
+
+const Receiver = mongoose.model("Receiver", receiverSchema);
+
+module.exports = Receiver;

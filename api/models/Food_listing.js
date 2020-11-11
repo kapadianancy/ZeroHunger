@@ -37,7 +37,7 @@ const foodlistingSchema=mongoose.Schema({
     plates:
     {
         type:Number,
-
+        required:true
     },
    
     isDeleted:
@@ -51,6 +51,11 @@ const foodlistingSchema=mongoose.Schema({
     timestamps: true,
   });
 
+foodlistingSchema.virtual('Food_delivery', {
+    ref: 'Food_delivery',
+    localField: '_id',
+    foreignField: 'food_listing_id'
+})
 const Food_listing = mongoose.model("Food_listing", foodlistingSchema);
 
 module.exports = Food_listing;

@@ -11,11 +11,11 @@ const donationSchema = mongoose.Schema(
         },
         amount: {
             type: Number,
-            required: true
+            required: true,
         },
-        receiverId: {
+        receiver_id: {
             type : mongoose.Schema.Types.ObjectId,
-            ref : 'receiver'
+            ref : 'Receiver'
         },
         isDeleted: {
             type: Boolean,
@@ -26,6 +26,6 @@ const donationSchema = mongoose.Schema(
         timestamps: true,
     }
 );
-const Donation = mongoose.model("donation", donationSchema);
+const Donation = mongoose.model("Donation", donationSchema);
 
 module.exports = Donation;
