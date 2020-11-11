@@ -1,9 +1,6 @@
 {
   "name": "api",
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 6ba92b1bc3d67e9792c54bf02056b568fc79becb
+
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -16,10 +13,7 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "mongoose": "^5.10.13",
-    "morgan": "~1.9.1"
-<<<<<<< HEAD
-=======
-=======
+    "morgan": "~1.9.1",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -30,7 +24,5 @@
   "license": "ISC",
   "dependencies": {
     "express-generator": "^4.16.1"
->>>>>>> nancyKapadia
->>>>>>> 6ba92b1bc3d67e9792c54bf02056b568fc79becb
   }
 }
