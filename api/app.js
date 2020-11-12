@@ -3,6 +3,7 @@ const { mongo, Mongoose } = require('mongoose');
 var path = require('path');
 
 var EventRoute = require('./routes/EventRoute');
+var ReceiverCatRoute=require("./routes/ReceiverCatRoute");
 
 var app = express();
 
@@ -15,10 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/event', EventRoute);
-
-
-
-
+app.use('/receiverCategory',ReceiverCatRoute);
 
 
 

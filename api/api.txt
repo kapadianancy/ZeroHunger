@@ -11,7 +11,7 @@
 4)soft delete volunteer(id)
 5)display landmark manager
 6)soft delete landmark manager
-7)CRUD of receiver category
+*7)CRUD of receiver category 
 8)add food request
 9)display food request
 10)delete food request
