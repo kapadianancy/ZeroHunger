@@ -12,4 +12,10 @@ router.get('/getEventById/:id',Event.getEventById)
 //add event
 router.post('/addEvent',Event.addEvent)
 
+//edit event
+router.put('/editEvent/:id',Event.editEvent)
+
+//delete event
+router.delete('/deleteEvent/:id',Event.deleteEvent)
+
 module.exports = router;
