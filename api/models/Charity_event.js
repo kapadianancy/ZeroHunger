@@ -1,11 +1,6 @@
 const mongoose = require("mongoose");
 const CharityEventSchema = mongoose.Schema(
     {
-        _id: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-        },
-
         title : {
             type:String,
             required:true

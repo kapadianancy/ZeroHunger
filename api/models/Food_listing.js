@@ -2,11 +2,7 @@ const mongoose=require("mongoose");
 const validator=require("validator");
 
 const foodlistingSchema=mongoose.Schema({
-    _id:
-    {
-        type:mongoose.Schema.Types.ObjectId,
-        required:true
-    },
+   
     date:
     {
         type:Date,

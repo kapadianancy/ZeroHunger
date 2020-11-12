@@ -2,8 +2,7 @@ var express = require('express');
 const { mongo, Mongoose } = require('mongoose');
 var path = require('path');
 
-// var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
+var EventRoute = require('./routes/EventRoute');
 
 var app = express();
 
@@ -15,8 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use('/', indexRouter);
-// app.use('/users', usersRouter);
+app.use('/event', EventRoute);
 
 
 
@@ -25,6 +23,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
-app.listen(8000,()=>{
+app.listen(8000, () => {
   console.log("Server is running")
 })

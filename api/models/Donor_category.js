@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 const donorcategorySchema = mongoose.Schema(
   {
-    _id: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-    },
     category: {
       type: String,
       required: true,

@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 const donorSchema = mongoose.Schema(
     {
-        _id: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-        },
         donor_category_id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Donor_category'

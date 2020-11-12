@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 const donationSchema = mongoose.Schema(
     {
-        _id: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-        },
         date: {
             type: Date,
             required: true

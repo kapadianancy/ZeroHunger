@@ -2,10 +2,7 @@ const mongoose = require("mongoose");
 
 const landmarkmanagerSchema = mongoose.Schema(
     {
-        _id: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-        },
+        
         volunteer_id:{
             type : mongoose.Schema.Types.ObjectId,
             required:true,
