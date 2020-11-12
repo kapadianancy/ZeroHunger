@@ -174,6 +174,7 @@ dashboard
 -volunteers
 	list of volunteer
 	assign area to volunteer (landmark manager)
+	list of landmark manager
 -reciever category management
 	add
 	list
