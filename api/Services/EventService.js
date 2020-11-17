@@ -3,7 +3,7 @@ const CharityEvent = require('../models/Charity_event');
 exports.getAllEvent = async (req, res) => {
     try {
         const data = await CharityEvent.find({
-            is_Deleted: 0
+            is_deleted: 0
         })
 
         return res.status(200).send(data)
@@ -18,7 +18,7 @@ exports.getEventById = async (req, res) => {
     try {
         const data = await CharityEvent.findOne({
             _id: req.params.id,
-            is_Deleted: 0
+            is_deleted: 0
         })
         if (data) {
             return res.status(200).send(data)
@@ -61,7 +61,7 @@ exports.editEvent = async (req, res) => {
 exports.deleteEvent = async (req, res) => {
     try {
         await CharityEvent.findByIdAndUpdate(req.params.id, {
-            is_Deleted: 1
+            is_deleted: 1
         }, (err) => {
             if (err) {
                 return res.status(400).send(err)

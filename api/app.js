@@ -5,6 +5,9 @@ var port =process.env.PORT || 8000;
 
 var EventRoute = require('./routes/EventRoute');
 var ReceiverCatRoute=require("./routes/ReceiverCatRoute");
+var userRoute=require('./routes/UserRoute');
+var volunteerRoute=require('./routes/VolunteerRoute');
+var landmarkRoute=require('./routes/LandmarkRoute');
 
 var app = express();
 
@@ -18,6 +21,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/event', EventRoute);
 app.use('/receiverCategory',ReceiverCatRoute);
+app.use('/user',userRoute);
+app.use('/volunteer',volunteerRoute);
+app.use('/landmark',landmarkRoute);
+
 app.use('/*',(req,res)=>
 {
   res.status(400).send("url not found");

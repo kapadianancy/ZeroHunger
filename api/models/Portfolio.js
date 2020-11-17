@@ -10,7 +10,7 @@ const portfolioSchema = mongoose.Schema(
             type : String
         },
        
-        is_Deleted: {
+        is_deleted: {
             type: Boolean,
             default: 0,
         },
