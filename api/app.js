@@ -23,10 +23,6 @@ app.use('/*',(req,res)=>
   res.status(400).send("url not found");
 })
 
-
-
-
-
 app.listen(port, () => {
   console.log("Server is running at "+port)
 })

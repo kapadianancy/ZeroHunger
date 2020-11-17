@@ -36,7 +36,7 @@ exports.addEvent = async (req, res) => {
     const event = new CharityEvent(req.body)
     try {
         await event.save();
-        return res.status(201).send("Event Insetred")
+        return res.status(201).send("Event Inserted")
     } catch (e) {
         return res.status(400).send(e)
     }
