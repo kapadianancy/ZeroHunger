@@ -28,18 +28,18 @@ const volunteerSchema=mongoose.Schema({
     },
     weekdays:
     {
-        type:String
+        type:Array
     },
     weekends:
     {
-        type:String
+        type:Array
     },
     vehicle_mode:
     {
         type:String
     },
     
-    is_Deleted:
+    is_deleted:
     {
         type:Boolean,
         required:true,

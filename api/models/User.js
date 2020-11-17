@@ -49,18 +49,13 @@ const UserSchema=mongoose.Schema({
         required:true,
         ref:'Landmark'
     },
-    pincode:
-    {
-        type:Number,
-        required:true
-    },
     role_id:
     {
         type:mongoose.Schema.Types.ObjectId,
         required:true,
         ref:'Role'
     },
-    is_Deleted:
+    is_deleted:
     {
         type:Boolean,
         required:true,

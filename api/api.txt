@@ -1,5 +1,8 @@
 --------------Admin----------------
 
+volunteer registration /volunteer/signup
+CRUD of landmark
+
 1)dashboard--total food donation
 	--total donors
 	--total receivers
@@ -11,7 +14,7 @@
 4)soft delete volunteer(id)
 5)display landmark manager
 6)soft delete landmark manager
-*7)CRUD of receiver category 
+*7)CRUD of receiver category   /receiverCategory/add
 8)add food request
 9)display food request
 10)delete food request

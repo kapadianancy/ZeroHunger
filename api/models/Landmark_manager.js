@@ -14,7 +14,7 @@ const landmarkmanagerSchema = mongoose.Schema(
             ref : 'landmark'
         },
        
-        is_Deleted: {
+        is_deleted: {
             type: Boolean,
             default: 0,
         },

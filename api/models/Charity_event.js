@@ -29,7 +29,7 @@ const CharityEventSchema = mongoose.Schema(
         receivedFunds : {
             type:Number
         },
-        is_Deleted: {
+        is_deleted: {
             type: Boolean,
             default: 0,
         },

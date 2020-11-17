@@ -7,6 +7,9 @@ var EventRoute = require('./routes/EventRoute');
 var ReceiverCatRoute=require("./routes/ReceiverCatRoute");
 var DonationRoute = require('./routes/DonationRoute');
 var PortfolioRoute = require('./routes/PortfolioRoute');
+var userRoute=require('./routes/UserRoute');
+var volunteerRoute=require('./routes/VolunteerRoute');
+var landmarkRoute=require('./routes/LandmarkRoute');
 
 var app = express();
 
@@ -22,6 +25,9 @@ app.use('/event', EventRoute);
 app.use('/receiverCategory',ReceiverCatRoute);
 app.use('/donation',DonationRoute);
 app.use('/portfolio',PortfolioRoute);
+app.use('/user',userRoute);
+app.use('/volunteer',volunteerRoute);
+app.use('/landmark',landmarkRoute);
 app.use('/*',(req,res)=>
 {
   res.status(400).send("Url Not Found");

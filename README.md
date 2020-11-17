@@ -18,7 +18,7 @@ panel- admin, donor, volunteer
 1-->Role
 -id -int
 -name(admin,donor,reciver,volunteer) -varchar
--is_Deleted -boolean
+-is_deleted -boolean
 -updatedAt -boolean
 -createdAt -boolean
 
@@ -33,7 +33,7 @@ panel- admin, donor, volunteer
 -landmark id
 -pincode
 -role id
--is_Deleted
+-is_deleted
 -updatedAt
 -createdAt
 
@@ -47,14 +47,14 @@ panel- admin, donor, volunteer
 -weekdays (morning,afternoon,evening,night)
 -weekends
 -vehicle mode
--is_Deleted
+-is_deleted
 -updatedAt
 -createdAt
 
 4-->reciever category
 -id
 -name(old aged home,orphnage,goverment school/hospital,slums,homeless,bio-gas plant)
--is_Deleted
+-is_deleted
 -updatedAt
 -createdAt
 
@@ -63,7 +63,7 @@ panel- admin, donor, volunteer
 -category id
 -user id
 -population
--is_Deleted
+-is_deleted
 -updatedAt
 -createdAt
 
@@ -77,7 +77,7 @@ panel- admin, donor, volunteer
 -event
 -reciever-id
 -plates
--is_Deleted
+-is_deleted
 -updatedAt
 -createdAt
 
@@ -86,7 +86,7 @@ panel- admin, donor, volunteer
 -food listing id
 -volunteer id
 -status
--is_Deleted
+-is_deleted
 -updatedAt
 -createdAt
 
@@ -96,7 +96,7 @@ panel- admin, donor, volunteer
 -time
 -plates
 -reciever id
--is_Deleted
+-is_deleted
 -updatedAt
 -createdAt
 
@@ -105,7 +105,7 @@ panel- admin, donor, volunteer
 -date
 -amount
 -reciever-id
--is_Deleted
+-is_deleted
 -updatedAt
 -createdAt
 
@@ -119,7 +119,7 @@ panel- admin, donor, volunteer
 -description
 -banner
 -recieved funds
--is_Deleted
+-is_deleted
 -updatedAt
 -createdAt
 
@@ -129,7 +129,7 @@ panel- admin, donor, volunteer
 -pincode
 -latitude
 -longitude
--is_Deleted
+-is_deleted
 -updatedAt
 -createdAt
 
@@ -137,7 +137,7 @@ panel- admin, donor, volunteer
 -id
 -volunteer id
 -landmark id
--is_Deleted
+-is_deleted
 -updatedAt
 -createdAt
 
@@ -145,14 +145,14 @@ panel- admin, donor, volunteer
 -id
 -image
 -description
--is_Deleted
+-is_deleted
 -updatedAt
 -createdAt
 
 14-->donor category
 -id
 -category(event , caterer , resturant ,other....)
--is_Deleted
+-is_deleted
 -updatedAt
 -createdAt
 
@@ -160,7 +160,7 @@ panel- admin, donor, volunteer
 -id
 -donor category id
 -userid
--is_Deleted
+-is_deleted
 -updatedAt
 -createdAt
 

@@ -10,7 +10,7 @@ const recieverCatSchema=mongoose.Schema({
         required:true
     },
     
-    is_Deleted:
+    is_deleted:
     {
         type:Boolean,
         required:true,
