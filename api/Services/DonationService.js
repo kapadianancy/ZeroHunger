@@ -1,0 +1,151 @@
+const Food_delivery = require('../models/Food_delivery');
+const Food_listing = require('../models/Food_Listing');
+const Food_request=require('../models/Food_request');
+const Donation = require('../models/Donation');
+
+exports.getAllFoodDonation = async (req, res) => {
+    try {
+        const data = await Food_listing.find({
+            is_Deleted: 0
+        })
+
+        return res.status(200).send(data)
+
+
+    } catch (err) {
+        return res.status(400).send("Bad request");
+    }
+}
+
+exports.getAllMoneyDonation = async (req, res) => {
+    try {
+        const data = await Donation.find({
+            is_Deleted: 0
+        })
+
+        return res.status(200).send(data)
+
+
+    } catch (err) {
+        return res.status(400).send("Bad request");
+    }
+}
+
+exports.getAllDeliveredFood = async (req, res) => {
+    try {
+        const data = await Food_delivery.find({
+            status:"Delivered",
+            is_Deleted: 0
+        })
+
+        return res.status(200).send(data)
+
+
+    } catch (err) {
+        return res.status(400).send("Bad request");
+    }
+}
+
+exports.addFoodListing = async (req, res) => {
+    const event = new Food_listing(req.body)
+    try {
+        await event.save();
+        return res.status(201).send("Food Listing Inserted")
+    } catch (e) {
+        return res.status(400).send(e)
+    }
+}
+
+exports.addMoneyDonation = async (req, res) => {
+    const event = new Donation(req.body)
+    try {
+        await event.save();
+        return res.status(201).send("Money Donation Inserted")
+    } catch (e) {
+        return res.status(400).send(e)
+    }
+}
+
+exports.addFoodDelivery = async (req, res) => {
+    const event = new Food_delivery(req.body)
+    try {
+        await event.save();
+        return res.status(201).send("Food Delivery Inserted")
+    } catch (e) {
+        return res.status(400).send(e)
+    }
+}
+
+exports.addFoodRequest = async (req, res) => {
+    const event = new Food_request(req.body)
+    try {
+        await event.save();
+        return res.status(201).send("Food Request Inserted")
+    } catch (e) {
+        return res.status(400).send(e)
+    }
+}
+
+exports.getAllFoodRequest = async (req, res) => {
+    try {
+        const data = await Food_request.find({
+            is_Deleted: 0
+        })
+
+        return res.status(200).send(data)
+
+
+    } catch (err) {
+        return res.status(400).send("Bad request");
+    }
+}
+
+exports.getFoodRequestById = async (req, res) => {
+    try {
+        const data = await Food_request.findOne({
+            _id: req.params.id,
+            is_Deleted: 0
+        })
+        if (data) {
+            return res.status(200).send(data)
+        }
+        else {
+            return res.status(400).send("No Data Found")
+        }
+
+    } catch (err) {
+        return res.status(400).send("Food Request Not Found");
+    }
+}
+
+exports.editFoodRequest = async (req, res) => {
+    try {
+        await Food_request.findByIdAndUpdate(req.params.id, req.body, (err) => {
+            if (err) {
+                return res.status(400).send(err)
+            }
+            else {
+                return res.status(201).send("Food Request Updated")
+            }
+        });
+    } catch (e) {
+        return res.status(400).send("Not Updated")
+    }
+}
+
+exports.deleteFoodRequest = async (req, res) => {
+    try {
+        await Food_request.findByIdAndUpdate(req.params.id, {
+            is_Deleted: 1
+        }, (err) => {
+            if (err) {
+                return res.status(400).send(err)
+            }
+            else {
+                return res.status(201).send("Food Request Deleted")
+            }
+        });
+    } catch (e) {
+        return res.status(400).send("Not Deleted")
+    }
+}
