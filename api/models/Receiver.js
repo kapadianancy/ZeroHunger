@@ -20,7 +20,7 @@ const receiverSchema=mongoose.Schema({
         type:Number
     },
     
-    isDeleted:
+    is_Deleted:
     {
         type:Boolean,
         required:true,

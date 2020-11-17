@@ -60,7 +60,7 @@ const UserSchema=mongoose.Schema({
         required:true,
         ref:'Role'
     },
-    isDeleted:
+    is_Deleted:
     {
         type:Boolean,
         required:true,

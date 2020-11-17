@@ -9,7 +9,7 @@ const donorSchema = mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
         },
-        isDeleted: {
+        is_Deleted: {
             type: Boolean,
             default: 0,
         },

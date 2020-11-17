@@ -23,7 +23,7 @@ exports.add=async(req,res)=>
 
 exports.getAll = async (req, res) => {
     try {
-        const data = await ReceiverCat.find({isDeleted:false})
+        const data = await ReceiverCat.find({is_Deleted:false})
         res.status(200).send(data)
 
     } catch (err) {
@@ -35,7 +35,7 @@ exports.getAll = async (req, res) => {
 exports.delete = async (req, res) => {
     try {
         const data = await ReceiverCat.findById(req.params.id);
-        data.isDeleted=true;
+        data.is_Deleted=true;
         await data.save();
         res.status(200).send(data)
 

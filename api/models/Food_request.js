@@ -17,7 +17,7 @@ const foodRequestSchema = mongoose.Schema(
             type : mongoose.Schema.Types.ObjectId,
             ref : 'receiver'
         },
-        isDeleted: {
+        is_Deleted: {
             type: Boolean,
             default: 0,
         },

@@ -39,7 +39,7 @@ const volunteerSchema=mongoose.Schema({
         type:String
     },
     
-    isDeleted:
+    is_Deleted:
     {
         type:Boolean,
         required:true,
