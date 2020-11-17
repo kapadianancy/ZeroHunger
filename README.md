@@ -18,7 +18,7 @@ panel- admin, donor, volunteer
 1-->Role
 -id -int
 -name(admin,donor,reciver,volunteer) -varchar
--isDeleted -boolean
+-is_Deleted -boolean
 -updatedAt -boolean
 -createdAt -boolean
 
@@ -33,7 +33,7 @@ panel- admin, donor, volunteer
 -landmark id
 -pincode
 -role id
--isDeleted
+-is_Deleted
 -updatedAt
 -createdAt
 
@@ -47,14 +47,14 @@ panel- admin, donor, volunteer
 -weekdays (morning,afternoon,evening,night)
 -weekends
 -vehicle mode
--isDeleted
+-is_Deleted
 -updatedAt
 -createdAt
 
 4-->reciever category
 -id
 -name(old aged home,orphnage,goverment school/hospital,slums,homeless,bio-gas plant)
--isDeleted
+-is_Deleted
 -updatedAt
 -createdAt
 
@@ -63,7 +63,7 @@ panel- admin, donor, volunteer
 -category id
 -user id
 -population
--isDeleted
+-is_Deleted
 -updatedAt
 -createdAt
 
@@ -77,7 +77,7 @@ panel- admin, donor, volunteer
 -event
 -reciever-id
 -plates
--isDeleted
+-is_Deleted
 -updatedAt
 -createdAt
 
@@ -86,7 +86,7 @@ panel- admin, donor, volunteer
 -food listing id
 -volunteer id
 -status
--isDeleted
+-is_Deleted
 -updatedAt
 -createdAt
 
@@ -96,7 +96,7 @@ panel- admin, donor, volunteer
 -time
 -plates
 -reciever id
--isDeleted
+-is_Deleted
 -updatedAt
 -createdAt
 
@@ -105,7 +105,7 @@ panel- admin, donor, volunteer
 -date
 -amount
 -reciever-id
--isDeleted
+-is_Deleted
 -updatedAt
 -createdAt
 
@@ -119,7 +119,7 @@ panel- admin, donor, volunteer
 -description
 -banner
 -recieved funds
--isDeleted
+-is_Deleted
 -updatedAt
 -createdAt
 
@@ -129,7 +129,7 @@ panel- admin, donor, volunteer
 -pincode
 -latitude
 -longitude
--isDeleted
+-is_Deleted
 -updatedAt
 -createdAt
 
@@ -137,7 +137,7 @@ panel- admin, donor, volunteer
 -id
 -volunteer id
 -landmark id
--isDeleted
+-is_Deleted
 -updatedAt
 -createdAt
 
@@ -145,14 +145,14 @@ panel- admin, donor, volunteer
 -id
 -image
 -description
--isDeleted
+-is_Deleted
 -updatedAt
 -createdAt
 
 14-->donor category
 -id
 -category(event , caterer , resturant ,other....)
--isDeleted
+-is_Deleted
 -updatedAt
 -createdAt
 
@@ -160,7 +160,7 @@ panel- admin, donor, volunteer
 -id
 -donor category id
 -userid
--isDeleted
+-is_Deleted
 -updatedAt
 -createdAt
 

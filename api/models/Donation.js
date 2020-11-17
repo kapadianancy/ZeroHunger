@@ -13,7 +13,7 @@ const donationSchema = mongoose.Schema(
             type : mongoose.Schema.Types.ObjectId,
             ref : 'Receiver'
         },
-        isDeleted: {
+        is_Deleted: {
             type: Boolean,
             default: 0,
         },

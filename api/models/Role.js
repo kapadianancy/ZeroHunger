@@ -6,7 +6,7 @@ const roleSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    isDeleted: {
+    is_Deleted: {
       type: Boolean,
       default: 0,
     },

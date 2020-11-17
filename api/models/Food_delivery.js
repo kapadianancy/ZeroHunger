@@ -22,7 +22,7 @@ const fooddeliverySchema=mongoose.Schema({
         required:true
     },
     
-    isDeleted:
+    is_Deleted:
     {
         type:Boolean,
         required:true,
