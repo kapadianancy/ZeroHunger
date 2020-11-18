@@ -3,6 +3,7 @@
 volunteer registration /volunteer/addvolunteer
 CRUD of landmark
 donor and receiver registration
+CRUD of donor category
 
 1)dashboard--total food donation
 	--total donors
@@ -11,7 +12,7 @@ donor and receiver registration
 	--total money donation	
 	--total charity events
 2)display voluteer
-3)add landmark manager (id)
+3)add landmark manager 
 4)soft delete volunteer(id)
 5)display landmark manager
 6)soft delete landmark manager
