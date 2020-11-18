@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const Donation = require('../Services/DonationService');
+const { route } = require('./VolunteerRoute');
 
 //get all Food Donations
 router.get('/getAllFoodDonation',Donation.getAllFoodDonation)
@@ -36,5 +37,9 @@ router.put('/editFoodRequest/:id',Donation.editFoodRequest)
 //delete Food request
 router.delete('/deleteFoodRequest/:id',Donation.deleteFoodRequest)
 
+//total food donation
+router.get('/total',Donation.total);
+
+router.get('/totalMoney',Donation.totalMoney);
 
 module.exports = router;

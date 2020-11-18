@@ -39,3 +39,20 @@ exports.getAll = async (req, res) => {
         return res.status(400).send("bad request");
     }
 }
+
+exports.total=async(req,res)=>
+{
+    try{
+        var total=await volunteer.where({is_deleted:false}).count();          
+        
+        if(total == 0)
+        {
+            return res.status(200).send(`no data found`);
+        }
+        return res.status(200).send(`total volunteers ${total}`);
+
+    }catch(err)
+    {
+        return res.status(400).send("bad request");
+    }
+}

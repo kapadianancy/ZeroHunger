@@ -1,7 +1,8 @@
 --------------Admin----------------
 
-volunteer registration /volunteer/signup
+volunteer registration /volunteer/addvolunteer
 CRUD of landmark
+donor and receiver registration
 
 1)dashboard--total food donation
 	--total donors

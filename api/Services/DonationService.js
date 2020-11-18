@@ -1,5 +1,5 @@
 const Food_delivery = require('../models/Food_delivery');
-const Food_listing = require('../models/Food_Listing');
+const Food_listing = require('../models/Food_listing');
 const Food_request=require('../models/Food_request');
 const Donation = require('../models/Donation');
 
@@ -147,5 +147,39 @@ exports.deleteFoodRequest = async (req, res) => {
         });
     } catch (e) {
         return res.status(400).send("Not Deleted")
+    }
+}
+
+exports.total=async(req,res)=>
+{
+    try{
+        var total=await Food_listing.where({is_deleted:false}).count();          
+        
+        if(total == 0)
+        {
+            return res.status(200).send(`no data found`);
+        }
+        return res.status(200).send(`total food donation ${total}`);
+
+    }catch(err)
+    {
+        return res.status(400).send("bad request");
+    }
+}
+
+exports.totalMoney=async(req,res)=>
+{
+    try{
+        var total=await Donation.where({is_deleted:false}).count();          
+        
+        if(total == 0)
+        {
+            return res.status(200).send(`no data found`);
+        }
+        return res.status(200).send(`total money donation ${total}`);
+
+    }catch(err)
+    {
+        return res.status(400).send("bad request");
     }
 }

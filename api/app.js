@@ -10,6 +10,8 @@ var PortfolioRoute = require('./routes/PortfolioRoute');
 var userRoute=require('./routes/UserRoute');
 var volunteerRoute=require('./routes/VolunteerRoute');
 var landmarkRoute=require('./routes/LandmarkRoute');
+var donorRoute=require('./routes/DonorRoute');
+var ReceiverRoute=require('./routes/ReceiverRoute')
 
 var app = express();
 
@@ -28,6 +30,9 @@ app.use('/portfolio',PortfolioRoute);
 app.use('/user',userRoute);
 app.use('/volunteer',volunteerRoute);
 app.use('/landmark',landmarkRoute);
+app.use('/donor',donorRoute);
+app.use('/receiver',ReceiverRoute);
+
 app.use('/*',(req,res)=>
 {
   res.status(400).send("Url Not Found");
