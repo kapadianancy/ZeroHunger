@@ -1,5 +1,6 @@
 const Portfolio = require('../models/Portfolio');
 
+
 exports.getAllPortfolio = async (req, res) => {
     try {
         const data = await Portfolio.find({
@@ -32,11 +33,14 @@ exports.getPortfolioById = async (req, res) => {
     }
 }
 
-exports.addPortfolio = async (req, res) => {
-    const portfolio = new Portfolio(req.body)
+exports.addPortfolio = async (req, res, next) => {
+    const portfolio = new Portfolio({
+        image: "/images/" + 'portfolio' + req.file.originalname,
+        ...req.body
+    })
     try {
         await portfolio.save();
-        return res.status(201).send("Portfolio Inserted")
+        return res.status(201).send("Portfolio Inserted");
     } catch (e) {
         return res.status(400).send(e)
     }
@@ -45,7 +49,12 @@ exports.addPortfolio = async (req, res) => {
 
 exports.editPortfolio = async (req, res) => {
     try {
-        await Portfolio.findByIdAndUpdate(req.params.id, req.body, (err) => {
+        const portfolio = {
+            image: "/images/" + 'portfolio' + req.file.originalname,
+            ...req.body
+        }
+       
+        await Portfolio.findByIdAndUpdate(req.params.id, portfolio, (err) => {
             if (err) {
                 return res.status(400).send(err)
             }
