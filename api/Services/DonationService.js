@@ -2,6 +2,9 @@ const Food_delivery = require('../models/Food_delivery');
 const Food_listing = require('../models/Food_listing');
 const Food_request=require('../models/Food_request');
 const Donation = require('../models/Donation');
+const User = require('../models/User');
+const Receiver = require('../models/Receiver');
+const Donor = require('../models/Donor');
 
 exports.getAllFoodDonation = async (req, res) => {
     try {
@@ -177,6 +180,116 @@ exports.totalMoney=async(req,res)=>
             return res.status(200).send(`no data found`);
         }
         return res.status(200).send(`total money donation ${total}`);
+
+    }catch(err)
+    {
+        return res.status(400).send("bad request");
+    }
+}
+
+exports.areaWiseTotalRequest=async(req,res)=>
+{
+    try{
+        Food_request.find().populate("receiver_id")
+        .exec((err,data)=>
+        {
+            if(err)
+            {
+                return res.status(400).send(err);
+            }
+            else
+            {
+                data.map((d)=>
+                {
+                    Receiver.findById(d.receiver_id).populate("user_id").exec(async (err,user)=>
+                    {
+                        var total= await User.where({landmark_id:"5fb3be57cb07c31f57ab2905"}).count();
+                        if(total == 0)
+                        {
+                            return res.status(200).send(`no data found`);
+                        }
+                        return res.status(200).send(`total area wise food request ${total}`);
+                    })
+                });
+            }
+        })      
+        
+       
+
+    }catch(err)
+    {
+        return res.status(400).send("bad request");
+    }
+}
+
+
+exports.areaWiseTotalDonation=async(req,res)=>
+{
+    try{
+        Food_listing.find().populate("donor_id")
+        .exec((err,data)=>
+        {
+            if(err)
+            {
+                return res.status(400).send(err);
+            }
+            else
+            {
+                var plates=0;
+                data.map((d)=>
+                {
+                    Donor.findById(d.donor_id).populate("user_id").exec(async (err,user)=>
+                    {
+                        var total= await User.where({landmark_id:"5fb3be57cb07c31f57ab2905"}).count();
+                        if(total == 0)
+                        {
+                            return res.status(200).send(`no data found`);
+                        }
+                        else
+                        {
+                            plates+=d.plates
+                            return res.status(200).send(`total area wise food donation ${total} and total plates ${plates}`);
+                        }
+                       
+                    })
+                });
+            }
+        })      
+        
+       
+
+    }catch(err)
+    {
+        return res.status(400).send("bad request");
+    }
+}
+
+
+exports.areaWiseRequest=async(req,res)=>
+{
+    try{
+        Food_request.find().populate("receiver_id")
+        .exec((err,data)=>
+        {
+            if(err)
+            {
+                return res.status(400).send(err);
+            }
+            else
+            {
+                data.map((d)=>
+                {
+                    Receiver.findById(d.receiver_id).populate("user_id").exec(async (err,user)=>
+                    {
+                        var requests= await User.where({landmark_id:"5fb3be57cb07c31f57ab2905"});
+                       
+                        return res.status(200).send(data);
+                    })
+                });
+            }
+        })      
+        
+       
 
     }catch(err)
     {

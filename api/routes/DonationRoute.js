@@ -42,4 +42,10 @@ router.get('/total',Donation.total);
 
 router.get('/totalMoney',Donation.totalMoney);
 
+router.get('/areaWiseTotalRequest',Donation.areaWiseTotalRequest);
+
+router.get('/areaWiseTotalDonation',Donation.areaWiseTotalDonation);
+
+router.get('/areaWiseRequest',Donation.areaWiseRequest);
+
 module.exports = router;

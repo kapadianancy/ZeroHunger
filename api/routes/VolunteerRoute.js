@@ -11,6 +11,9 @@ router.get('/total',volunteer.total);
 
 router.delete('/delete/:id',volunteer.delete);
 
+router.get('/areaWiseTotal',volunteer.areaWiseTotal)
+
+//-----------------------------------------------------------------------------------
 router.post('/addLandmarkManager',volunteer.addLandmarkManager);
 
 router.get('/getAllLandmarkManager',volunteer.getAllLandmarkManager)
