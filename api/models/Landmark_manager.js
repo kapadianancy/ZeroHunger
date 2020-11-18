@@ -6,12 +6,12 @@ const landmarkmanagerSchema = mongoose.Schema(
         volunteer_id:{
             type : mongoose.Schema.Types.ObjectId,
             required:true,
-            ref : 'volunteer'
+            ref : 'Volunteer'
         },
         landmark_id:{
             type : mongoose.Schema.Types.ObjectId,
             required:true,
-            ref : 'landmark'
+            ref : 'Landmark'
         },
        
         is_deleted: {
