@@ -7,4 +7,5 @@ router.post("/addRole",user.addRole);
 
 router.post("/add",user.addUser);
 
+
 module.exports=router;
