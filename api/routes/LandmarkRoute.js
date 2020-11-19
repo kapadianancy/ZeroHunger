@@ -1,14 +1,15 @@
 var express = require('express');
 var router = express.Router();
 
+var auth=require('../middleware/auth');
 var landmark = require("../Services/LandmarkService");
 
-router.post("/add",landmark.add);
+router.post("/add",auth,landmark.add);
 
 router.get("/getAll",landmark.getAll);
 
-router.put("/edit/:id",landmark.edit);
+router.put("/edit/:id",auth,landmark.edit);
 
-router.delete("/delete/:id",landmark.delete);
+router.delete("/delete/:id",auth,landmark.delete);
 
 module.exports=router;

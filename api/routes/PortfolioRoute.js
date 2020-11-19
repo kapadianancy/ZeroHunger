@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var router = express.Router();
 
+var auth=require('../middleware/auth');
 const Portfolio = require('../Services/PortfolioService');
 
 const multer = require('multer');
@@ -30,12 +31,12 @@ router.get('/getAllPortfolio',Portfolio.getAllPortfolio)
 router.get('/getPortfolioById/:id',Portfolio.getPortfolioById)
 
 //add Portfolio
-router.post('/addPortfolio',upload.single('image'),Portfolio.addPortfolio)
+router.post('/addPortfolio',auth,upload.single('image'),Portfolio.addPortfolio)
 
 //edit Portfolio
-router.put('/editPortfolio/:id',upload.single('image'),Portfolio.editPortfolio)
+router.put('/editPortfolio/:id',auth,upload.single('image'),Portfolio.editPortfolio)
 
 //delete Portfolio
-router.delete('/deletePortfolio/:id',Portfolio.deletePortfolio)
+router.delete('/deletePortfolio/:id',auth,Portfolio.deletePortfolio)
 
 module.exports = router;

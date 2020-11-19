@@ -10,7 +10,7 @@ router.post("/addRole",user.addRole);
 //adduser
 router.post("/add",user.addUser);
 
-router.put("/edit/:id",user.edit);
+router.put("/edit/:id",auth,user.edit);
 
 //login
 router.get("/login",user.login);

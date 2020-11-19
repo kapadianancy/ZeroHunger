@@ -1,22 +1,21 @@
 var express = require('express');
 var router = express.Router();
+
+var auth=require('../middleware/auth');
 var donor=require('../Services/DonorService');
-const { route } = require('./EventRoute');
 
 router.post("/addDonor",donor.addDonor);
 
-router.put('/edit/:id',donor.edit);
+router.put('/edit/:id',auth,donor.edit);
 
-router.get("/getDonorCat",donor.getAllCat);
+router.get("/getDonorCat",auth,donor.getAllCat);
 
-router.post("/addDonorCat",donor.addCat);
+router.post("/addDonorCat",auth,donor.addCat);
 
-router.put("/editDonorCat/:id",donor.editCat);
+router.put("/editDonorCat/:id",auth,donor.editCat);
 
-router.delete("/deleteDonorCat/:id",donor.deleteCat);
+router.delete("/deleteDonorCat/:id",auth,donor.deleteCat);
 
 router.get("/totalDonor",donor.totalDonor)
 
 module.exports = router;
-
-user:{} vol:{}

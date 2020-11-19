@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 const Donation = require('../Services/DonationService');
+var auth=require('../middleware/auth');
+
 
 //get all Food Donations
 router.get('/getAllFoodDonation',Donation.getAllFoodDonation)
@@ -13,16 +15,16 @@ router.get('/getAllMoneyDonation',Donation.getAllMoneyDonation)
 router.get('/getAllDeliveredFood',Donation.getAllDeliveredFood)
 
 //add Food Listing
-router.post('/addFoodListing',Donation.addFoodListing)
+router.post('/addFoodListing',auth,Donation.addFoodListing)
 
 //add Donation
-router.post('/addMoneyDonation',Donation.addMoneyDonation)
+router.post('/addMoneyDonation',auth,Donation.addMoneyDonation)
 
 //add Food Delievry
-router.post('/addFoodDelivery',Donation.addFoodDelivery)
+router.post('/addFoodDelivery',auth,Donation.addFoodDelivery)
 
 //add Food Request
-router.post('/addFoodRequest',Donation.addFoodRequest)
+router.post('/addFoodRequest',auth,Donation.addFoodRequest)
 
 //get All Food Request
 router.get('/getAllFoodRequest',Donation.getAllFoodRequest)
@@ -31,10 +33,10 @@ router.get('/getAllFoodRequest',Donation.getAllFoodRequest)
 router.get('/getFoodRequestById/:id',Donation.getFoodRequestById)
 
 //edit Food Request
-router.put('/editFoodRequest/:id',Donation.editFoodRequest)
+router.put('/editFoodRequest/:id',auth,Donation.editFoodRequest)
 
 //delete Food request
-router.delete('/deleteFoodRequest/:id',Donation.deleteFoodRequest)
+router.delete('/deleteFoodRequest/:id',auth,Donation.deleteFoodRequest)
 
 //total food donation
 router.get('/total',Donation.total);
@@ -45,8 +47,8 @@ router.get('/areaWiseTotalRequest',Donation.areaWiseTotalRequest);
 
 router.get('/areaWiseTotalDonation',Donation.areaWiseTotalDonation);
 
-router.get('/areaWiseRequest',Donation.areaWiseRequest);
+router.get('/areaWiseRequest',auth,Donation.areaWiseRequest);
 
-router.get('/areaWiseFoodDonation',Donation.areaWiseFoodDonation);
+router.get('/areaWiseFoodDonation',auth,Donation.areaWiseFoodDonation);
 
 module.exports = router;

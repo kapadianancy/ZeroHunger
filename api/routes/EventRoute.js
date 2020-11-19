@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+var auth=require('../middleware/auth');
 const Event = require('../Services/EventService');
 
 const multer = require('multer');
@@ -29,13 +30,13 @@ router.get('/getAllEvent',Event.getAllEvent)
 router.get('/getEventById/:id',Event.getEventById)
 
 //add event
-router.post('/addEvent',upload.single('banner'),Event.addEvent)
+router.post('/addEvent',auth,upload.single('banner'),Event.addEvent)
 
 //edit event
-router.put('/editEvent/:id',upload.single('banner'),Event.editEvent)
+router.put('/editEvent/:id',auth,upload.single('banner'),Event.editEvent)
 
 //delete event
-router.delete('/deleteEvent/:id',Event.deleteEvent);
+router.delete('/deleteEvent/:id',auth,Event.deleteEvent);
 
 router.get('/total',Event.total);
 
