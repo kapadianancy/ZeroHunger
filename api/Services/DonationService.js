@@ -245,28 +245,6 @@ exports.areaWiseTotalDonation = async (req, res) => {
 }
 
 
-<<<<<<< HEAD
-exports.areaWiseRequest = async (req, res) => {
-    try {
-        let user = [];
-       await Receiver.find().populate("user_id")
-            .exec(async (err, data) => {
-                if (err) {
-                    return res.status(400).send(err);
-                }
-                else {
-                 const a= data.map(async d=>{
-                       // if(d.user_id.landmark_id === "5fb61f9fc169f922bcff6519"){
-                         
-                       await user.push(d);
-                       // }
-                        return {
-                            user
-                        }
-                    })
-                    const results = await Promise.all(a)
-                    res.send(results)
-=======
 exports.areaWiseRequest=async(req,res)=>
 {
     try{
@@ -342,12 +320,8 @@ exports.areaWiseFoodDonation=async(req,res)=>
                 //res.status(200).send(userIds);
             }
         })
->>>>>>> df5c98906eadaf01495327d49336e447649894de
 
-                   
-
-                }
-            })
+             
     } catch (err) {
         return res.status(400).send("bad request");
     }

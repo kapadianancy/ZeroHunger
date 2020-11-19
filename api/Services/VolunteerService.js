@@ -49,13 +49,6 @@ exports.delete = async (req, res) => {
     }
 }
 
-<<<<<<< HEAD
-exports.total = async (req, res) => {
-    try {
-        var total = await volunteer.where({ is_deleted: false }).count();
-
-        if (total == 0) {
-=======
 exports.edit = async (req, res) => {
     try {
         await volunteer.findByIdAndUpdate(req.params.id, req.body,{new:true,runValidators:true}, (err) => {
@@ -78,7 +71,6 @@ exports.total=async(req,res)=>
         
         if(total == 0)
         {
->>>>>>> df5c98906eadaf01495327d49336e447649894de
             return res.status(200).send(`no data found`);
         }
         return res.status(200).send(`total volunteers ${total}`);
