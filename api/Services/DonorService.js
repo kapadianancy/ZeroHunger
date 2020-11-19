@@ -20,6 +20,22 @@ exports.addDonor=async(req,res)=>
     }
 }
 
+
+exports.edit = async (req, res) => {
+    try {
+        await donor.findByIdAndUpdate(req.params.id, req.body,{new:true,runValidators:true}, (err) => {
+            if (err) {
+                return res.status(400).send(err)
+            }
+            else {
+                return res.status(201).send("donor Updated")
+            }
+        });
+    } catch (e) {
+        return res.status(400).send("Not Updated")
+    }
+}
+
 exports.addCat=async(req,res)=>
 {
     try{
@@ -66,7 +82,7 @@ exports.deleteCat = async (req, res) => {
 
 exports.editCat = async (req, res) => {
     try {
-        await donorCat.findByIdAndUpdate(req.params.id, req.body, (err) => {
+        await donorCat.findByIdAndUpdate(req.params.id, req.body,{new:true,runValidators:true}, (err) => {
             if (err) {
                 return res.status(400).send(err)
             }

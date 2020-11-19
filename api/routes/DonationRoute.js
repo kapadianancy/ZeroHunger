@@ -48,4 +48,6 @@ router.get('/areaWiseTotalDonation',Donation.areaWiseTotalDonation);
 
 router.get('/areaWiseRequest',Donation.areaWiseRequest);
 
+router.get('/areaWiseFoodDonation',Donation.areaWiseFoodDonation);
+
 module.exports = router;
