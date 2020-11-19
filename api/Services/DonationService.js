@@ -211,6 +211,7 @@ exports.areaWiseTotalRequest=async(req,res)=>
                             return res.status(200).send(`no data found`);
                         }
                         return res.status(200).send(`total area wise food request ${total}`);
+                        
                     })
                 });
             }
@@ -249,7 +250,7 @@ exports.areaWiseTotalDonation=async(req,res)=>
                         }
                         else
                         {
-                            plates+=d.plates
+                            plates+=d.plates;
                             return res.status(200).send(`total area wise food donation ${total} and total plates ${plates}`);
                         }
                        
@@ -270,8 +271,9 @@ exports.areaWiseTotalDonation=async(req,res)=>
 exports.areaWiseRequest=async(req,res)=>
 {
     try{
-        Food_request.find().populate("receiver_id")
-        .exec((err,data)=>
+        
+        Food_request.find().populate("receiver_id").populate("user_id")
+        .exec(async(err,data)=>
         {
             if(err)
             {
@@ -279,15 +281,19 @@ exports.areaWiseRequest=async(req,res)=>
             }
             else
             {
-                data.map((d)=>
+                data.map(async(d)=>
                 {
-                    Receiver.findById(d.receiver_id).populate("user_id").exec(async (err,user)=>
+                   const u =await User.findOne({_id:d.receiver_id.user_id,landmark_id:"5fb4f93e50a9a41abf1b5e9f"});
+                    console.log(u);
+                    console.log(d.receiver_id.user_id);
+                    console.log(u._id);
+                    if(d.receiver_id.user_id===u._id)
                     {
-                        var requests= await User.where({landmark_id:"5fb3be57cb07c31f57ab2905"});
-                       
-                        return res.status(200).send(data);
-                    })
-                });
+                        console.log("dfghj");
+                    }
+                })
+                
+                //return res.status(200).send(requests);
             }
         })      
         
@@ -297,4 +303,4 @@ exports.areaWiseRequest=async(req,res)=>
     {
         return res.status(400).send("bad request");
     }
-}
+}   
