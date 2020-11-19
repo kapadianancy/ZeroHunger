@@ -1,6 +1,6 @@
 const Food_delivery = require('../models/Food_delivery');
 const Food_listing = require('../models/Food_listing');
-const Food_request=require('../models/Food_request');
+const Food_request = require('../models/Food_request');
 const Donation = require('../models/Donation');
 const User = require('../models/User');
 const Receiver = require('../models/Receiver');
@@ -37,7 +37,7 @@ exports.getAllMoneyDonation = async (req, res) => {
 exports.getAllDeliveredFood = async (req, res) => {
     try {
         const data = await Food_delivery.find({
-            status:"Delivered",
+            status: "Delivered",
             is_Deleted: 0
         })
 
@@ -92,9 +92,8 @@ exports.addFoodRequest = async (req, res) => {
 exports.getAllFoodRequest = async (req, res) => {
     try {
         const data = await Food_request.find({
-            is_Deleted: 0
+            is_deleted: 0
         })
-
         return res.status(200).send(data)
 
 
@@ -107,7 +106,7 @@ exports.getFoodRequestById = async (req, res) => {
     try {
         const data = await Food_request.findOne({
             _id: req.params.id,
-            is_Deleted: 0
+            is_deleted: 0
         })
         if (data) {
             return res.status(200).send(data)
@@ -141,7 +140,7 @@ exports.editFoodRequest = async (req, res) => {
 exports.deleteFoodRequest = async (req, res) => {
     try {
         await Food_request.findByIdAndUpdate(req.params.id, {
-            is_Deleted: 1
+            is_deleted: 1
         }, (err) => {
             if (err) {
                 return res.status(400).send(err)
@@ -155,152 +154,122 @@ exports.deleteFoodRequest = async (req, res) => {
     }
 }
 
-exports.total=async(req,res)=>
-{
-    try{
-        var total=await Food_listing.where({is_deleted:false}).count();          
-        
-        if(total == 0)
-        {
+exports.total = async (req, res) => {
+    try {
+        var total = await Food_listing.where({ is_deleted: false }).count();
+
+        if (total == 0) {
             return res.status(200).send(`no data found`);
         }
         return res.status(200).send(`total food donation ${total}`);
 
-    }catch(err)
-    {
+    } catch (err) {
         return res.status(400).send("bad request");
     }
 }
 
-exports.totalMoney=async(req,res)=>
-{
-    try{
-        var total=await Donation.where({is_deleted:false}).count();          
-        
-        if(total == 0)
-        {
+exports.totalMoney = async (req, res) => {
+    try {
+        var total = await Donation.where({ is_deleted: false }).count();
+
+        if (total == 0) {
             return res.status(200).send(`no data found`);
         }
         return res.status(200).send(`total money donation ${total}`);
 
-    }catch(err)
-    {
+    } catch (err) {
         return res.status(400).send("bad request");
     }
 }
 
-exports.areaWiseTotalRequest=async(req,res)=>
-{
-    try{
+exports.areaWiseTotalRequest = async (req, res) => {
+    try {
         Food_request.find().populate("receiver_id")
-        .exec((err,data)=>
-        {
-            if(err)
-            {
-                return res.status(400).send(err);
-            }
-            else
-            {
-                data.map((d)=>
-                {
-                    Receiver.findById(d.receiver_id).populate("user_id").exec(async (err,user)=>
-                    {
-                        var total= await User.where({landmark_id:"5fb3be57cb07c31f57ab2905"}).count();
-                        if(total == 0)
-                        {
-                            return res.status(200).send(`no data found`);
-                        }
-                        return res.status(200).send(`total area wise food request ${total}`);
-                        
-                    })
-                });
-            }
-        })      
-        
-       
+            .exec((err, data) => {
+                if (err) {
+                    return res.status(400).send(err);
+                }
+                else {
+                    data.map((d) => {
+                        Receiver.findById(d.receiver_id).populate("user_id").exec(async (err, user) => {
+                            var total = await User.where({ landmark_id: "5fb61f9fc169f922bcff6519" }).count();
+                            if (total == 0) {
+                                return res.status(200).send(`no data found`);
+                            }
+                            return res.status(200).send(`total area wise food request ${total}`);
 
-    }catch(err)
-    {
+                        })
+                    });
+                }
+            })
+
+
+
+    } catch (err) {
         return res.status(400).send("bad request");
     }
 }
 
 
-exports.areaWiseTotalDonation=async(req,res)=>
-{
-    try{
+exports.areaWiseTotalDonation = async (req, res) => {
+    try {
         Food_listing.find().populate("donor_id")
-        .exec((err,data)=>
-        {
-            if(err)
-            {
-                return res.status(400).send(err);
-            }
-            else
-            {
-                var plates=0;
-                data.map((d)=>
-                {
-                    Donor.findById(d.donor_id).populate("user_id").exec(async (err,user)=>
-                    {
-                        var total= await User.where({landmark_id:"5fb3be57cb07c31f57ab2905"}).count();
-                        if(total == 0)
-                        {
-                            return res.status(200).send(`no data found`);
-                        }
-                        else
-                        {
-                            plates+=d.plates;
-                            return res.status(200).send(`total area wise food donation ${total} and total plates ${plates}`);
-                        }
-                       
-                    })
-                });
-            }
-        })      
-        
-       
+            .exec((err, data) => {
+                if (err) {
+                    return res.status(400).send(err);
+                }
+                else {
+                    var plates = 0;
+                    data.map((d) => {
+                        Donor.findById(d.donor_id).populate("user_id").exec(async (err, user) => {
+                            var total = await User.where({ landmark_id: "5fb3be57cb07c31f57ab2905" }).count();
+                            if (total == 0) {
+                                return res.status(200).send(`no data found`);
+                            }
+                            else {
+                                plates += d.plates;
+                                return res.status(200).send(`total area wise food donation ${total} and total plates ${plates}`);
+                            }
 
-    }catch(err)
-    {
+                        })
+                    });
+                }
+            })
+
+
+
+    } catch (err) {
         return res.status(400).send("bad request");
     }
 }
 
 
-exports.areaWiseRequest=async(req,res)=>
-{
-    try{
-        
-        Food_request.find().populate("receiver_id").populate("user_id")
-        .exec(async(err,data)=>
-        {
-            if(err)
-            {
-                return res.status(400).send(err);
-            }
-            else
-            {
-                data.map(async(d)=>
-                {
-                   const u =await User.findOne({_id:d.receiver_id.user_id,landmark_id:"5fb4f93e50a9a41abf1b5e9f"});
-                    console.log(u);
-                    console.log(d.receiver_id.user_id);
-                    console.log(u._id);
-                    if(d.receiver_id.user_id===u._id)
-                    {
-                        console.log("dfghj");
-                    }
-                })
-                
-                //return res.status(200).send(requests);
-            }
-        })      
-        
-       
+exports.areaWiseRequest = async (req, res) => {
+    try {
+        let user = [];
+       await Receiver.find().populate("user_id")
+            .exec(async (err, data) => {
+                if (err) {
+                    return res.status(400).send(err);
+                }
+                else {
+                 const a= data.map(async d=>{
+                       // if(d.user_id.landmark_id === "5fb61f9fc169f922bcff6519"){
+                         
+                       await user.push(d);
+                       // }
+                        return {
+                            user
+                        }
+                    })
+                    const results = await Promise.all(a)
+                    res.send(results)
 
-    }catch(err)
-    {
+                   
+
+                }
+            })
+    } catch (err) {
         return res.status(400).send("bad request");
     }
 }   
