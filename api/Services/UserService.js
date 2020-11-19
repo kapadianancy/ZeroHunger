@@ -39,6 +39,22 @@ exports.addRole = async (req, res) => {
     }
 }
 
+exports.edit = async (req, res) => {
+    try {
+        await user.findByIdAndUpdate(req.params.id, req.body,{new:true,runValidators:true}, (err) => {
+            if (err) {
+                return res.status(400).send(err)
+            }
+            else {
+                return res.status(201).send("user Updated")
+            }
+        });
+    } catch (e) {
+        return res.status(400).send("Not Updated")
+    }
+}
+
+
 exports.login = async (req, res) => {
     try {
         const u = await user.find({
@@ -61,6 +77,8 @@ exports.login = async (req, res) => {
 
 }
 
+
+
 exports.changePassword = async (req, res) => {
     try {
         let validpass = await bcrypt.compare(req.body.oldpass, req.validUser.password)
@@ -73,7 +91,7 @@ exports.changePassword = async (req, res) => {
 
         const User = await user.findByIdAndUpdate(req.validUser._id, {
             password: password
-        })
+        },{new:true,runValidators:true})
 
         if (User) {
             return res.status(201).send("Successfully Password Changed");
@@ -118,7 +136,7 @@ exports.updatePassword = async (req, res) => {
     
         const User = await user.findByIdAndUpdate(req.params.id, {
             password: password
-        })
+        },{new:true,runValidators:true})
 
         if (User) {
             return res.status(201).send("Successfully Password Changed");

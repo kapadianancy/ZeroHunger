@@ -33,7 +33,11 @@ exports.getEventById = async (req, res) => {
 }
 
 exports.addEvent = async (req, res) => {
-    const event = new CharityEvent(req.body)
+    const e ={
+        banner: "/images/" + 'event' + req.file.originalname,
+        ...req.body
+    }
+    const event = new CharityEvent(e)
     try {
         await event.save();
         return res.status(201).send("Event Inserted")
@@ -45,7 +49,11 @@ exports.addEvent = async (req, res) => {
 
 exports.editEvent = async (req, res) => {
     try {
-        await CharityEvent.findByIdAndUpdate(req.params.id, req.body, (err) => {
+        const e ={
+            banner: "/images/" + 'event' + req.file.originalname,
+            ...req.body
+        }
+        await CharityEvent.findByIdAndUpdate(req.params.id, e,{new:true,runValidators:true}, (err) => {
             if (err) {
                 return res.status(400).send(err)
             }

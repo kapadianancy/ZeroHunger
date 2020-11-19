@@ -54,7 +54,7 @@ exports.editPortfolio = async (req, res) => {
             ...req.body
         }
        
-        await Portfolio.findByIdAndUpdate(req.params.id, portfolio, (err) => {
+        await Portfolio.findByIdAndUpdate(req.params.id, portfolio,{new:true,runValidators:true}, (err) => {
             if (err) {
                 return res.status(400).send(err)
             }

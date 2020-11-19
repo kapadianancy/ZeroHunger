@@ -56,6 +56,21 @@ exports.delete = async (req, res) => {
     }
 }
 
+exports.edit = async (req, res) => {
+    try {
+        await volunteer.findByIdAndUpdate(req.params.id, req.body,{new:true,runValidators:true}, (err) => {
+            if (err) {
+                return res.status(400).send(err)
+            }
+            else {
+                return res.status(201).send("volunteer Updated")
+            }
+        });
+    } catch (e) {
+        return res.status(400).send("Not Updated")
+    }
+}
+
 exports.total=async(req,res)=>
 {
     try{
@@ -143,6 +158,24 @@ exports.deleteLandmarkManager = async (req, res) => {
         res.status(200).send(data)
 
     } catch (err) {
+        return res.status(400).send("bad request");
+    }
+}
+
+exports.areaWise=async(req,res)=>
+{
+    try{
+        var volunteer=await User.find({is_deleted:false,role_id:"5fb3be8ccb07c31f57ab2908",landmark_id:"5fb3be57cb07c31f57ab2905"});
+            
+        
+        if(volunteer.length == 0)
+        {
+            return res.status(200).send(`No data found`);
+        }
+        return res.status(200).send(volunteer);
+
+    }catch(err)
+    {
         return res.status(400).send("bad request");
     }
 }

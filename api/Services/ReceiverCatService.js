@@ -46,7 +46,7 @@ exports.delete = async (req, res) => {
 
 exports.edit = async (req, res) => {
     try {
-        await ReceiverCat.findByIdAndUpdate(req.params.id, req.body, (err) => {
+        await ReceiverCat.findByIdAndUpdate(req.params.id, req.body,{new:true,runValidators:true}, (err) => {
             if (err) {
                 return res.status(400).send(err)
             }

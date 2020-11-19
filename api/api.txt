@@ -4,6 +4,10 @@ volunteer registration /volunteer/addvolunteer
 CRUD of landmark
 donor and receiver registration
 CRUD of donor category
+edit profile of all roles
+login
+change/update/forget password
+
 
 1)dashboard--total food donation
 	--total donors

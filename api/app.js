@@ -35,7 +35,7 @@ app.use('/receiver',ReceiverRoute);
 
 app.use('/*',(req,res)=>
 {
-  res.status(400).send("Url Not Found");
+  res.status(404).send("Url Not Found");
 })
 
 app.listen(port, () => {

@@ -5,6 +5,7 @@ const Donation = require('../models/Donation');
 const User = require('../models/User');
 const Receiver = require('../models/Receiver');
 const Donor = require('../models/Donor');
+const { request } = require('express');
 
 exports.getAllFoodDonation = async (req, res) => {
     try {
@@ -92,7 +93,7 @@ exports.addFoodRequest = async (req, res) => {
 exports.getAllFoodRequest = async (req, res) => {
     try {
         const data = await Food_request.find({
-            is_Deleted: 0
+            is_deleted: 0
         })
 
         return res.status(200).send(data)
@@ -125,7 +126,7 @@ exports.getFoodRequestById = async (req, res) => {
 
 exports.editFoodRequest = async (req, res) => {
     try {
-        await Food_request.findByIdAndUpdate(req.params.id, req.body, (err) => {
+        await Food_request.findByIdAndUpdate(req.params.id, req.body,{new:true,runValidators:true}, (err) => {
             if (err) {
                 return res.status(400).send(err)
             }
@@ -271,33 +272,78 @@ exports.areaWiseTotalDonation=async(req,res)=>
 exports.areaWiseRequest=async(req,res)=>
 {
     try{
-        
-        Food_request.find().populate("receiver_id").populate("user_id")
-        .exec(async(err,data)=>
+        Food_request.find().populate("receiver_id").exec(async(err,requests)=>
         {
             if(err)
             {
                 return res.status(400).send(err);
             }
-            else
-            {
-                data.map(async(d)=>
-                {
-                   const u =await User.findOne({_id:d.receiver_id.user_id,landmark_id:"5fb4f93e50a9a41abf1b5e9f"});
-                    console.log(u);
-                    console.log(d.receiver_id.user_id);
-                    console.log(u._id);
-                    if(d.receiver_id.user_id===u._id)
+            else{
+                var userIds=requests.map((r)=>{return r.receiver_id.user_id});
+                User.find({_id: {$in: userIds},landmark_id:"5fb4f93e50a9a41abf1b5e9f"}, async(err, users)=> {
+                    if (err) {
+                      
+                      return res.status(400).send(err);
+                    }
+                    else
                     {
-                        console.log("dfghj");
+                        if(users.length==0)
+                        {
+                            return res.status(400).send("No data found");
+                        }
+                       var uids=users.map((u)=>{return u._id.toString()})
+                       var result=requests.filter(function(x)
+                       {
+                         return uids.includes(x.receiver_id.user_id.toString());
+                       })
+                       res.status(200).send(result);
                     }
                 })
-                
-                //return res.status(200).send(requests);
+
+                //res.status(200).send(userIds);
             }
-        })      
-        
-       
+        })
+
+    }catch(err)
+    {
+        return res.status(400).send("bad request");
+    }
+}   
+
+exports.areaWiseFoodDonation=async(req,res)=>
+{
+    try{
+        Food_listing.find().populate("donor_id").exec(async(err,requests)=>
+        {
+            if(err)
+            {
+                return res.status(400).send(err);
+            }
+            else{
+                var userIds=requests.map((r)=>{return r.donor_id.user_id});
+                User.find({_id: {$in: userIds},landmark_id:"5fb4f93e50a9a41abf1b5e9f"}, async(err, users)=> {
+                    if (err) {
+                      
+                      return res.status(400).send(err);
+                    }
+                    else
+                    {
+                        if(users.length==0)
+                        {
+                            return res.status(400).send("No data found");
+                        }
+                       var uids=users.map((u)=>{return u._id.toString()})
+                       var result=requests.filter(function(x)
+                       {
+                         return uids.includes(x.donor_id.user_id.toString());
+                       })
+                       res.status(200).send(result);
+                    }
+                })
+
+                //res.status(200).send(userIds);
+            }
+        })
 
     }catch(err)
     {
