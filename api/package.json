@@ -3,16 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-<<<<<<< HEAD
-    "start": "env-cmd -f ./.env nodemon app.js",
-    "test": "jest --watch"
-=======
     "start": "env-cmd -f ./.env nodemon index.js",
     "test": "env-cmd -f ./testcase/test.env jest --watch"
   },
   "jest": {
     "testEnvironment": "node"
->>>>>>> master
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

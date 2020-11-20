@@ -4,6 +4,7 @@ var User=require('../models/User');
 var Role=require('../models/Role');
 var mongoose=require('mongoose')
 
+
 var rid=new mongoose.Types.ObjectId();
 
 var User1={
