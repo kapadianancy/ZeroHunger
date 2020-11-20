@@ -73,7 +73,7 @@ exports.delete = async (req, res) => {
 exports.totalReceiver=async(req,res)=>
 {
     try{
-        var total=await receiver.where({is_deleted:false}).count();          
+        var total=await receiver.where({is_deleted:false}).countDocuments();          
         
         if(total == 0)
         {
