@@ -1,5 +1,7 @@
 const mongoose=require("mongoose");
 const validator=require("validator");
+const bcrypt=require('bcryptjs');
+
 const UserSchema=mongoose.Schema({
    
     name:
@@ -10,7 +12,8 @@ const UserSchema=mongoose.Schema({
     username:
     {
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     email:
     {
@@ -82,6 +85,16 @@ UserSchema.virtual('Volunteer', {
     ref: 'Volunteer',
     localField: '_id',
     foreignField: 'user_id'
+})
+
+UserSchema.pre('save',async function(next)
+{
+    const user=this;
+    if(user.isModified("password"))
+    {
+        user.password=await bcrypt.hash(user.password,8);
+    }
+    next();
 })
 
 const User = mongoose.model("User", UserSchema);

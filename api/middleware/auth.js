@@ -1,16 +1,17 @@
 const user=require('../models/User');
 const jwt=require("jsonwebtoken");
-const secret=process.env.secret;
+const secret=process.env.SECRET || "zerohungersecretkey";
 
 const auth=async(req,res,next)=>
 {
     try{
         //console.log("auth running");
+        
         const token=req.header("authorization").replace("Bearer ","");
-        //console.log(token);
+        //sconsole.log(token);
         const valid=await jwt.verify(token,secret);
         const u=await user.findById(valid._id)
-        //console.log(u);
+
         if(!u)
         {
             throw new Error("user not found");
