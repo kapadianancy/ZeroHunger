@@ -9,7 +9,6 @@ exports.addUser = async (req, res) => {
     try {
         const u = new user(req.body);
         var token = await util.generateToken(u);
-        u.password = await gethash(req.body.password);
         if (!token) {
             return res.status(400).send("bad request");
         }
@@ -55,12 +54,27 @@ exports.edit = async (req, res) => {
     }
 }
 
+exports.getUser = async (req, res) => {
+    try {
+       var username=req.params.username;
+       const u=await user.findOne({username:username});
+       if(u)
+       {
+          return res.status(200).send(u);
+       }
+       return res.status(400).send("not found");
+
+    } catch (err) {
+        res.status(400).send(err);
+    }
+}
+
 
 exports.login = async (req, res) => {
     try {
         const u = await user.find({
             username: req.body.username,
-            is_deleted: 0
+            is_deleted: false
         })
         if (u.length == 0) {
             return res.status(401).send("Invalid Username");
@@ -185,7 +199,3 @@ const sendMail = async function (email) {
 
 }
 
-const gethash = async function (password) {
-    const h = await bcrypt.hash(password, 8);
-    return h;
-}

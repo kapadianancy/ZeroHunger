@@ -17,10 +17,8 @@ beforeEach(async()=>
 })
 
 test('Add Category',async()=>{
-   const user = await  User.findOne({
-            "email":"user1@gmail.com"
-        });
-        token =await utils.generateToken(user);
+   const user = await  User.findOne({email:"user1@gmail.com"});
+    token =await utils.generateToken(user);
     await request(app).
           post('/receiverCategory/add').
           set('Authorization',`Bearer ${token}`).

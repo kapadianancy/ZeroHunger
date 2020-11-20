@@ -19,7 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12cb061a-0a43-45e4-b6ba-448379e83b36" name="Default Changelist" comment="" />
+    <list default="true" id="12cb061a-0a43-45e4-b6ba-448379e83b36" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/api/routes/ReceiverRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/ReceiverRoute.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/routes/UserRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/UserRoute.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/testcase/user.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/testcase/user.test.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,5 +74,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

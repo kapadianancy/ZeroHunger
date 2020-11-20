@@ -4,7 +4,7 @@ var router = express.Router();
 var auth=require('../middleware/auth');
 var receiver = require("../Services/ReceiverService");
 
-router.post('/add',receiver.addReceiver);
+router.post('/add',auth,receiver.addReceiver);
 
 router.get('/total',receiver.totalReceiver);
 
