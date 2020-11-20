@@ -29,6 +29,7 @@ exports.addRole = async (req, res) => {
         const r = new role(req.body);
 
         var result = await r.save();
+       
         if (!result) {
             return res.status(400).send("bad request");
         }

@@ -1,7 +1,7 @@
 var express = require('express');
 const { mongo, Mongoose } = require('mongoose');
 var path = require('path');
-var port =process.env.PORT || 8000;
+
 
 var EventRoute = require('./routes/EventRoute');
 var ReceiverCatRoute=require("./routes/ReceiverCatRoute");
@@ -38,6 +38,4 @@ app.use('/*',(req,res)=>
   res.status(404).send("Url Not Found");
 })
 
-app.listen(port, () => {
-  console.log("Server is running at "+port)
-})
+ module.exports=app;
