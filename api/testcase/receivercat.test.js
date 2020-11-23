@@ -8,7 +8,8 @@ let token = "";
 
 var cat1 = {
     _id: "5fb7b16a41c0752b88158a6c",
-    name: "Old Age Home"
+    name: "Old Age Home",
+    is_deleted : false
 }
 
 beforeEach(async () => {
@@ -20,22 +21,16 @@ beforeEach(async () => {
     token = await utils.generateToken(user);
 })
 
-test('Edit Receiver Category', async () => {
-    await request(app).
-        put('/receiverCategory/edit/5fb7b16a41c0752b88158a6c').
-        set('Authorization', `Bearer ${token}`).
-        send({
-            name: 'Oldd Age Home'
-        }).expect(201);
-})
-
 test('Add Category', async () => {
-    await request(app).
+    const result=await request(app).
         post('/receiverCategory/add').
         set('Authorization', `Bearer ${token}`).
         send({
             name: 'Slum Area'
         }).expect(201);
+
+        expect(result.text).not.toBe(null)
+
 })
 
 test('Add Category Without Authentication',async()=>{
@@ -50,6 +45,15 @@ test('Get All Receiver Category',async()=>{
     await request(app)
     .get('/receiverCategory/getAll')
     .expect(200);
+})
+
+test('Edit Receiver Category', async () => {
+    await request(app).
+        put('/receiverCategory/edit/5fb7b16a41c0752b88158a6c').
+        set('Authorization', `Bearer ${token}`).
+        send({
+            name: 'Oldd Age Home'
+        }).expect(201);
 })
 
 test('Delete Category', async () => {
