@@ -20,9 +20,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12cb061a-0a43-45e4-b6ba-448379e83b36" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/api/routes/ReceiverRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/ReceiverRoute.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/UserRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/UserRoute.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/testcase/user.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/testcase/user.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/ui/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/ui/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/ui/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/App.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/reportWebVitals.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/setupTests.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +53,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Projects/kaiju/tradeui" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -58,6 +66,7 @@
       <option name="presentableId" value="Default" />
       <updated>1605763017933</updated>
       <workItem from="1605763019023" duration="355000" />
+      <workItem from="1606128911815" duration="24000" />
     </task>
     <servers />
   </component>
@@ -75,5 +84,11 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="536" y="220" width="424" height="484" key="FileChooserDialogImpl" timestamp="1606128932700">
+      <screen x="67" y="27" width="1373" height="873" />
+    </state>
+    <state x="536" y="220" width="424" height="484" key="FileChooserDialogImpl/67.27.1373.873@67.27.1373.873" timestamp="1606128932700" />
   </component>
 </project>
