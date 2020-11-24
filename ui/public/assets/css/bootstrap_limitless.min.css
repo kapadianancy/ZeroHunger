@@ -2242,7 +2242,7 @@ input[class*=bg-]:not(.bg-light):not(.bg-white):not(.bg-transparent)+.form-contr
 
 @media (min-width:768px) {
     .navbar-expand-md .navbar-brand {
-        min-width: 70.625rem
+        min-width: 15.625rem
     }
     .navbar-expand-md .navbar-nav-link:before {
         top: auto;
