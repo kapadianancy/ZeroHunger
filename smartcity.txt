@@ -1,4 +1,4 @@
-1- event/caterer/party/resturant/etc donate excessive food
+ 1- event/caterer/party/resturant/etc donate excessive food
 2- donate money to site(general or specific)
 
 4- donate food on special ocassion(general or specific)

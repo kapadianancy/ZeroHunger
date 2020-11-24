@@ -1,17 +1,23 @@
 import React from 'react'
 
 function Sidebar(proprs) {
+	var style={
+		position:"fixed",
+		left: 0,
+		top: 70,
+		height: "100%"	  
+	}
 	return (
 
 		<div>
 
-			<div class="sidebar sidebar-dark sidebar-main sidebar-expand-md" style={{ minHeight: "555px" }}>
+			<div class="sidebar sidebar-dark sidebar-main sidebar-expand-md" style={style}>
 
 				<div class="sidebar-content">
 					<div class="card card-sidebar-mobile">
 						<ul class="nav nav-sidebar" data-nav-type="accordion">
 
-							<li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Main</div> <i class="icon-menu" title="Main"></i></li>
+							
 							<li class="nav-item">
 								<a href="/admin" class="nav-link active">
 									<i class="icon-home4"></i>
@@ -81,7 +87,7 @@ function Sidebar(proprs) {
 								<a href="#" class="nav-link"><i class="icon-graph"></i> <span>Graphs</span></a>
 							</li>
 							<li class="nav-item">
-								<a href="#" class="nav-link"><i class="icon-grid6"></i> <span>Reports</span></a>
+								<a href="#" class="nav-link"><i class="icon-table"></i> <span>Reports</span></a>
 							</li>
 						</ul>
 					</div>
