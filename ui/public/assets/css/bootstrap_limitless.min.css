@@ -2164,7 +2164,7 @@ input[class*=bg-]:not(.bg-light):not(.bg-white):not(.bg-transparent)+.form-contr
 
 @media (min-width:576px) {
     .navbar-expand-sm .navbar-brand {
-        min-width: 15.625rem
+        min-width: 13.625rem
     }
     .navbar-expand-sm .navbar-nav-link:before {
         top: auto;
@@ -2242,7 +2242,7 @@ input[class*=bg-]:not(.bg-light):not(.bg-white):not(.bg-transparent)+.form-contr
 
 @media (min-width:768px) {
     .navbar-expand-md .navbar-brand {
-        min-width: 15.625rem
+        min-width: 13.625rem
     }
     .navbar-expand-md .navbar-nav-link:before {
         top: auto;
@@ -2320,7 +2320,7 @@ input[class*=bg-]:not(.bg-light):not(.bg-white):not(.bg-transparent)+.form-contr
 
 @media (min-width:992px) {
     .navbar-expand-lg .navbar-brand {
-        min-width: 15.625rem
+        min-width: 13.625rem
     }
     .navbar-expand-lg .navbar-nav-link:before {
         top: auto;
@@ -2398,7 +2398,7 @@ input[class*=bg-]:not(.bg-light):not(.bg-white):not(.bg-transparent)+.form-contr
 
 @media (min-width:1200px) {
     .navbar-expand-xl .navbar-brand {
-        min-width: 15.625rem
+        min-width: 13.625rem
     }
     .navbar-expand-xl .navbar-nav-link:before {
         top: auto;
@@ -2486,7 +2486,7 @@ input[class*=bg-]:not(.bg-light):not(.bg-white):not(.bg-transparent)+.form-contr
 }
 
 .navbar-expand .navbar-brand {
-    min-width: 15.625rem
+    min-width: 13.625rem
 }
 
 .navbar-expand .navbar-nav-link:before {

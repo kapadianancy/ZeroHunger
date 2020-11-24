@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
-import Content from './Content';
+import Main from './Main';
 
 function Dashboard(props) {
     return (
@@ -9,8 +9,9 @@ function Dashboard(props) {
             <Header />
             <div class="page-content">
                 <Sidebar />
-                <Content />
+                <Main />
             </div>
+          
         </div>
     );
 }

@@ -35,13 +35,13 @@ function Header(props) {
 					<a href="#" className="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown">
 						<i className="icon-bubbles4"></i>
 						<span className="d-md-none ml-2">Messages</span>
-						<span className="badge badge-pill bg-warning-400 ml-auto ml-md-0">2</span>
+						<span className="badge badge-pill bg-warning-400 ml-auto ml-md-0">1</span>
 					</a>
 					
 					<div className="dropdown-menu dropdown-menu-right dropdown-content wmin-md-350">
 						<div className="dropdown-content-header">
 							<span className="font-weight-semibold">Messages</span>
-							<a href="#" className="text-default"><i className="icon-compose"></i></a>
+							<a href="#" className="text-default"></a>
 						</div>
 
 						<div className="dropdown-content-body dropdown-scrollable">

@@ -6,7 +6,7 @@ function Dashboard(props) {
     return (
         <div>
             <Header/>
-           
+           <Sidebar/>
         </div>
     );
 }
