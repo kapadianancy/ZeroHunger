@@ -33,6 +33,10 @@ function Login(proprs) {
                         </div>
 
                         <div class="text-center">
+                        Don’t have an account?  <a href="login_password_recover.html">Sign up!</a>
+                        </div>
+
+                        <div class="text-center">
                             <a href="login_password_recover.html">Forgot password?</a>
                         </div>
                     </div>
