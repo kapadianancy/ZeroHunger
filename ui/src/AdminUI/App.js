@@ -2,13 +2,14 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 import Header from "./Components/Header/Header";
 import Sidebar from "./Components/Sidebar/Sidebar";
 import Login from "./Components/Login/Login";
-
+import ForgetPassword from "./Components/ForgetPassword/ForgetPassword";
+import {Route,Switch} from 'react-router-dom';
 
 function App() {
-  var path="assets/images/about_layout.png";
-  var style ={
+  var path = "assets/images/about_layout.png";
+  var style = {
     backgroundImage: "url(" + path + ")",
-    height:"100%",
+    height: "100%",
     backgroundPosition: 'center',
     //backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat'
@@ -16,11 +17,13 @@ function App() {
 
   return (
     <>
-      {/* <div style={style}>
+{/*      
+      <div style={style}>
         <Login />
+        <ForgetPassword />
       </div> */}
 
-
+      
       <Header />
       
       <div class="page-content" style={{height:"100%"}} >
