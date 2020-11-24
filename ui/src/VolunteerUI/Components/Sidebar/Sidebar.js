@@ -1,17 +1,12 @@
 import React from 'react'
 
 function Sidebar(proprs) {
-	var style={
-		position:"fixed",
-		left: 0,
-		top: 70,
-		height: "100%"	  
-	}
+
 	return (
 
 		<div>
 
-			<div class="sidebar sidebar-dark sidebar-main sidebar-expand-md" style={style}>
+			<div class="sidebar sidebar-dark sidebar-main sidebar-expand-md" style={{height:"100%"}}>
 
 				<div class="sidebar-content">
 					<div class="card card-sidebar-mobile">

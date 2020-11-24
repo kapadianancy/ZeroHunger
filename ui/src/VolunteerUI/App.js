@@ -1,10 +1,34 @@
 import Dashboard from "./Components/Dashboard/Dashboard";
+import Header from "./Components/Header/Header";
+import Sidebar from "./Components/Sidebar/Sidebar";
+import Login from "./Components/Login/Login"
 
 
 function App() {
+  var path="assets/images/about_layout.png";
+  var style ={
+    backgroundImage: "url(" + path + ")",
+    height:"100%",
+    backgroundPosition: 'center',
+    //backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat'
+  }
 
   return (
-  <Dashboard/>
+    <>
+      {/* <div style={style}>
+        <Login />
+      </div> */}
+
+
+      <Header />
+      
+      <div class="page-content" style={{height:"100%"}} >
+      <Sidebar />
+        <Dashboard />
+      </div>
+
+    </>
   );
 }
 
