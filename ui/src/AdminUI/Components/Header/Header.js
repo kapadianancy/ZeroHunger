@@ -34,14 +34,14 @@ function Header(props) {
 				<li className="nav-item dropdown">
 					<a href="#" className="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown">
 						<i className="icon-bubbles4"></i>
-						<span className="d-md-none ml-2">Messages</span>
+						<span className="d-md-none ml-2">Notifications</span>
 						<span className="badge badge-pill bg-warning-400 ml-auto ml-md-0">2</span>
 					</a>
 					
 					<div className="dropdown-menu dropdown-menu-right dropdown-content wmin-md-350">
 						<div className="dropdown-content-header">
-							<span className="font-weight-semibold">Messages</span>
-							<a href="#" className="text-default"><i className="icon-compose"></i></a>
+							<span className="font-weight-semibold">Notification</span>
+							<a href="#" className="text-default"></a>
 						</div>
 
 						<div className="dropdown-content-body dropdown-scrollable">
@@ -75,7 +75,7 @@ function Header(props) {
 				<li className="nav-item dropdown dropdown-user">
 					<a href="#" className="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
 						<img src="assets/images/demo/users/face11.jpg" className="rounded-circle mr-2" height="34" alt=""/>
-						<span>Volunteer</span>
+						<span>Admin</span>
 					</a>
 
 					<div className="dropdown-menu dropdown-menu-right">
