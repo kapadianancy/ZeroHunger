@@ -1,38 +1,19 @@
 import Dashboard from "./Components/Dashboard/Dashboard";
-import Header from "./Components/Header/Header";
-import Sidebar from "./Components/Sidebar/Sidebar";
 import Login from "./Components/Login/Login";
 import ForgetPassword from "./Components/ForgetPassword/ForgetPassword";
-import {Route,Switch} from 'react-router-dom';
+import { Switch, Route, withRouter, Redirect } from 'react-router'
 
-function App() {
-  var path = "assets/images/about_layout.png";
-  var style = {
-    backgroundImage: "url(" + path + ")",
-    height: "100%",
-    backgroundPosition: 'center',
-    //backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat'
-  }
-
+function App(props) {
   return (
     <>
-{/*      
-      <div style={style}>
-        <Login />
-        <ForgetPassword />
-      </div> */}
-
-      
-      <Header />
-      
-      <div class="page-content" style={{height:"100%"}} >
-      <Sidebar />
-        <Dashboard />
-      </div>
-
+      <Switch>
+        <Route path="/admin/login" exact component={Login} />
+        <Route path="/admin/forgetpassword" exact component={ForgetPassword} />
+        <Route path="/admin/" exact component={Dashboard} />
+      </Switch>
     </>
   );
 }
 
-export default App;
+
+export default withRouter(App);
