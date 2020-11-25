@@ -1,14 +1,21 @@
 import React from 'react';
+import Header from '../Header/Header';
+import Sidebar from '../Sidebar/Sidebar';
 
 function ChangePassword(props) {
     return (
+        <>
+        <Header />
+            <div className="page-content" style={{ height: "100%" }} >
+                <Sidebar />
+       
       
           <div class="content-wrapper">
 
 <div class="page-header page-header-light">
     <div class="page-header-content header-elements-md-inline" style={{height:"55px"}}>
         <div class="page-title d-flex">
-            <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Change Password </span></h4>
+            <h4><span class="font-weight-semibold">Change Password </span></h4>
             <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
         </div>
 
@@ -42,26 +49,30 @@ function ChangePassword(props) {
 
                 <div class="card-body">
                     <form action="#">
-                        <div class="form-group row">
-                            <label class="col-form-label col-lg-2">Old Password</label>
-                            <div class="col-lg-10">
-                                <input type="password" class="form-control"/>
-                            </div>
-                        </div>
+                    <div class="form-group row">
+									<label class="col-form-label col-lg-2">Old password <span class="text-danger">*</span></label>
+									<div class="col-lg-9">
+										<input type="password" name="old password" class="form-control" required="" placeholder="Text input validation" aria-invalid="true"/>
+                                        <label id="basic-error" class="validation-invalid-label" for="old password">This field is required.</label>
+									</div>
+								</div>
+
 
                         <div class="form-group row">
-                            <label class="col-form-label col-lg-2">New Password</label>
-                            <div class="col-lg-10">
-                                <input type="password" class="form-control"/>
-                            </div>
-                        </div>
+									<label class="col-form-label col-lg-2">New Password <span class="text-danger">*</span></label>
+									<div class="col-lg-9">
+										<input type="password" name="new password" id="password" class="form-control validate-equalTo-blur" required="" placeholder="enter new password" aria-invalid="false"/>
+                                            <label id="password-error" class="validation-invalid-label validation-valid-label" for="new password">Success.</label>
+									</div>
+								</div>
 
-                        <div class="form-group row">
-                            <label class="col-form-label col-lg-2">Confirm New Password</label>
-                            <div class="col-lg-10">
-                                <input type="password" class="form-control"/>
-                            </div>
-                        </div>
+                                <div class="form-group row">
+									<label class="col-form-label col-lg-2">Repeat password <span class="text-danger">*</span></label>
+									<div class="col-lg-9">
+										<input type="password" name="repeat_password" class="form-control" required="" placeholder="confirm your new password" aria-invalid="true"/>
+                                        <label id="repeat_password-error" class="validation-invalid-label" for="repeat_password">Please enter the same value again.</label>
+									</div>
+								</div>
 
 
                         <div class="form-group row mb-0">
@@ -81,6 +92,8 @@ function ChangePassword(props) {
     
 </div>
     </div>   
+    </div>
+    </>
     );
 }
 
