@@ -24,7 +24,7 @@ function ChangePassword() {
                             <div class="d-flex">
                                 <div class="breadcrumb">
                                     <a href="/admin" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
-                                    <a href="form_actions.html" class="breadcrumb-item">Change Password</a>
+                                    <a href="/admin/changepassword" class="breadcrumb-item">Change Password</a>
 
                                 </div>
 
