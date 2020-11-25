@@ -1,8 +1,14 @@
 import React from 'react';
+import Header from '../Header/Header';
+import Sidebar from '../Sidebar/Sidebar';
 
 function EditProfile(props) {
     return (
-             
+        <>
+        <Header />
+            <div className="page-content" style={{ height: "100%" }} >
+                <Sidebar />
+           
         <div class="content-wrapper">
 
         <div class="page-header page-header-light">
@@ -223,6 +229,8 @@ function EditProfile(props) {
             
         </div>
             </div>  
+        </div>
+        </>    
     );
 }
 

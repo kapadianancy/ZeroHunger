@@ -1,14 +1,21 @@
 import React from 'react';
+import Header from '../Header/Header';
+import Sidebar from '../Sidebar/Sidebar';
 
 function ChangePassword(props) {
     return (
+        <>
+        <Header />
+            <div className="page-content" style={{ height: "100%" }} >
+                <Sidebar />
+       
       
           <div class="content-wrapper">
 
 <div class="page-header page-header-light">
     <div class="page-header-content header-elements-md-inline" style={{height:"55px"}}>
         <div class="page-title d-flex">
-            <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Change Password </span></h4>
+            <h4><span class="font-weight-semibold">Change Password </span></h4>
             <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
         </div>
 
@@ -85,6 +92,8 @@ function ChangePassword(props) {
     
 </div>
     </div>   
+    </div>
+    </>
     );
 }
 
