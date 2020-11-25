@@ -1,7 +1,8 @@
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Header from "./Components/Header/Header";
 import Sidebar from "./Components/Sidebar/Sidebar";
-import Login from "./Components/Login/Login"
+import Login from "./Components/Login/Login";
+import ForgetPassword from './Components/ForgetPassword/ForgetPassword';
 
 
 function App() {
@@ -25,7 +26,8 @@ function App() {
       
       <div class="page-content" style={{height:"100%"}} >
       <Sidebar />
-        <Dashboard />
+        {/* <Dashboard /> */}
+        <ForgetPassword/>
       </div>
 
     </>
