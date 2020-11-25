@@ -79,7 +79,7 @@ function Header(props) {
 					</a>
 
 					<div className="dropdown-menu dropdown-menu-right">
-						<a href="#" className="dropdown-item"><i className="icon-user-plus"></i> My profile</a>
+						<a href="/admin/editprofile" className="dropdown-item"><i className="icon-user-plus"></i> My profile</a>
 						<a href="/admin/changepassword" className="dropdown-item"><i className="icon-cog5"></i>Change Password</a>
 						<a href="#" className="dropdown-item"><i className="icon-switch2"></i> Logout</a>
 					</div>

@@ -5,11 +5,13 @@ import Login from "./Components/Login/Login";
 import ForgetPassword from "./Components/ForgetPassword/ForgetPassword";
 import ChangePassword from "./Components/ChangePassword/ChangePassword";
 import VolunteerList from "./Components/Volunteer/VolunteerList";
+import EditProfile from './Components/EditProfile/EditProfile';
 
 function App(props) {
   return (
     <>
       <Switch>
+      <Route path="/admin/editprofile" exact component={EditProfile} />
         <Route path="/admin/volunteerlist" exact component={VolunteerList} />
         <Route path="/admin/changepassword" exact component={ChangePassword} />
         <Route path="/admin/login" exact component={Login} />
