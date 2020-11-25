@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ForgetPassword(props) {
+function ChangePassword(props) {
     return (
       
           <div class="content-wrapper">
@@ -84,4 +84,4 @@ function ForgetPassword(props) {
     );
 }
 
-export default ForgetPassword;
+export default ChangePassword;
