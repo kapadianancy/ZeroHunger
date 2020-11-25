@@ -8,7 +8,7 @@ function Dashboard(props) {
         height : "150px"
     }
 
-    var path="assets/images/bottom-bg.png";
+    var path="../assets/images/bottom-bg.png";
     var bgImageStyle ={
       backgroundImage: "url(" + path + ")",
       height:"100%",
@@ -17,6 +17,10 @@ function Dashboard(props) {
       backgroundRepeat: 'no-repeat'
     }
     return (
+        <>
+        <Header />
+            <div className="page-content" style={{ height: "100%" }} >
+                <Sidebar />
        
         <div class="content-wrapper" style={bgImageStyle}>
             <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
@@ -104,6 +108,8 @@ function Dashboard(props) {
                 </div>
             </div>
         </div>
+        </div>
+        </>
     );
 }
 

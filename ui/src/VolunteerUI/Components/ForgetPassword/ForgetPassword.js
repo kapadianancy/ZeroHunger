@@ -1,87 +1,41 @@
-import React from 'react';
+import React from 'react'
 
-function ForgetPassword(props) {
+function ForgetPassword() {
+    var path = "../assets/images/about_layout.png";
+    var style = {
+        backgroundImage: "url(" + path + ")",
+        height: "100%",
+        backgroundPosition: 'center',
+        //backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat'
+    }
     return (
-      
-          <div class="content-wrapper">
+        <div style={style}>
+            <div className="content d-flex justify-content-center align-items-center">
 
-<div class="page-header page-header-light">
-    <div class="page-header-content header-elements-md-inline" style={{height:"55px"}}>
-        <div class="page-title d-flex">
-            <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Change Password </span></h4>
-            <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
-        </div>
+                <form className="login-form" action="#" style={{ marginTop: "85px" }}>
+                    <div className="card mb-0">
+                        <div className="card-body">
+                            <div className="text-center mb-3">
+                                <i className="icon-spinner11 icon-2x text-warning border-warning border-3 rounded-round p-3 mb-3 mt-1"></i>
+                                <h5 className="mb-0">Forget Password</h5>
+                                <span className="d-block text-muted">We'll send you instructions in email</span>
+                            </div>
 
-        
-    </div>
+                            <div className="form-group form-group-feedback form-group-feedback-right">
+                                <input type="email" className="form-control" placeholder="Your email" />
+                                <div className="form-control-feedback">
+                                    <i className="icon-mail5 text-muted"></i>
+                                </div>
+                            </div>
 
-    <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
-        <div class="d-flex">
-            <div class="breadcrumb">
-                <a href="/volunteer" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> dashboard</a>
-                <a href="form_actions.html" class="breadcrumb-item">Change password</a>
-                
+                            <button type="submit" className="btn bg-blue btn-block"><i className="icon-spinner11 mr-2"></i> Forget password</button>
+                        </div>
+                    </div>
+                </form>
+
             </div>
-
-            <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
         </div>
-
-        
-    </div>
-</div>
-
-<div class="content">
-
-    <div class="row">
-        <div class="col-md-12">
-          
-            <div class="card">
-                <div class="card-header header-elements-inline">
-                  
-                </div>
-
-                <div class="card-body">
-                    <form action="#">
-                        <div class="form-group row">
-                            <label class="col-form-label col-lg-2">Old Password</label>
-                            <div class="col-lg-10">
-                                <input type="password" class="form-control"/>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-form-label col-lg-2">New Password</label>
-                            <div class="col-lg-10">
-                                <input type="password" class="form-control"/>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-form-label col-lg-2">Confirm New Password</label>
-                            <div class="col-lg-10">
-                                <input type="password" class="form-control"/>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group row mb-0">
-                            <div class="col-lg-10 ml-lg-auto">
-                                <button type="submit" class="btn btn-light">Cancel</button>
-                                <button type="submit" class="btn bg-teal-400 ml-3">Change <i class="icon-paperplane ml-2"></i></button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-           
-
-        </div>
-        
-    </div>
-    
-</div>
-    </div>   
-    );
+    )
 }
-
 export default ForgetPassword;
