@@ -1,9 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
 import {Route,Switch} from 'react-router-dom';
 import Admin from './AdminUI/App'
 import Volunteer from './VolunteerUI/App';
 import Error from './Error';
+import Login from './AdminUI/Components/Login/Login';
+import Dashboard from './AdminUI/Components/Dashboard/Dashboard';
 
 function App() {
 
@@ -11,7 +12,7 @@ function App() {
    <>
   
    <Switch>
-     <Route path="/admin" component={Admin}/>
+     <Route path ="/admin" component = {Admin}/>
      <Route path="/volunteer" component={Volunteer}/>
      <Route path="/*" component={Error}/>
    </Switch>
