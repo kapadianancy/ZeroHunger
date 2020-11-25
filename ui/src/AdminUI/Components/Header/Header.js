@@ -11,7 +11,7 @@ function Header(props) {
 		<div className="navbar navbar-expand-md navbar-dark" style={style}>
 		<div className="navbar-brand">
 			<a href="#" className="d-inline-block">
-				<img src="assets/images/logo_light.png" alt=""/>
+				<img src="../assets/images/logo_light.png" alt=""/>
 			</a>
 		</div>
 
@@ -48,7 +48,7 @@ function Header(props) {
 							<ul className="media-list">
 								<li className="media">
 									<div className="mr-3 position-relative">
-										<img src="assets/images/demo/users/face10.jpg" width="36" height="36" className="rounded-circle" alt=""/>
+										<img src="../assets/images/demo/users/face10.jpg" width="36" height="36" className="rounded-circle" alt=""/>
 									</div>
 
 									<div className="media-body">
@@ -74,13 +74,13 @@ function Header(props) {
 
 				<li className="nav-item dropdown dropdown-user">
 					<a href="#" className="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
-						<img src="assets/images/demo/users/face11.jpg" className="rounded-circle mr-2" height="34" alt=""/>
+						<img src="../assets/images/demo/users/face11.jpg" className="rounded-circle mr-2" height="34" alt=""/>
 						<span>Admin</span>
 					</a>
 
 					<div className="dropdown-menu dropdown-menu-right">
 						<a href="#" className="dropdown-item"><i className="icon-user-plus"></i> My profile</a>
-						<a href="#" className="dropdown-item"><i className="icon-cog5"></i>Change Password</a>
+						<a href="/admin/changepassword" className="dropdown-item"><i className="icon-cog5"></i>Change Password</a>
 						<a href="#" className="dropdown-item"><i className="icon-switch2"></i> Logout</a>
 					</div>
 				</li>

@@ -2,9 +2,6 @@ import React from 'react'
 
 function Sidebar(proprs) {
 	var style={
-		//position:"fixed",
-		//left: 0,
-		//top: 70,
 		height: "100%"	  
 	}
 	return (
