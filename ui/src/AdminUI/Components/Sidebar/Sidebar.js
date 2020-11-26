@@ -75,8 +75,8 @@ function Sidebar(proprs) {
 							<li className="nav-item nav-item-submenu">
 								<a href="#" className="nav-link"><i className="icon-camera"></i> <span>Portfolio</span></a>
 								<ul className="nav nav-group-sub" data-submenu-title="Portfolio">
-									<li className="nav-item"><a href="widgets_content.html" className="nav-link">Add Portfolio</a></li>
-									<li className="nav-item"><a href="widgets_content.html" className="nav-link">List of Portfolio</a></li>
+									<li className="nav-item"><a href="/admin/addportfolio" className="nav-link">Add Portfolio</a></li>
+									<li className="nav-item"><a href="/admin/portfoliolist" className="nav-link">List of Portfolio</a></li>
 								</ul>
 							</li>
 
