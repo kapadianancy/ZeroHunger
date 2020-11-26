@@ -44,7 +44,7 @@ function PortfolioList() {
 
 
                                     <table class="table datatable-basic table-hover">
-                                        <thead>
+                                    <thead>
                                             <tr>
                                                 <th>Image</th>
                                                 <th>Description</th>

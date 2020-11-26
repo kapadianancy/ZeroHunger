@@ -2,6 +2,7 @@ import { Switch, Route, withRouter, Redirect } from 'react-router'
 
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Login from "./Components/Login/Login";
+import Logout from "./Components/Logout";
 import ForgetPassword from "./Components/ForgetPassword/ForgetPassword";
 import ChangePassword from "./Components/ChangePassword/ChangePassword";
 import VolunteerList from "./Components/Volunteer/VolunteerList";
@@ -19,6 +20,7 @@ function App(props) {
         <Route path="/admin/volunteerlist" exact component={VolunteerList} />
         <Route path="/admin/changepassword" exact component={ChangePassword} />
         <Route path="/admin/login" exact component={Login} />
+        <Route path="/admin/logout" exact component={Logout} />
         <Route path="/admin/forgetpassword" exact component={ForgetPassword} />
         <Route path="/admin/" exact component={Dashboard} />
       </Switch>
