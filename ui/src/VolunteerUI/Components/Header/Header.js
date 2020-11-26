@@ -11,7 +11,7 @@ function Header(props) {
 		<div className="navbar navbar-expand-md navbar-dark" style={style}>
 		<div className="navbar-brand">
 			<a href="#" className="d-inline-block">
-				<img src="assets/images/logo_light.png" alt=""/>
+				<img src="../assets/images/logo_light.png" alt=""/>
 			</a>
 		</div>
 
@@ -34,13 +34,13 @@ function Header(props) {
 				<li className="nav-item dropdown">
 					<a href="#" className="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown">
 						<i className="icon-bubbles4"></i>
-						<span className="d-md-none ml-2">Messages</span>
-						<span className="badge badge-pill bg-warning-400 ml-auto ml-md-0">1</span>
+						<span className="d-md-none ml-2">Notifications</span>
+						<span className="badge badge-pill bg-warning-400 ml-auto ml-md-0">2</span>
 					</a>
 					
 					<div className="dropdown-menu dropdown-menu-right dropdown-content wmin-md-350">
 						<div className="dropdown-content-header">
-							<span className="font-weight-semibold">Messages</span>
+							<span className="font-weight-semibold">Notification</span>
 							<a href="#" className="text-default"></a>
 						</div>
 
@@ -48,7 +48,7 @@ function Header(props) {
 							<ul className="media-list">
 								<li className="media">
 									<div className="mr-3 position-relative">
-										<img src="assets/images/demo/users/face10.jpg" width="36" height="36" className="rounded-circle" alt=""/>
+										<img src="../assets/images/demo/users/face10.jpg" width="36" height="36" className="rounded-circle" alt=""/>
 									</div>
 
 									<div className="media-body">
@@ -74,13 +74,13 @@ function Header(props) {
 
 				<li className="nav-item dropdown dropdown-user">
 					<a href="#" className="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
-						<img src="assets/images/demo/users/face11.jpg" className="rounded-circle mr-2" height="34" alt=""/>
+						<img src="../assets/images/demo/users/face13.jpg" className="rounded-circle mr-2" height="34" alt=""/>
 						<span>Volunteer</span>
 					</a>
 
 					<div className="dropdown-menu dropdown-menu-right">
-						<a href="#" className="dropdown-item"><i className="icon-user-plus"></i> My profile</a>
-						<a href="#" className="dropdown-item"><i className="icon-cog5"></i>Change Password</a>
+						<a href="/volunteer/editprofile" className="dropdown-item"><i className="icon-user-plus"></i> My profile</a>
+						<a href="/volunteer/changepassword" className="dropdown-item"><i className="icon-cog5"></i>Change Password</a>
 						<a href="#" className="dropdown-item"><i className="icon-switch2"></i> Logout</a>
 					</div>
 				</li>

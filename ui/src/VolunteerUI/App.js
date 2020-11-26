@@ -1,39 +1,31 @@
+import { Switch, Route, withRouter, Redirect } from 'react-router'
+
 import Dashboard from "./Components/Dashboard/Dashboard";
-import Header from "./Components/Header/Header";
-import Sidebar from "./Components/Sidebar/Sidebar";
 import Login from "./Components/Login/Login";
-import ChangePassword from './Components/ChangePassword/ChangePassword';
+import ForgetPassword from "./Components/ForgetPassword/ForgetPassword";
+import ChangePassword from "./Components/ChangePassword/ChangePassword";
 import EditProfile from './Components/EditProfile/EditProfile';
+import Header from './Components/Header/Header';
+import Sidebar from './Components/Sidebar/Sidebar';
 
 
-function App() {
-  var path="assets/images/about_layout.png";
-  var style ={
-    backgroundImage: "url(" + path + ")",
-    height:"100%",
-    backgroundPosition: 'center',
-    //backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat'
-  }
-
+function App(props) {
   return (
     <>
-      {/* <div style={style}>
-        <Login />
-      </div> */}
+    
 
-
-      <Header />
-      
-      <div class="page-content" style={{height:"100%"}} >
-      <Sidebar />
-        {/* <Dashboard /> */}
-        {/* <ChangePassword/> */}
-        <EditProfile/>
-      </div>
-
+      <Switch>
+        <Route path="/volunteer/" exact component={Dashboard} />
+        <Route path="/volunteer/login" exact component={Login} />
+        <Route path="/volunteer/forgetpassword" exact component={ForgetPassword} />
+        <Route path="/volunteer/changepassword" exact component={ChangePassword} />
+        <Route path="/volunteer/editprofile" exact component={EditProfile} />
+        
+      </Switch>
+     
     </>
   );
 }
 
-export default App;
+
+export default withRouter(App);

@@ -1,21 +1,20 @@
-import React from 'react';
+import React from 'react'
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 
-function ChangePassword(props) {
+function AddPortfolio() {
     return (
         <>
             <Header />
             <div className="page-content" style={{ height: "100%" }} >
                 <Sidebar />
 
-
                 <div class="content-wrapper">
 
                     <div class="page-header page-header-light">
                         <div class="page-header-content header-elements-md-inline" style={{ height: "55px" }}>
                             <div class="page-title d-flex">
-                                <h4><span class="font-weight-semibold">Change Password </span></h4>
+                                <h4><span class="font-weight-semibold">Add Portfolio </span></h4>
                                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
                             </div>
 
@@ -25,8 +24,8 @@ function ChangePassword(props) {
                         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
                             <div class="d-flex">
                                 <div class="breadcrumb">
-                                    <a href="/volunteer" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> dashboard</a>
-                                    <a href="form_actions.html" class="breadcrumb-item">Change password</a>
+                                    <a href="/admin" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>Dashboard</a>
+                                    <a href="/admin/addportfolio" class="breadcrumb-item">Add Portfolio</a>
 
                                 </div>
 
@@ -39,7 +38,7 @@ function ChangePassword(props) {
 
                     <div class="content">
 
-                        <div class="row">
+                        <div class="row" style={{ marginBottom: "50px" }}>
                             <div class="col-md-12">
 
                                 <div class="card">
@@ -50,27 +49,18 @@ function ChangePassword(props) {
                                     <div class="card-body">
                                         <form action="#">
                                             <div class="form-group row">
-                                                <label class="col-form-label col-lg-2">Old password <span class="text-danger">*</span></label>
+                                                <label class="col-form-label col-lg-2">Image<span class="text-danger">*</span></label>
                                                 <div class="col-lg-9">
-                                                    <input type="password" name="old password" class="form-control" required="" placeholder="Text input validation" aria-invalid="true" />
-                                                    <label id="basic-error" class="validation-invalid-label" for="old password">This field is required.</label>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="form-group row">
-                                                <label class="col-form-label col-lg-2">New Password <span class="text-danger">*</span></label>
-                                                <div class="col-lg-9">
-                                                    <input type="password" name="new password" id="password" class="form-control validate-equalTo-blur" required="" placeholder="enter new password" aria-invalid="false" />
-                                                    <label id="password-error" class="validation-invalid-label validation-valid-label" for="new password">Success.</label>
+                                                <input type="file" class="form-control h-auto" name="image"/>
+                                                    <label id="basic-error" class="validation-invalid-label" for="image">This field is required.</label>
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
-                                                <label class="col-form-label col-lg-2">Repeat password <span class="text-danger">*</span></label>
+                                                <label class="col-form-label col-lg-2">Description <span class="text-danger">*</span></label>
                                                 <div class="col-lg-9">
-                                                    <input type="password" name="repeat_password" class="form-control" required="" placeholder="confirm your new password" aria-invalid="true" />
-                                                    <label id="repeat_password-error" class="validation-invalid-label" for="repeat_password">Please enter the same value again.</label>
+                                                    <textarea rows="3" name="description" cols="3" class="form-control" placeholder="Enter Description" aria-invalid="true"></textarea>
+                                                    <label id="basic-error" class="validation-invalid-label" for="description">This field is required.</label>
                                                 </div>
                                             </div>
 
@@ -78,7 +68,7 @@ function ChangePassword(props) {
                                             <div class="form-group row mb-0">
                                                 <div class="col-lg-10 ml-lg-auto">
                                                     <button type="submit" class="btn btn-light">Cancel</button>
-                                                    <button type="submit" class="btn bg-teal-400 ml-3">Change <i class="icon-paperplane ml-2"></i></button>
+                                                    <button type="submit" class="btn bg-teal-400 ml-3">Add <i class="icon-paperplane ml-2"></i></button>
                                                 </div>
                                             </div>
                                         </form>
@@ -94,7 +84,7 @@ function ChangePassword(props) {
                 </div>
             </div>
         </>
-    );
+    )
 }
 
-export default ChangePassword;
+export default AddPortfolio;

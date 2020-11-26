@@ -24,8 +24,8 @@ function EditProfile(props) {
             <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
                 <div class="d-flex">
                     <div class="breadcrumb">
-                        <a href="/volunteer" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> dashboard</a>
-                        <a href="form_actions.html" class="breadcrumb-item">Edit Profile</a>
+                        <a href="/admin" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>Dashboard</a>
+                        <a href="/admin/editprofile" class="breadcrumb-item">Edit Profile</a>
                         
                     </div>
         
@@ -122,94 +122,12 @@ function EditProfile(props) {
 								</div>
                             </div>
 
-                                <div class="form-group row">
-									<label class="col-form-label col-lg-2">Profession </label>
-									<div class="col-lg-9">
-										<input type="text" name="profession" class="form-control" placeholder="enter your Profession" aria-invalid="true"/>
-                                       </div>
-								</div>
+             
 
-                                <div class="form-group row">
-									<label class="col-form-label col-lg-2">Skillset </label>
-									<div class="col-lg-9">
-										<input type="text" name="skillset" class="form-control" placeholder="enter your skills" aria-invalid="true"/>
-                                       </div>
-								</div>
+                              
+                            
 
-                                <div class="form-group row">
-                                <label class="col-form-label col-md-2">Weekdays</label>
-									<div class="col-md-9">
-               
-
-									<div class="form-check form-check-inline">
-											<div class="uniform-checker">
-                                                    <input type="checkbox" class="form-check-input-styled" name="morning"/>
-                                            </div>
-											Morning
-									</div>
-
-                                    <div class="form-check form-check-inline">
-                                        <div class="uniform-checker">
-                                                   <input type="checkbox" class="form-check-input-styled" name="noon"/>
-                                           </div>
-											Noon
-                                        	</div>
-                                            <div class="form-check form-check-inline">
-                            <div class="uniform-checker">
-                                            <input type="checkbox" class="form-check-input-styled" name="night"/>
-                                    </div>
-                                   Night
-                                    </div>       
-								</div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-form-label col-md-2">Weekends</label>
-									<div class="col-md-9">
-               
-
-									<div class="form-check form-check-inline">
-											<div class="uniform-checker">
-                                                    <input type="checkbox" class="form-check-input-styled" name="morning"/>
-                                            </div>
-											Morning
-									</div>
-
-                                    <div class="form-check form-check-inline">
-                                        <div class="uniform-checker">
-                                                   <input type="checkbox" class="form-check-input-styled" name="noon"/>
-                                           </div>
-											Noon
-                                        	</div>
-                                            <div class="form-check form-check-inline">
-                            <div class="uniform-checker">
-                                            <input type="checkbox" class="form-check-input-styled" name="night"/>
-                                    </div>
-                                   Night
-                                    </div>       
-								</div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-form-label col-md-2">Vehicle mode</label>
-									<div class="col-md-9">
-               
-
-									<div class="form-check form-check-inline">
-											<div class="uniform-checker">
-                                                    <input type="checkbox" class="form-check-input-styled" name="two whheeler"/>
-                                            </div>
-											Two wheeler
-									</div>
-
-                                    <div class="form-check form-check-inline">
-                                        <div class="uniform-checker">
-                                                   <input type="checkbox" class="form-check-input-styled" name="four wheeler"/>
-                                           </div>
-											Four wheeler
-                                     </div>
-                                    </div>       
-                            </div>
+                            
 
         
                                 <div class="form-group row mb-0">
