@@ -8,7 +8,7 @@ function Dashboard(props) {
         height: "150px"
     }
 
-    var path = "assets/images/bottom-bg.png";
+    var path = "../assets/images/bottom-bg.png";
     var bgImageStyle = {
         backgroundImage: "url(" + path + ")",
         height: "100%",
