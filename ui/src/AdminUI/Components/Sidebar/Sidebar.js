@@ -80,6 +80,14 @@ function Sidebar(proprs) {
 								</ul>
 							</li>
 
+							<li className="nav-item nav-item-submenu">
+								<a href="#" className="nav-link"><i className="icon-location4"></i> <span>Landmark</span></a>
+								<ul className="nav nav-group-sub" data-submenu-title="Landmark">
+									<li className="nav-item"><a href="/admin/addlandmark" className="nav-link">Add Landmark</a></li>
+									<li className="nav-item"><a href="/admin/landmarklist" className="nav-link">List of Landmark</a></li>
+								</ul>
+							</li>
+
 							<li className="nav-item">
 								<a href="#" className="nav-link"><i className="icon-graph"></i> <span>Graphs</span></a>
 							</li>
