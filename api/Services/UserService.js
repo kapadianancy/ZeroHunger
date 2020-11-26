@@ -4,6 +4,7 @@ const util = require('./utils');
 
 const bcrypt = require("bcryptjs");
 const nodemailer = require('nodemailer');
+const Role = require('../models/Role');
 
 exports.addUser = async (req, res) => {
     try {
@@ -71,20 +72,26 @@ exports.getUser = async (req, res) => {
 
 
 exports.login = async (req, res) => {
+    
     try {
-        const u = await user.find({
+        var role_id=await Role.findOne({
+            name:req.body.role
+        })
+        
+        const u = await user.findOne({
             username: req.body.username,
+            role_id:role_id._id,
             is_deleted: false
         })
-        if (u.length == 0) {
-            return res.status(401).send("Invalid Username");
+        if (u == null) {
+            return res.status(401).send("Invalid User");
         }
-        let valid = await bcrypt.compare(req.body.password, u[0].password);
+        let valid = await bcrypt.compare(req.body.password, u.password);
         if (!valid) {
             return res.status(401).send("Invalid Password");
         }
-        const token = await util.generateToken(u[0]);
-        res.status(200).send({ "user": u[0], "token": token });
+        const token = await util.generateToken(u);
+        res.status(200).send({ "user": u, "token": token });
     }
     catch (e) {
         res.status(400).send(e);
