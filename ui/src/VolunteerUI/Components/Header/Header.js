@@ -35,7 +35,7 @@ function Header(props) {
 					<a href="#" className="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown">
 						<i className="icon-bubbles4"></i>
 						<span className="d-md-none ml-2">Notifications</span>
-						<span className="badge badge-pill bg-warning-400 ml-auto ml-md-0">2</span>
+						<span className="badge badge-pill bg-warning-400 ml-auto ml-md-0">1</span>
 					</a>
 					
 					<div className="dropdown-menu dropdown-menu-right dropdown-content wmin-md-350">

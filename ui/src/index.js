@@ -6,12 +6,15 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, withRouter } from 'react-router-dom';
 
 import {UserProvider} from './Context/UserContext';
+import {PortfolioProvider} from './Context/PortfolioContext';
 //localStorage.clear();
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
     <UserProvider>
-    <App />
+      <PortfolioProvider>
+        <App />
+    </PortfolioProvider>
     </UserProvider>
     </BrowserRouter>
   </React.StrictMode>,
