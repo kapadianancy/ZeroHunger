@@ -1,4 +1,5 @@
 import { Switch, Route, withRouter, Redirect } from 'react-router'
+import { useEffect } from 'react';
 
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Login from "./Components/Login/Login";
@@ -10,11 +11,22 @@ import PortfolioList from './Components/Portfolio/PortfolioList';
 import AddPortfolio from './Components/Portfolio/AddPortfolio';
 
 
+import {useUserState} from '../Context/UserContext';
+
+
 function App(props) {
+
+  var {token}=useUserState();
+
+  useEffect(()=>
+  {
+    console.log(token)
+  },[token])
+  
+
   return (
     <>
-    
-
+      {token==null?<Redirect to="/volunteer/login"/>:null}
       <Switch>
         <Route path="/volunteer/" exact component={Dashboard} />
         <Route path="/volunteer/login" exact component={Login} />

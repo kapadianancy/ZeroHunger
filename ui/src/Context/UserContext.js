@@ -7,11 +7,12 @@ var UserDispatchContext = React.createContext()
 function userReducer(state, action) {
    
 	switch (action.type) {
-		case ActionNames.LOGIN:
-           
+		case ActionNames.LOGIN:           
 			return { ...state, user:action.data.user, token:action.data.token,error:null}
 		case ActionNames.LOGIN_FAILED:
-            return{...state,error:action.data.error}
+			return{...state,error:action.data.error}
+		case ActionNames.LOGOUT:
+			return {...state,user:null,token:null,error:null}
 		default: {
 			throw new Error(`Unhandled action type: ${action.type}`)
 		}
@@ -20,9 +21,9 @@ function userReducer(state, action) {
 
 function UserProvider({ children }) {
 	var [state, dispatch] = React.useReducer(userReducer, {
-        user:{},
-        error:null,
-        token:null
+		token: localStorage.getItem('token')?localStorage.getItem('token'):null,
+		user: JSON.parse(localStorage.getItem('user'))?JSON.parse(localStorage.getItem('user')):null,
+		error:null
 	})
 
 	return (

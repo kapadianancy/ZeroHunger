@@ -1,6 +1,6 @@
 import {useEffect,useState} from 'react'
 import * as actions from '../../../Actions/UserAction';
-import {withRouter} from 'react-router-dom';
+import {Redirect, withRouter} from 'react-router-dom';
 import { useUserDispatch,useUserState } from '../../../Context/UserContext';
 
 function Login(props) {
@@ -20,16 +20,6 @@ function Login(props) {
         backgroundRepeat: 'no-repeat'
     }
 
-    useEffect(()=>
-    {
-        
-        if(token){
-            props.history.push("/volunteer");
-        }
-
-    },[error,token])
-  
-
     const login=async(event)=>
     {
         
@@ -47,6 +37,7 @@ function Login(props) {
 
     return (
         <div style={style}>
+            {token!=null?<Redirect to="/volunteer"/>:null}
             <div className="content d-flex justify-content-center align-items-center" >
                 <form className="login-form" style={{ marginTop: "147px" }}
                 onSubmit={login} >
@@ -60,6 +51,7 @@ function Login(props) {
 
                                 
                                 <div style={{color:"red",fontSize:"18px"}}>{error}</div>
+
                             </div>
 
                             <div className="form-group form-group-feedback form-group-feedback-left">

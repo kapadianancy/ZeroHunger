@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 
+import { Redirect } from 'react-router';
+
+
 
 function Dashboard(props) {
+
+    
     var style = {
         height : "150px"
     }
@@ -16,8 +22,10 @@ function Dashboard(props) {
       //backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat'
     }
+
     return (
         <>
+       
         <Header />
             <div className="page-content" style={{ height: "100%" }} >
                 <Sidebar />
