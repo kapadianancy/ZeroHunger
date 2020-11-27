@@ -1,8 +1,5 @@
 export const LOGIN="LOGIN"
 export const LOGIN_FAILED="LOGIN_FAILED"
-<<<<<<< HEAD
 export const ADD_LANDMARK="ADD_LANDMARK"
 export const ADD_LANDMARK_FAILED="ADD_LANDMARK_FAILED"
-=======
 export const LOGOUT="LOGOUT"
->>>>>>> 50af3bb7441151010083abc9360b61641218c44b
