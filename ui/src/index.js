@@ -5,15 +5,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 
-import { UserProvider } from './Context/UserContext';
-import { LandmarkProvider } from './Context/LandmarkContext';
+import {UserProvider} from './Context/UserContext';
+import {PortfolioProvider} from './Context/PortfolioContext';
 //localStorage.clear();
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
         <LandmarkProvider>
+          <PortfolioProvider>
           <App />
+          </PortfolioProvider>
         </LandmarkProvider>
       </UserProvider>
     </BrowserRouter>

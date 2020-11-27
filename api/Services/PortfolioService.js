@@ -35,7 +35,7 @@ exports.getPortfolioById = async (req, res) => {
 
 exports.addPortfolio = async (req, res, next) => {
     const portfolio = new Portfolio({
-        image: "/images/" + 'portfolio' + req.file.originalname,
+        image: "/images/" + 'portfolio/' + req.file.originalname,
         ...req.body
     })
     try {

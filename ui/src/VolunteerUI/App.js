@@ -18,11 +18,7 @@ function App(props) {
 
   var {token}=useUserState();
 
-  useEffect(()=>
-  {
-    console.log(token)
-  },[token])
-  
+ 
 
   return (
     <>
