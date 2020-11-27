@@ -5,10 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, withRouter } from 'react-router-dom';
 
+import {UserProvider} from './Context/UserContext';
+//localStorage.clear();
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+    <UserProvider>
     <App />
+    </UserProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
