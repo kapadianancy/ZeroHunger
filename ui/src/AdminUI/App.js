@@ -9,11 +9,15 @@ import VolunteerList from "./Components/Volunteer/VolunteerList";
 import EditProfile from './Components/EditProfile/EditProfile';
 import AddPortfolio from './Components/Portfolio/AddPortfolio';
 import PortfolioList from './Components/Portfolio/PortfolioList';
+import AddLandmark from './Components/Landmark/AddLandmark';
+import LandmarkList from './Components/Landmark/LandmarkList';
 
 function App(props) {
   return (
     <>
       <Switch>
+        <Route path="/admin/landmarklist" exact component={LandmarkList} />
+        <Route path="/admin/addlandmark" exact component={AddLandmark} />
         <Route path="/admin/portfoliolist" exact component={PortfolioList}/>
         <Route path="/admin/addportfolio" exact component={AddPortfolio} /> 
         <Route path="/admin/editprofile" exact component={EditProfile} />

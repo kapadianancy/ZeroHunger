@@ -21,12 +21,10 @@ function Login(props) {
     }
 
     useEffect(()=>
-    {
-        
+    {  
         if(token){
             props.history.push("/admin");
         }
-
     },[error,token])
   
 

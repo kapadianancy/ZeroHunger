@@ -1,9 +1,8 @@
 import React from 'react'
-
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 
-function PortfolioList(props) {
+function LandmarkList(props) {
     return (
         <>
             <Header />
@@ -14,7 +13,7 @@ function PortfolioList(props) {
                     <div class="page-header page-header-light">
                         <div class="page-header-content header-elements-md-inline" style={{ height: "55px" }}>
                             <div class="page-title d-flex">
-                                <h4> <span class="font-weight-semibold">Volunteer List</span></h4>
+                                <h4> <span class="font-weight-semibold">Landmark List</span></h4>
                                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
                             </div>
 
@@ -25,7 +24,7 @@ function PortfolioList(props) {
                             <div class="d-flex">
                                 <div class="breadcrumb">
                                     <a href="/admin" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
-                                    <a href="/admin/volunteerlist" class="breadcrumb-item">Volunteer List</a>
+                                    <a href="/admin/landmarklist" class="breadcrumb-item">Landmark List</a>
 
                                 </div>
 
@@ -45,20 +44,20 @@ function PortfolioList(props) {
                                     <table class="table datatable-basic table-hover">
                                         <thead>
                                             <tr>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Job Title</th>
-                                                <th>DOB</th>
+                                                <th>Name</th>
+                                                <th>Pincode</th>
+                                                <th>Latitude</th>
+                                                <th>Longitude</th>
                                                 <th>Status</th>
                                                 <th class="text-center">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>Marth</td>
-                                                <td><a href="#">Enright</a></td>
-                                                <td>Traffic Court Referee</td>
-                                                <td>22 Jun 1972</td>
+                                                <td>Adajan</td>
+                                                <td>395009</td>
+                                                <td>21.154258</td>
+                                                <td>19.145852</td>
                                                 <td><span class="badge badge-success">Active</span></td>
                                                 <td class="text-center">
                                                     <div class="list-icons">
@@ -87,5 +86,4 @@ function PortfolioList(props) {
         </>
     )
 }
-
-export default PortfolioList;
+export default LandmarkList;
