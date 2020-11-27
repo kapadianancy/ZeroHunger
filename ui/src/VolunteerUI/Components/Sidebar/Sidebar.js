@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
 
 function Sidebar(proprs) {
 
@@ -45,7 +46,7 @@ function Sidebar(proprs) {
 		
 							
 							<li class="nav-item nav-item-submenu">
-								<a href="#" class="nav-link"><i class="icon-camera"></i> <span>Portfolio</span></a>
+								<a  href="#" class="nav-link"><i class="icon-camera"></i> <span>Portfolio</span></a>
 								<ul class="nav nav-group-sub" data-submenu-title="Portfolio">
 									<li class="nav-item"><a href="/volunteer/addportfolio" class="nav-link">Add Portfolio</a></li>
 									<li class="nav-item"><a href="/volunteer/portfoliolist" class="nav-link">List of Portfolio</a></li>
