@@ -4,7 +4,7 @@ const Portfolio = require('../models/Portfolio');
 exports.getAllPortfolio = async (req, res) => {
     try {
         const data = await Portfolio.find({
-            is_Deleted: 0
+            is_deleted: 0
         })
 
         return res.status(200).send(data)
