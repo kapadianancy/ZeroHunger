@@ -11,7 +11,7 @@ exports.add=async(req,res)=>
         {
             return res.status(400).send("bad request");
         }
-        return res.status(201).send("added "+l);
+        return res.status(201).send(l);
 
     }catch(err)
     {

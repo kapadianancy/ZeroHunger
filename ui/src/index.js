@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, withRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 import {UserProvider} from './Context/UserContext';
 import {PortfolioProvider} from './Context/PortfolioContext';
@@ -11,11 +11,13 @@ import {PortfolioProvider} from './Context/PortfolioContext';
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-    <UserProvider>
-      <PortfolioProvider>
-        <App />
-    </PortfolioProvider>
-    </UserProvider>
+      <UserProvider>
+        <LandmarkProvider>
+          <PortfolioProvider>
+          <App />
+          </PortfolioProvider>
+        </LandmarkProvider>
+      </UserProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
