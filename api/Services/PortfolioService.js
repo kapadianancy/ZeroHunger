@@ -40,7 +40,7 @@ exports.addPortfolio = async (req, res, next) => {
     })
     try {
         await portfolio.save();
-        return res.status(201).send("Portfolio Inserted");
+        return res.status(201).send(portfolio);
     } catch (e) {
         return res.status(400).send(e)
     }

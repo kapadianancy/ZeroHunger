@@ -8,7 +8,11 @@ function PortfolioReducer(state, action) {
    
 	switch (action.type) {
 		case ActionNames.PORTFOLIO_LIST:
-            return{...state,portfolios:action.data.portfolios}
+			return{...state,portfolios:action.data.portfolios}
+		case ActionNames.ADD_PORTFOLIO:
+			return{...state,portfolio:action.data.portfolio}
+		case ActionNames.ADD_PORTFOLIO_FAILED:
+			return{...state,error:action.data.error}
 		default: {
 			throw new Error(`Unhandled action type: ${action.type}`)
 		}
@@ -17,7 +21,9 @@ function PortfolioReducer(state, action) {
 
 function PortfolioProvider({ children }) {
 	var [state, dispatch] = React.useReducer(PortfolioReducer, {
-        portfolios:[]
+		portfolios:[],
+		portfolio:null,
+		error:null
 	})
 
 	return (
