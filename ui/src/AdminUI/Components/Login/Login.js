@@ -39,7 +39,7 @@ function Login(props) {
         <div style={style}>
             {token!=null?<Redirect to="/admin"/>:null}
             <div className="content d-flex justify-content-center align-items-center" >
-                <form className="login-form" style={{ marginTop: "147px" }}
+                <form className="login-form" style={{ marginTop: "96px" }}
                 onSubmit={login} >
                     <div className="card mb-0">
                         <div className="card-body">
