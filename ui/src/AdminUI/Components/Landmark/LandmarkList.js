@@ -1,8 +1,50 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
+
+import * as actions from '../../../Actions/LandmarkAction';
+import { useLandmarkDispatch, useLandmarkState } from '../../../Context/LandmarkContext';
+
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 
 function LandmarkList(props) {
+
+    var landmarkDispatch = useLandmarkDispatch();
+    var { landmarks } = useLandmarkState();
+
+    useEffect(async () => {
+        await actions.getAllLandmark(landmarkDispatch);
+    }, [landmarks])
+
+    var data = null;
+    data = landmarks.map(l => {
+        data = (
+            <tr>
+                <td>{l.name}</td>
+                <td>{l.pincode}</td>
+                <td>{l.latitude}</td>
+                <td>{l.longitude}</td>
+                <td></td>
+                <td class="text-center">
+                    <div class="list-icons">
+                        <div class="dropdown">
+                            <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                <i class="icon-menu9"></i>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a href="#" class="dropdown-item"><i class="icon-pencil"></i>Edit</a>
+                                <a href="#" class="dropdown-item"><i class="icon-cross2"></i>Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+        )
+        return data;
+    })
+
+
     return (
         <>
             <Header />
@@ -48,32 +90,11 @@ function LandmarkList(props) {
                                                 <th>Pincode</th>
                                                 <th>Latitude</th>
                                                 <th>Longitude</th>
-                                                <th>Status</th>
-                                                <th class="text-center">Actions</th>
+                                                <th colSpan="2" class="text-center">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Adajan</td>
-                                                <td>395009</td>
-                                                <td>21.154258</td>
-                                                <td>19.145852</td>
-                                                <td><span class="badge badge-success">Active</span></td>
-                                                <td class="text-center">
-                                                    <div class="list-icons">
-                                                        <div class="dropdown">
-                                                            <a href="#" class="list-icons-item" data-toggle="dropdown">
-                                                                <i class="icon-menu9"></i>
-                                                            </a>
-
-                                                            <div class="dropdown-menu dropdown-menu-right">
-                                                                <a href="#" class="dropdown-item"><i class="icon-pencil"></i>Edit</a>
-                                                                <a href="#" class="dropdown-item"><i class="icon-cross2"></i>Delete</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                          {data}
                                         </tbody>
                                     </table>
                                 </div>

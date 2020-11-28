@@ -14,8 +14,6 @@ function PortfolioList() {
     useEffect(async()=>
     {
         await actions.getAllPortfolio(portfolioDispatch);
-        console.log(portfolios);
-
     },[portfolios])
 
     var data=null;

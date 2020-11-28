@@ -1,5 +1,5 @@
 import React from 'react'
-import  * as ActionNames from '../ActionNames';
+import * as ActionNames from '../ActionNames';
 
 var LandmarkStateContext = React.createContext()
 var LandmarkDispatchContext = React.createContext()
@@ -7,9 +7,11 @@ var LandmarkDispatchContext = React.createContext()
 function landmarkReducer(state, action) {
 	switch (action.type) {
 		case ActionNames.ADD_LANDMARK:
-			return { ...state, landmark:action.data.landmark,error:null}
+			return { ...state, landmark: action.data.landmark, error: null }
 		case ActionNames.ADD_LANDMARK_FAILED:
-            return{...state,error:action.data.error,landmark:null}
+			return { ...state, error: action.data.error, landmark: null }
+		case ActionNames.LANDMARK_LIST:
+			return { ...state, landmarks: action.data.landmarks }
 		default: {
 			throw new Error(`Unhandled action type: ${action.type}`)
 		}
@@ -18,8 +20,9 @@ function landmarkReducer(state, action) {
 
 function LandmarkProvider({ children }) {
 	var [state, dispatch] = React.useReducer(landmarkReducer, {
-        landmark:null,
-        error:null,
+		landmark: null,
+		landmarks: [],
+		error: null,
 	})
 
 	return (

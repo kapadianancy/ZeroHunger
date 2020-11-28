@@ -72,7 +72,7 @@ function AddLandmark(props) {
             err["latitude"] = "Please enter landmark latitude.";
         }
         else if (typeof latitude !== "undefined") {
-            var pattern = new RegExp(/^[0-9]*$/);
+            var pattern = new RegExp(/^[0-9.]*$/);
             if (!pattern.test(latitude)) {
                 isValid = false;
                 err["latitude"] = "Please enter valid latitude.";
@@ -84,7 +84,7 @@ function AddLandmark(props) {
             err["longitude"] = "Please enter landmark longitude.";
         }
         else if (typeof longitude !== "undefined") {
-            var pattern = new RegExp(/^[0-9]*$/);
+            var pattern = new RegExp(/^[0-9.]*$/);
             if (!pattern.test(longitude)) {
                 isValid = false;
                 err["longitude"] = "Please enter valid longitude.";

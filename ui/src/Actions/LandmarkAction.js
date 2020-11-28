@@ -24,3 +24,19 @@ export const addLandmark = async (landmarkDispatch, landmark) => {
             });
         })
 };
+
+
+export const getAllLandmark = async (landmarkDispatch) => {
+    await axios.get('/landmark/getAll')
+        .then(async (response) => {
+            landmarkDispatch({
+                type: ActionNames.LANDMARK_LIST,
+                data: {
+                    landmarks: response.data
+                }
+
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
