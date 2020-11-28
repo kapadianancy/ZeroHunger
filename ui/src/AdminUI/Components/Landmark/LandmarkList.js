@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 
 import * as actions from '../../../Actions/LandmarkAction';
 import { useLandmarkDispatch, useLandmarkState } from '../../../Context/LandmarkContext';
@@ -14,6 +14,14 @@ function LandmarkList(props) {
     useEffect(async () => {
         await actions.getAllLandmark(landmarkDispatch);
     }, [landmarks])
+
+    const deleteLandmark = async (id) => {
+        if (window.confirm('Are you sure to delete this landmark???')) {
+            await actions.removeLandmark(landmarkDispatch, id);
+            await actions.getAllLandmark(landmarkDispatch);
+        }
+    }
+
 
     var data = null;
     data = landmarks.map(l => {
@@ -33,7 +41,7 @@ function LandmarkList(props) {
 
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a href="#" class="dropdown-item"><i class="icon-pencil"></i>Edit</a>
-                                <a href="#" class="dropdown-item"><i class="icon-cross2"></i>Delete</a>
+                                <a onClick={() => deleteLandmark(l._id)} class="dropdown-item"> <i class="icon-cross2"></i>Delete</a>
                             </div>
                         </div>
                     </div>
@@ -94,7 +102,7 @@ function LandmarkList(props) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                          {data}
+                                            {data}
                                         </tbody>
                                     </table>
                                 </div>

@@ -34,7 +34,26 @@ export const getAllLandmark = async (landmarkDispatch) => {
                 data: {
                     landmarks: response.data
                 }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
 
+export const removeLandmark = async (landmarkDispatch, id) => {
+    const token = localStorage.getItem("token");
+    await axios.delete('/landmark/delete/' + id, {
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    })
+        .then(async (response) => {
+            console.log(response)
+            landmarkDispatch({
+                type: ActionNames.REMOVE_LANDMARK,
+                data: {
+                    landmark: response.data
+                }
             });
         }).catch(error => {
             throw new Error(error);
