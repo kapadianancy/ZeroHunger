@@ -18,7 +18,7 @@ function landmarkReducer(state, action) {
 
 function LandmarkProvider({ children }) {
 	var [state, dispatch] = React.useReducer(landmarkReducer, {
-        landmark:{},
+        landmark:null,
         error:null,
 	})
 

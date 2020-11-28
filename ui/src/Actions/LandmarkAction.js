@@ -12,7 +12,7 @@ export const addLandmark = async (landmarkDispatch, landmark) => {
             landmarkDispatch({
                 type: ActionNames.ADD_LANDMARK,
                 data: {
-                    landmark: JSON.stringify(response.data.landmark)
+                    landmark: JSON.stringify(response.data)
                 }
             });
         }).catch(error => {

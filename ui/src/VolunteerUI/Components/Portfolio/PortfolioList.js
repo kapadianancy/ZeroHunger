@@ -21,7 +21,7 @@ function PortfolioList() {
     var data=null;
     data=portfolios.map(p=>
         {
-            var image="localhost:8000"+p.image;
+            var image="http://localhost:8000"+p.image;
             data=(
                 <tr>
                 <td><img src={image} height="50px" width="50px" /></td>

@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import {UserProvider} from './Context/UserContext';
 import {PortfolioProvider} from './Context/PortfolioContext';
+import { LandmarkProvider } from './Context/LandmarkContext';
 //localStorage.clear();
 ReactDOM.render(
   <React.StrictMode>
