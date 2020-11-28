@@ -2,7 +2,7 @@ import React from 'react'
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 
-function AddPortfolio() {
+function AddPortfolio(props) {
     return (
         <>
             <Header />

@@ -1,6 +1,6 @@
 import {useEffect,useState} from 'react'
 import * as actions from '../../../Actions/UserAction';
-import {withRouter} from 'react-router-dom';
+import {Redirect, withRouter} from 'react-router-dom';
 import { useUserDispatch,useUserState } from '../../../Context/UserContext';
 
 function Login(props) {
@@ -20,16 +20,6 @@ function Login(props) {
         backgroundRepeat: 'no-repeat'
     }
 
-    useEffect(()=>
-    {
-        
-        if(token){
-            props.history.push("/admin");
-        }
-
-    },[error,token])
-  
-
     const login=async(event)=>
     {
         
@@ -47,6 +37,7 @@ function Login(props) {
 
     return (
         <div style={style}>
+            {token!=null?<Redirect to="/admin"/>:null}
             <div className="content d-flex justify-content-center align-items-center" >
                 <form className="login-form" style={{ marginTop: "147px" }}
                 onSubmit={login} >
@@ -60,12 +51,12 @@ function Login(props) {
 
                                 
                                 <div style={{color:"red",fontSize:"18px"}}>{error}</div>
+
                             </div>
 
                             <div className="form-group form-group-feedback form-group-feedback-left">
 
                                 <input type="text" className="form-control" placeholder="Username"
-                                required
                                 value={username} onChange={(e)=>{setUsername(e.target.value)}} 
                                />
 
@@ -76,7 +67,7 @@ function Login(props) {
 
                             <div className="form-group form-group-feedback form-group-feedback-left">
 
-                                <input type="password" className="form-control" placeholder="Password"  required
+                                <input type="password" className="form-control" placeholder="Password" 
                                 value={password} onChange={(e)=>{setPassword(e.target.value)}}
                                 />
 

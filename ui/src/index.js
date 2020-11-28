@@ -3,16 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, withRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 import {UserProvider} from './Context/UserContext';
+import {PortfolioProvider} from './Context/PortfolioContext';
+import { LandmarkProvider } from './Context/LandmarkContext';
 //localStorage.clear();
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-    <UserProvider>
-    <App />
-    </UserProvider>
+      <UserProvider>
+        <LandmarkProvider>
+          <PortfolioProvider>
+          <App />
+          </PortfolioProvider>
+        </LandmarkProvider>
+      </UserProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

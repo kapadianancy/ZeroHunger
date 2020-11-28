@@ -1,9 +1,53 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
+import * as actions from '../../../Actions/PortfolioAction';
+
+import {usePortfolioDispatch,usePortfolioState} from '../../../Context/PortfolioContext';
 
 function PortfolioList() {
+
+    var portfolioDispatch=usePortfolioDispatch();
+    var {portfolios}=usePortfolioState();
+
+    useEffect(async()=>
+    {
+        await actions.getAllPortfolio(portfolioDispatch);
+        console.log(portfolios);
+
+    },[portfolios])
+
+    var data=null;
+    data=portfolios.map(p=>
+        {
+            var image="http://localhost:8000"+p.image;
+            data=(
+                <tr>
+                <td><img src={image} height="50px" width="50px" /></td>
+                <td>{p.description}</td>
+
+                <td class="text-center">
+                    <div class="list-icons">
+                        <div class="dropdown">
+                            <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                <i class="icon-menu9"></i>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a href="#" class="dropdown-item"><i class="icon-pencil"></i>Edit</a>
+                                <a href="#" class="dropdown-item"><i class="icon-cross2"></i>Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            )
+            return data;
+        })
+
+
     return (
         <>
             <Header />
@@ -52,25 +96,9 @@ function PortfolioList() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td><img src="../assets/images/bottom-bg.png" height="50px" width="50px" /></td>
-                                                <td>Maben</td>
 
-                                                <td class="text-center">
-                                                    <div class="list-icons">
-                                                        <div class="dropdown">
-                                                            <a href="#" class="list-icons-item" data-toggle="dropdown">
-                                                                <i class="icon-menu9"></i>
-                                                            </a>
+                                            {data}
 
-                                                            <div class="dropdown-menu dropdown-menu-right">
-                                                                <a href="#" class="dropdown-item"><i class="icon-pencil"></i>Edit</a>
-                                                                <a href="#" class="dropdown-item"><i class="icon-cross2"></i>Delete</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
                                         </tbody>
                                     </table>
 

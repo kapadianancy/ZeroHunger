@@ -3,7 +3,7 @@ import React from 'react'
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 
-function PortfolioList() {
+function PortfolioList(props) {
     return (
         <>
             <Header />
@@ -14,7 +14,7 @@ function PortfolioList() {
                     <div class="page-header page-header-light">
                         <div class="page-header-content header-elements-md-inline" style={{ height: "55px" }}>
                             <div class="page-title d-flex">
-                                <h4> <span class="font-weight-semibold">Portfolio List</span></h4>
+                                <h4> <span class="font-weight-semibold">Volunteer List</span></h4>
                                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
                             </div>
 
@@ -25,7 +25,7 @@ function PortfolioList() {
                             <div class="d-flex">
                                 <div class="breadcrumb">
                                     <a href="/admin" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
-                                    <a href="/admin/portfoliolist" class="breadcrumb-item">Portfolio List</a>
+                                    <a href="/admin/volunteerlist" class="breadcrumb-item">Volunteer List</a>
 
                                 </div>
 
@@ -42,20 +42,24 @@ function PortfolioList() {
                             <div class="col-md-12">
                                 <div class="card">
 
-
                                     <table class="table datatable-basic table-hover">
-                                    <thead>
+                                        <thead>
                                             <tr>
-                                                <th>Image</th>
-                                                <th>Description</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Job Title</th>
+                                                <th>DOB</th>
+                                                <th>Status</th>
                                                 <th class="text-center">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td><img src="../assets/images/bottom-bg.png" height="50px" width="50px" /></td>
-                                                <td>Maben</td>
-
+                                                <td>Marth</td>
+                                                <td><a href="#">Enright</a></td>
+                                                <td>Traffic Court Referee</td>
+                                                <td>22 Jun 1972</td>
+                                                <td><span class="badge badge-success">Active</span></td>
                                                 <td class="text-center">
                                                     <div class="list-icons">
                                                         <div class="dropdown">
@@ -73,7 +77,6 @@ function PortfolioList() {
                                             </tr>
                                         </tbody>
                                     </table>
-
                                 </div>
 
                             </div>

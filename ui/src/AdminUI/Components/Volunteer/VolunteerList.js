@@ -2,7 +2,7 @@ import React from 'react'
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 
-function VolunteerList() {
+function VolunteerList(props) {
 	return (
 		<>
 			<Header />
