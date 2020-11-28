@@ -20,3 +20,28 @@ export const getAllPortfolio = async(portfolioDispatch) => {
         })
     
 };
+
+export const addPortfolio=async(portfolio,portfolioDispatch)=>
+{
+    const token = localStorage.getItem("token");
+    await axios.post('/portfolio/addPortfolio', portfolio, {
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    })
+        .then(async (response) => {
+            portfolioDispatch({
+                type: ActionNames.ADD_PORTFOLIO,
+                data: {
+                    portfolio: JSON.stringify(response.data)
+                }
+            });
+        }).catch(error => {
+            portfolioDispatch({
+                type: ActionNames.ADD_PORTFOLIO_FAILED,
+                data: {
+                    error: "Something Went Wrong"
+                }
+            });
+        })
+}

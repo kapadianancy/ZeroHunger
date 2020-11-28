@@ -13,7 +13,7 @@ function ForgetPassword() {
         <div style={style}>
             <div className="content d-flex justify-content-center align-items-center">
 
-                <form className="login-form" action="#" style={{ marginTop: "185px" }}>
+                <form className="login-form" action="#" style={{ marginTop: "120px" }}>
                     <div className="card mb-0">
                         <div className="card-body">
                             <div className="text-center mb-3">

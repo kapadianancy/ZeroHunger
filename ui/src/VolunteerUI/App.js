@@ -17,12 +17,16 @@ import {useUserState} from '../Context/UserContext';
 function App(props) {
 
   var {token}=useUserState();
-
+  var content = null;
+  if (props.location.pathname.startsWith("/volunteer/forgetpassword")) {
+    content = (<Redirect to="/volunteer/forgetpassword" />
+    )
+  }
  
 
   return (
     <>
-      {token==null?<Redirect to="/volunteer/login"/>:null}
+     {token == null && content==null ? <Redirect to="/volunteer/login" /> : null}
       <Switch>
         <Route path="/volunteer/" exact component={Dashboard} />
         <Route path="/volunteer/login" exact component={Login} />
