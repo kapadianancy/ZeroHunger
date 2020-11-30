@@ -14,6 +14,10 @@ function landmarkReducer(state, action) {
 			return { ...state, landmarks: action.data.landmarks }
 		case ActionNames.REMOVE_LANDMARK:
 			return { ...state, landmark:null}
+		case ActionNames.GET_LANDMARK:
+			return { ...state, landmark:action.data.landmark}
+		case ActionNames.UPDATE_LANDMARK:
+			return {...state,landmark:null}
 		default: {
 			throw new Error(`Unhandled action type: ${action.type}`)
 		}

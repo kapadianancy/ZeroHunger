@@ -29,6 +29,24 @@ exports.getAll = async (req, res) => {
     }
 }
 
+exports.getById = async (req, res) => {
+    try {
+        const data = await landmark.findOne({
+            _id: req.params.id,
+            is_deleted: 0
+        })
+        if (data) {
+            return res.status(200).send(data)
+        }
+        else {
+            return res.status(400).send("No Data Found")
+        }
+
+    } catch (err) {
+        return res.status(400).send("Landmark Not Found");
+    }
+}
+
 
 exports.delete = async (req, res) => {
     try {

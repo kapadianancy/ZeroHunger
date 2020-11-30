@@ -13,6 +13,7 @@ import AddLandmark from './Components/Landmark/AddLandmark';
 import LandmarkList from './Components/Landmark/LandmarkList';
 
 import { useUserState } from '../Context/UserContext';
+import EditLandmark from './Components/Landmark/EditLandmark';
 
 function App(props) {
 
@@ -30,6 +31,7 @@ function App(props) {
       {token == null && content==null ? <Redirect to="/admin/login" /> : null}
 
       <Switch>
+        <Route path="/admin/editlandmark/:id" exact component={EditLandmark} />
         <Route path="/admin/landmarklist" exact component={LandmarkList} />
         <Route path="/admin/addlandmark" exact component={AddLandmark} />
         <Route path="/admin/portfoliolist" exact component={PortfolioList} />

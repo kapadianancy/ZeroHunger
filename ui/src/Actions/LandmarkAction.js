@@ -40,6 +40,20 @@ export const getAllLandmark = async (landmarkDispatch) => {
         })
 };
 
+export const getLandmarkById = async (landmarkDispatch,id) => {
+    await axios.get('/landmark/getById/'+id)
+        .then(async (response) => {
+            landmarkDispatch({
+                type: ActionNames.GET_LANDMARK,
+                data: {
+                    landmark: response.data
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
+
 export const removeLandmark = async (landmarkDispatch, id) => {
     const token = localStorage.getItem("token");
     await axios.delete('/landmark/delete/' + id, {
@@ -48,9 +62,28 @@ export const removeLandmark = async (landmarkDispatch, id) => {
         }
     })
         .then(async (response) => {
-            console.log(response)
             landmarkDispatch({
                 type: ActionNames.REMOVE_LANDMARK,
+                data: {
+                    landmark: response.data
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
+
+export const updateLandmark = async (landmarkDispatch, id ,landmark) => {
+    const token = localStorage.getItem("token");
+    await axios.put('/landmark/edit/' + id, landmark,{
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    })
+        .then(async (response) => {
+            console.log(response)
+            landmarkDispatch({
+                type: ActionNames.UPDATE_LANDMARK,
                 data: {
                     landmark: response.data
                 }

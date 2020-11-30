@@ -13,7 +13,12 @@ function LandmarkList(props) {
 
     useEffect(async () => {
         await actions.getAllLandmark(landmarkDispatch);
-    }, [landmarks])
+    }, [])
+
+    
+    const editLandmark = async (id) => {
+        props.history.push("/admin/editlandmark/"+id);
+    }
 
     const deleteLandmark = async (id) => {
         if (window.confirm('Are you sure to delete this landmark???')) {
@@ -31,8 +36,8 @@ function LandmarkList(props) {
                 <td>{l.pincode}</td>
                 <td>{l.latitude}</td>
                 <td>{l.longitude}</td>
-                
-                <td colSpan="2" class="text-center">
+                <td></td>
+                <td class="text-center">
                     <div class="list-icons">
                         <div class="dropdown">
                             <a href="#" class="list-icons-item" data-toggle="dropdown">
@@ -40,7 +45,7 @@ function LandmarkList(props) {
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a href="#" class="dropdown-item"><i class="icon-pencil"></i>Edit</a>
+                                <a onClick={() => editLandmark(l._id)} class="dropdown-item"><i class="icon-pencil"></i>Edit</a>
                                 <a onClick={() => deleteLandmark(l._id)} class="dropdown-item"> <i class="icon-cross2"></i>Delete</a>
                             </div>
                         </div>
