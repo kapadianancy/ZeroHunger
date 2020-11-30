@@ -12,8 +12,9 @@ const storage = multer.diskStorage({
         cb(null, 'public/images/portfolio')
     },
     filename: (req, file, cb) => {
+        console.log(file)
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 100)
-        cb(null, file.fieldname + '-' + uniqueSuffix+'.png')
+        cb(null, file.fieldname + '-' + uniqueSuffix+ file.originalname.split(".")[0])
     }
 });
 const cpUpload = multer({ storage: storage });
