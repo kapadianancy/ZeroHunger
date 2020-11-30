@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import config from '../../../config';
 
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
@@ -13,13 +14,14 @@ function PortfolioList() {
 
     useEffect(async()=>
     {
-        await actions.getAllPortfolio(portfolioDispatch);
-    },[portfolios])
+         await actions.getAllPortfolio(portfolioDispatch);
+    },[])
 
     var data=null;
     data=portfolios.map(p=>
         {
-            var image="http://localhost:8000/images/portfolio/"+p.image;
+            
+            var image=config.portfolio_image_path +p.image;
             data=(
                 <tr>
                 <td><img src={image} height="50px" width="50px" /></td>
@@ -52,7 +54,7 @@ function PortfolioList() {
             <div className="page-content" style={{ height: "100%" }} >
                 <Sidebar />
                 <div class="content-wrapper">
-
+      
                     <div class="page-header page-header-light">
                         <div class="page-header-content header-elements-md-inline" style={{ height: "55px" }}>
                             <div class="page-title d-flex">
@@ -77,14 +79,23 @@ function PortfolioList() {
 
                         </div>
                     </div>
-
+                         
                     <div class="content">
 
                         <div class="row" style={{ marginBottom: "50px" }}>
-                            <div class="col-md-12">
+                           <div class="col-md-12">
+                            
                                 <div class="card">
+                                <div class="card-header header-elements-inline">
+						<h5 class="card-title"></h5>
+						<div class="header-elements">
+							<div class="list-icons">
+                            <button type="submit" class="btn bg-teal-400 ml-3">Add <i class="icon-paperplane ml-2"></i></button>
 
-
+		                	</div>
+	                	</div>
+					</div>
+                                
                                     <table class="table datatable-basic table-hover">
                                         <thead>
                                             <tr>
