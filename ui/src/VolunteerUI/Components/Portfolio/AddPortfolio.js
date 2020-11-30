@@ -34,16 +34,31 @@ function AddPortfolio(props) {
         portfolio="";
     }
 
+    const onFileChange = (e) =>{
+        const imageFile = e.target.files[0];
+       
+        if(imageFile)
+        {
+         setImage(imageFile)   
+        }
+    }
+
     const addportfolio= async (event) => {
         event.preventDefault();
         if(await validate())
         {
-            let file=document.getElementById("file").value;
-           let data={
-               image:file,
-               description
-           }
-           console.log(data)
+         
+            const data = new FormData()
+            data.append('image', image)
+            data.append('description', description)
+
+            
+           
+        //    let data={
+        //        image:image,
+        //        description
+        //    }
+         //  console.log(data)
            await actions.addPortfolio(data,portfolioDispatch);
         }
     }
@@ -51,7 +66,7 @@ function AddPortfolio(props) {
     const validate=()=> {
         let err = {};
         let isValid = true;
-
+       
         if (!description) {
             isValid = false;
             err["description"] = "Please enter description.";
@@ -62,7 +77,7 @@ function AddPortfolio(props) {
             err["image"] = "Please uplaod image.";
         }
         else if (typeof image !== "undefined") {
-           if(!(image.endsWith(".jpeg")||image.endsWith(".jpg")||image.endsWith(".png")))
+            if (!image.name.match(/\.(jpg|jpeg|png)$/))
            {
                err["image"]="Must be an image format."
            }
@@ -116,12 +131,12 @@ function AddPortfolio(props) {
                                     </div>
 
                                     <div class="card-body">
-                                        <form onSubmit={addportfolio} onReset={reset} encType="multipart/form-data" >
+                                        <form onSubmit={addportfolio} onReset={reset}>
                                             <div class="form-group row">
                                                 <label class="col-form-label col-lg-2">Image<span class="text-danger">*</span></label>
                                                 <div class="col-lg-9">
-                                                <input type="file" class="form-control h-auto" name="file" id="file" 
-                                                value={image} onChange={(e)=>setImage(e.target.value)}/>
+                                                <input type="file" class="form-control h-auto" name="image"
+                                                 onChange={onFileChange}/>
                                                 <div className="validation-invalid-label">{validation["image"]}</div>
                                                 </div>
                                             </div>

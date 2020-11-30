@@ -57,7 +57,8 @@ test('login',async()=>
     await request(app).post('/user/login')
     .send({
         username:"user1",
-        password:"user123"
+        password:"user123",
+        role:"Admin"
     }).expect(200)
 })
 

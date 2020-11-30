@@ -34,11 +34,14 @@ exports.getPortfolioById = async (req, res) => {
 }
 
 exports.addPortfolio = async (req, res, next) => {
+
+    //console.log(req.files.image[0].filename)
     const portfolio = new Portfolio({
-        image: "/images/" + 'portfolio/' + req.file.originalname,
-        ...req.body
-    })
-    try {
+        ...req.body,
+        image: req.files.image[0].filename
+        })
+
+     try {
         await portfolio.save();
         return res.status(201).send(portfolio);
     } catch (e) {
@@ -50,8 +53,8 @@ exports.addPortfolio = async (req, res, next) => {
 exports.editPortfolio = async (req, res) => {
     try {
         const portfolio = {
-            image: "/images/" + 'portfolio' + req.file.originalname,
-            ...req.body
+            ...req.body,
+            image:  req.files.image[0].filename  
         }
        
         await Portfolio.findByIdAndUpdate(req.params.id, portfolio,{new:true,runValidators:true}, (err) => {

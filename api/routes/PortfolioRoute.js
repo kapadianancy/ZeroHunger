@@ -9,20 +9,15 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'public/images/portfolio');
+        cb(null, 'public/images/portfolio')
     },
     filename: (req, file, cb) => {
-        cb(null,file.originalname);
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 100)
+        cb(null, file.fieldname + '-' + uniqueSuffix+'.png')
     }
 });
-const fileFilter = (req, file, cb) => {
-    if (file.mimetype == 'image/jpeg' || file.mimetype == 'image/png') {
-        cb(null, true);
-    } else {
-        cb("Must be an Image", false);
-    }
-}
-const upload = multer({ storage: storage, fileFilter: fileFilter });
+const cpUpload = multer({ storage: storage });
+var upload = cpUpload.fields([{ name: 'image', maxCount: 1 }])
 
 //get all portfolio
 router.get('/getAllPortfolio',Portfolio.getAllPortfolio)
@@ -31,10 +26,10 @@ router.get('/getAllPortfolio',Portfolio.getAllPortfolio)
 router.get('/getPortfolioById/:id',Portfolio.getPortfolioById)
 
 //add Portfolio
-router.post('/addPortfolio',auth,upload.single('image'),Portfolio.addPortfolio)
+router.post('/addPortfolio',auth,upload,Portfolio.addPortfolio)
 
 //edit Portfolio
-router.put('/editPortfolio/:id',auth,upload.single('image'),Portfolio.editPortfolio)
+router.put('/editPortfolio/:id',auth,upload,Portfolio.editPortfolio)
 
 //delete Portfolio
 router.delete('/deletePortfolio/:id',auth,Portfolio.deletePortfolio)

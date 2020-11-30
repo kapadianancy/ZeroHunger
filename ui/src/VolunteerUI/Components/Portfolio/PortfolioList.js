@@ -19,13 +19,13 @@ function PortfolioList() {
     var data=null;
     data=portfolios.map(p=>
         {
-            var image="http://localhost:8000"+p.image;
+            var image="http://localhost:8000/images/portfolio/"+p.image;
             data=(
                 <tr>
                 <td><img src={image} height="50px" width="50px" /></td>
                 <td>{p.description}</td>
 
-                <td class="text-center">
+                <td colSpan="4" class="text-center">
                     <div class="list-icons">
                         <div class="dropdown">
                             <a href="#" class="list-icons-item" data-toggle="dropdown">
@@ -90,7 +90,7 @@ function PortfolioList() {
                                             <tr>
                                                 <th>Image</th>
                                                 <th>Description</th>
-                                                <th class="text-center">Actions</th>
+                                                <th colSpan="4" class="text-center">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
