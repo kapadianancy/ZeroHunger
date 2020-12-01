@@ -24,6 +24,14 @@ function PortfolioList(props) {
         props.history.push("/volunteer/editportfolio/"+id)
     }
 
+    const remove=async(id)=>
+    {
+        if (window.confirm('Are you sure to delete this portfolio ?')) {
+            await actions.removePortfolio(portfolioDispatch, id);
+            await actions.getAllPortfolio(portfolioDispatch);
+        }
+    }
+
     var data=null;
     data=portfolios.map(p=>
         {
@@ -43,7 +51,7 @@ function PortfolioList(props) {
 
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a onClick={() => edit(p._id)} class="dropdown-item"><i class="icon-pencil"></i>Edit</a>
-                                <a href="#" class="dropdown-item"><i class="icon-cross2"></i>Delete</a>
+                                <a onClick={() => remove(p._id)} class="dropdown-item"><i class="icon-cross2"></i>Delete</a>
                             </div>
                         </div>
                     </div>

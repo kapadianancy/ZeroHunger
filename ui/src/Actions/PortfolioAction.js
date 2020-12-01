@@ -61,6 +61,7 @@ export const getPortfolioById = async (portfolioDispatch,id) => {
 };
 
 export const updatePortfolio = async (portfolioDispatch, id ,portfolio) => {
+    console.log(portfolio)
     const token = localStorage.getItem("token");
     await axios.put('/portfolio/editPortfolio/' + id, portfolio,{
         headers: {
@@ -71,6 +72,25 @@ export const updatePortfolio = async (portfolioDispatch, id ,portfolio) => {
             console.log(response)
             portfolioDispatch({
                 type: ActionNames.UPDATE_PORTFOLIO,
+                data: {
+                    portfolio: response.data
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
+
+export const removePortfolio = async (portfolioDispatch, id) => {
+    const token = localStorage.getItem("token");
+    await axios.delete('/portfolio/deletePortfolio/' + id, {
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    })
+        .then(async (response) => {
+            portfolioDispatch({
+                type: ActionNames.REMOVE_PORTFOLIO,
                 data: {
                     portfolio: response.data
                 }

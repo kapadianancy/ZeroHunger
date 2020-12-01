@@ -19,7 +19,7 @@ function AddPortfolio(props) {
 
     useEffect(()=>
     {
-        if(portfolio)
+        if(portfolio!=null)
         {
             props.history.push("/volunteer/portfoliolist")
         }
@@ -52,18 +52,15 @@ function AddPortfolio(props) {
             data.append('image', image)
             data.append('description', description)
 
-            
-           
-        //    let data={
-        //        image:image,
-        //        description
-        //    }
-         //  console.log(data)
+       
            await actions.addPortfolio(data,portfolioDispatch);
+         
+           
         }
     }
 
     const validate=()=> {
+        console.log(image)
         let err = {};
         let isValid = true;
        
@@ -79,6 +76,7 @@ function AddPortfolio(props) {
         else if (typeof image !== "undefined") {
             if (!image.name.match(/\.(jpg|jpeg|png)$/))
            {
+               isValid=false;
                err["image"]="Must be an image format."
            }
         }

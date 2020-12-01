@@ -52,10 +52,22 @@ exports.addPortfolio = async (req, res, next) => {
 
 exports.editPortfolio = async (req, res) => {
     try {
-        const portfolio = {
-            ...req.body,
-            image:  req.files.image[0].filename  
+        let portfolio={};
+        if(req.files.image)
+        {
+            portfolio = {
+                ...req.body,
+                image:  req.files.image[0].filename  
+            }
         }
+        else
+        {
+            portfolio = {
+                ...req.body
+            }
+
+        }
+        
        
         await Portfolio.findByIdAndUpdate(req.params.id, portfolio,{new:true,runValidators:true}, (err) => {
             if (err) {

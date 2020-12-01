@@ -19,6 +19,7 @@ function EditPortfolio(props) {
     var[img,setImg]=useState(null);
     var[validation,setValidation]=useState("");
     var [id, setId] = useState(props.match.params.id);
+    var [valid,setValid]=useState(true);
 
     useEffect(async () => {
         await actions.getPortfolioById(portfolioDispatch, id);
@@ -27,7 +28,7 @@ function EditPortfolio(props) {
     useEffect(async () => {
      
         if (portfolio != null) {
-            var i=<img src={config.portfolio_image_path+portfolio.image}/>;
+            var i=<img src={config.portfolio_image_path+portfolio.image} style={{height: "166px",width: "304px"}}/>;
            
             setImg(i)
            setImage(portfolio.image);
@@ -50,55 +51,60 @@ function EditPortfolio(props) {
 
    
 
-    const onFileChange = (e) =>{
-        const imageFile = e.target.files[0];
-        
-        if(imageFile)
-        {
-         setImage(imageFile) 
-         setImg(null); 
-         
-        }
-    }
-
     const editportfolio= async (event) => {
         event.preventDefault();
-        if(await validate())
+        await validate();
+        if(valid==true)
         {
          
+            // var f=new File(image)
             const data = new FormData()
             data.append('image', image)
             data.append('description', description)
 
-        
+            console.log(data);
            await actions.updatePortfolio(portfolioDispatch,id,data);
            props.history.push('/volunteer/portfoliolist')
         }
     }
 
-    const validate=()=> {
-        let err = {};
-        let isValid = true;
-       
-        if (!description) {
-            isValid = false;
-            err["description"] = "Please enter description.";
-        }
 
-        if (!image) {
-            isValid = false;
+    const onFileChange = (e) =>{
+        const imageFile = e.target.files[0];
+        let err = {};
+        if(imageFile)
+        {
+         setImage(imageFile) 
+         setImg(null); 
+         if (!imageFile) {
+            setValid (false);
             err["image"] = "Please uplaod image.";
         }
-        else if (typeof image !== "undefined") {
-            if (!image.name.match(/\.(jpg|jpeg|png)$/))
+        else if (typeof imageFile !== "undefined") {
+            if (!imageFile.name.match(/\.(jpg|jpeg|png)$/))
            {
+               setValid(false)
                err["image"]="Must be an image format."
            }
         }
+        setValidation(err);
+        }
+        
+    }
+
+    const validate=()=> {
+        console.log(image);
+        let err = {};
+        
+       
+        if (!description) {
+            setValid(false);
+            err["description"] = "Please enter description.";
+        }
 
        
-        setValidation(err)
-        return isValid;
+        setValidation(err);
+        return;
     }
     return (
         <>
