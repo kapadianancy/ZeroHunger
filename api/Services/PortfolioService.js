@@ -19,7 +19,7 @@ exports.getPortfolioById = async (req, res) => {
     try {
         const data = await Portfolio.findOne({
             _id: req.params.id,
-            is_Deleted: 0
+            is_deleted: 0
         })
         if (data) {
             return res.status(200).send(data)
@@ -52,10 +52,22 @@ exports.addPortfolio = async (req, res, next) => {
 
 exports.editPortfolio = async (req, res) => {
     try {
-        const portfolio = {
-            ...req.body,
-            image:  req.files.image[0].filename  
+        let portfolio={};
+        if(req.files.image)
+        {
+            portfolio = {
+                ...req.body,
+                image:  req.files.image[0].filename  
+            }
         }
+        else
+        {
+            portfolio = {
+                ...req.body
+            }
+
+        }
+        
        
         await Portfolio.findByIdAndUpdate(req.params.id, portfolio,{new:true,runValidators:true}, (err) => {
             if (err) {
@@ -73,7 +85,7 @@ exports.editPortfolio = async (req, res) => {
 exports.deletePortfolio = async (req, res) => {
     try {
         await Portfolio.findByIdAndUpdate(req.params.id, {
-            is_Deleted: 1
+            is_deleted: 1
         }, (err) => {
             if (err) {
                 return res.status(400).send(err)
