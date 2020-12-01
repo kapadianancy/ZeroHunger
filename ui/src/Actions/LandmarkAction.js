@@ -1,6 +1,8 @@
 import * as ActionNames from '../ActionNames';
 import axios from '../axios';
 
+
+
 export const addLandmark = async (landmarkDispatch, landmark) => {
     const token = localStorage.getItem("token");
     await axios.post('/landmark/add', landmark, {
