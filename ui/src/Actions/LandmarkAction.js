@@ -83,7 +83,6 @@ export const updateLandmark = async (landmarkDispatch, id ,landmark) => {
         }
     })
         .then(async (response) => {
-            console.log(response)
             landmarkDispatch({
                 type: ActionNames.UPDATE_LANDMARK,
                 data: {

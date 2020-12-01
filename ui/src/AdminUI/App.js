@@ -15,6 +15,8 @@ import LandmarkList from './Components/Landmark/LandmarkList';
 import { useUserState } from '../Context/UserContext';
 import EditLandmark from './Components/Landmark/EditLandmark';
 import AddReceiverCategory from './Components/ReceiverCategory/AddReceiverCategory';
+import ReceiverCategoryList from './Components/ReceiverCategory/ReceiverCategoryList';
+import EditReceiverCategory from './Components/ReceiverCategory/EditReceiverCategory';
 
 function App(props) {
 
@@ -32,10 +34,12 @@ function App(props) {
       {token == null && content==null ? <Redirect to="/admin/login" /> : null}
 
       <Switch>
-        <Route path="/admin/addreceivercategory" exact component={AddReceiverCategory} /> 
-        <Route path="/admin/editlandmark/:id" exact component={EditLandmark} />
-        <Route path="/admin/landmarklist" exact component={LandmarkList} />
+        <Route path="/admin/addreceivercategory" exact component={AddReceiverCategory} />
+        <Route path="/admin/receivercategorylist" exact component={ReceiverCategoryList} />
+        <Route path="/admin/editreceivercategory/:id" exact component={EditReceiverCategory} />       
         <Route path="/admin/addlandmark" exact component={AddLandmark} />
+        <Route path="/admin/landmarklist" exact component={LandmarkList} />
+        <Route path="/admin/editlandmark/:id" exact component={EditLandmark} />
         <Route path="/admin/portfoliolist" exact component={PortfolioList} />
         <Route path="/admin/addportfolio" exact component={AddPortfolio} />
         <Route path="/admin/editprofile" exact component={EditProfile} />

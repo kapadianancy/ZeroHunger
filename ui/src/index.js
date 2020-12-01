@@ -5,9 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 
-import {UserProvider} from './Context/UserContext';
-import {PortfolioProvider} from './Context/PortfolioContext';
+import { UserProvider } from './Context/UserContext';
+import { PortfolioProvider } from './Context/PortfolioContext';
 import { LandmarkProvider } from './Context/LandmarkContext';
+import { ReceiverCategoryProvider } from './Context/ReceiverCategory';
 //localStorage.clear();
 ReactDOM.render(
   <React.StrictMode>
@@ -15,7 +16,9 @@ ReactDOM.render(
       <UserProvider>
         <LandmarkProvider>
           <PortfolioProvider>
-          <App />
+            <ReceiverCategoryProvider>
+              <App />
+            </ReceiverCategoryProvider>
           </PortfolioProvider>
         </LandmarkProvider>
       </UserProvider>

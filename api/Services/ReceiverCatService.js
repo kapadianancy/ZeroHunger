@@ -7,7 +7,7 @@ exports.add=async(req,res)=>
         const result=await cat.save();
         if(result)
         {
-            return res.status(201).send("category inserted"+cat);
+            return res.status(201).send(cat);
         }
         else
         {
@@ -28,6 +28,24 @@ exports.getAll = async (req, res) => {
 
     } catch (err) {
         return res.status(400).send("bad request");
+    }
+}
+
+exports.getById = async (req, res) => {
+    try {
+        const data = await ReceiverCat.findOne({
+            _id: req.params.id,
+            is_deleted: 0
+        })
+        if (data) {
+            return res.status(200).send(data)
+        }
+        else {
+            return res.status(400).send("No Data Found")
+        }
+
+    } catch (err) {
+        return res.status(400).send("Receiver Category Not Found");
     }
 }
 
