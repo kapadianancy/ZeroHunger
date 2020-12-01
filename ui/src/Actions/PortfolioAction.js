@@ -61,7 +61,6 @@ export const getPortfolioById = async (portfolioDispatch,id) => {
 };
 
 export const updatePortfolio = async (portfolioDispatch, id ,portfolio) => {
-    console.log(portfolio)
     const token = localStorage.getItem("token");
     await axios.put('/portfolio/editPortfolio/' + id, portfolio,{
         headers: {
@@ -69,7 +68,6 @@ export const updatePortfolio = async (portfolioDispatch, id ,portfolio) => {
         }
     })
         .then(async (response) => {
-            console.log(response)
             portfolioDispatch({
                 type: ActionNames.UPDATE_PORTFOLIO,
                 data: {

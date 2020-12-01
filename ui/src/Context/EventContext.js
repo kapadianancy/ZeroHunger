@@ -1,18 +1,24 @@
 import React from 'react'
-import  * as ActionNames from '../ActionNames';
+import * as ActionNames from '../ActionNames';
 
 var EventStateContext = React.createContext()
 var EventDispatchContext = React.createContext()
 
 function EventReducer(state, action) {
-   
+
 	switch (action.type) {
 		case ActionNames.EVENT_LIST:
-			return{...state,events:action.data.events}
+			return { ...state, events: action.data.events }
 		case ActionNames.ADD_EVENT:
-			return{...state,event:action.data.event}
+			return { ...state, event: action.data.event }
 		case ActionNames.ADD_EVENT_FAILED:
-			return{...state,error:action.data.error}
+			return { ...state, error: action.data.error }
+		case ActionNames.GET_EVENT:
+			return { ...state, event: action.data.event }
+		case ActionNames.UPDATE_EVENT:
+			return { ...state, event: null }
+		case ActionNames.REMOVE_EVENT:
+			return { ...state, event: null }
 		default: {
 			throw new Error(`Unhandled action type: ${action.type}`)
 		}
@@ -21,9 +27,9 @@ function EventReducer(state, action) {
 
 function EventProvider({ children }) {
 	var [state, dispatch] = React.useReducer(EventReducer, {
-		events:[],
-		event:null,
-		error:null
+		events: [],
+		event: null,
+		error: null
 	})
 
 	return (

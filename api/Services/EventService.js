@@ -33,27 +33,40 @@ exports.getEventById = async (req, res) => {
 }
 
 exports.addEvent = async (req, res) => {
-    const e ={
-        banner: "/images/" + 'event' + req.file.originalname,
-        ...req.body
-    }
-    const event = new CharityEvent(e)
+    const event = new CharityEvent({
+        ...req.body,
+        banner: req.files.banner[0].filename
+    })
+
     try {
         await event.save();
         return res.status(201).send("Event Inserted")
     } catch (e) {
         return res.status(400).send(e)
     }
+
 }
 
 
 exports.editEvent = async (req, res) => {
     try {
-        const e ={
-            banner: "/images/" + 'event' + req.file.originalname,
-            ...req.body
+        let event={};
+        if(req.files.image)
+        {
+            event = {
+                ...req.body,
+                banner:  req.files.image[0].filename  
+            }
         }
-        await CharityEvent.findByIdAndUpdate(req.params.id, e,{new:true,runValidators:true}, (err) => {
+        else
+        {
+            event = {
+                ...req.body
+            }
+
+        }
+
+        await CharityEvent.findByIdAndUpdate(req.params.id, event, { new: true, runValidators: true }, (err) => {
             if (err) {
                 return res.status(400).send(err)
             }
@@ -83,19 +96,16 @@ exports.deleteEvent = async (req, res) => {
     }
 }
 
-exports.total=async(req,res)=>
-{
-    try{
-        var total=await CharityEvent.where({is_deleted:false}).count();          
-        
-        if(total == 0)
-        {
+exports.total = async (req, res) => {
+    try {
+        var total = await CharityEvent.where({ is_deleted: false }).count();
+
+        if (total == 0) {
             return res.status(200).send(`no data found`);
         }
         return res.status(200).send(`total events ${total}`);
 
-    }catch(err)
-    {
+    } catch (err) {
         return res.status(400).send("bad request");
     }
 }

@@ -3,69 +3,60 @@ import { withRouter } from 'react-router';
 
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
-import * as actions from '../../../Actions/PortfolioAction';
+import * as actions from '../../../Actions/EventAction';
 
-import {usePortfolioDispatch,usePortfolioState} from '../../../Context/PortfolioContext';
+import { useEventDispatch, useEventState } from '../../../Context/EventContext';
 
 
 
-function AddPortfolio(props) {
+function AddEvent(props) {
 
-    var {error,portfolio}=usePortfolioState();
-    var portfolioDispatch=usePortfolioDispatch();
-    var[description,setDescription]=useState("");
-    var[image,setImage]=useState("");
-    var[validation,setValidation]=useState("");
+    var { error, event } = useEventState();
+    var eventDispatch = useEventDispatch();
+    var [title, setTitle] = useState("");
+    var [image, setImage] = useState("");
+    var [validation, setValidation] = useState("");
 
-    useEffect(()=>
-    {
-        if(portfolio!=null)
-        {
-            props.history.push("/admin/portfoliolist")
+    useEffect(() => {
+        if (event != null) {
+            props.history.push("/admin/eventlist")
         }
-    },[error,portfolio])
+    }, [error, event])
 
-    const reset=()=>
-    {
+    const reset = () => {
         setImage("");
-        setDescription("");
+        setTitle("");
         setValidation("");
-        error="";
-        portfolio="";
+        error = "";
+        event = "";
     }
 
-    const onFileChange = (e) =>{
+    const onFileChange = (e) => {
         const imageFile = e.target.files[0];
-       
-        if(imageFile)
-        {
-         setImage(imageFile)   
+
+        if (imageFile) {
+            setImage(imageFile)
         }
     }
 
-    const addportfolio= async (event) => {
+    const addevent = async (event) => {
         event.preventDefault();
-        if(await validate())
-        {
-         
+        if (await validate()) {
             const data = new FormData()
-            data.append('image', image)
-            data.append('description', description)
+            data.append('banner', image)
+            data.append('title', title)
 
-       
-           await actions.addPortfolio(data,portfolioDispatch);
-         
-           
+            await actions.addEvent(data, eventDispatch);
         }
     }
 
-    const validate=()=> {
+    const validate = () => {
         let err = {};
         let isValid = true;
-       
-        if (!description) {
+
+        if (!title) {
             isValid = false;
-            err["description"] = "Please enter description.";
+            err["title"] = "Please enter title.";
         }
 
         if (!image) {
@@ -73,14 +64,12 @@ function AddPortfolio(props) {
             err["image"] = "Please uplaod image.";
         }
         else if (typeof image !== "undefined") {
-            if (!image.name.match(/\.(jpg|jpeg|png)$/))
-           {
-               isValid=false;
-               err["image"]="Must be an image format."
-           }
+            if (!image.name.match(/\.(jpg|jpeg|png)$/)) {
+                isValid = false;
+                err["image"] = "Must be an image format."
+            }
         }
 
-       
         setValidation(err)
         return isValid;
     }
@@ -95,7 +84,7 @@ function AddPortfolio(props) {
                     <div class="page-header page-header-light">
                         <div class="page-header-content header-elements-md-inline" style={{ height: "55px" }}>
                             <div class="page-title d-flex">
-                                <h4><span class="font-weight-semibold">Add Portfolio </span></h4>
+                                <h4><span class="font-weight-semibold">Add Event </span></h4>
                                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
                             </div>
 
@@ -106,8 +95,7 @@ function AddPortfolio(props) {
                             <div class="d-flex">
                                 <div class="breadcrumb">
                                     <a href="/admin" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>Dashboard</a>
-                                    <a href="/admin/addportfolio" class="breadcrumb-item">Add Portfolio</a>
-
+                                    <a href="/admin/addevent" class="breadcrumb-item">Add Event</a>
                                 </div>
 
                                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -128,33 +116,36 @@ function AddPortfolio(props) {
                                     </div>
 
                                     <div class="card-body">
-                                        <form onSubmit={addportfolio} onReset={reset}>
+                                        <form onSubmit={addevent} onReset={reset}>
+                                            
                                             <div class="form-group row">
-                                                <label class="col-form-label col-lg-2">Image<span class="text-danger">*</span></label>
+                                                <label class="col-form-label col-lg-2">Title <span class="text-danger">*</span></label>
                                                 <div class="col-lg-9">
-                                                <input type="file" class="form-control h-auto" name="image"
-                                                 onChange={onFileChange}/>
-                                                <div className="validation-invalid-label">{validation["image"]}</div>
+                                                    <textarea rows="3" name="title" cols="3" class="form-control" placeholder="Enter Title" aria-invalid="true"
+                                                        value={title} onChange={(e) => setTitle(e.target.value)}></textarea>
+                                                    <div className="validation-invalid-label">{validation["title"]}</div>
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
-                                                <label class="col-form-label col-lg-2">Description <span class="text-danger">*</span></label>
+                                                <label class="col-form-label col-lg-2">Image<span class="text-danger">*</span></label>
                                                 <div class="col-lg-9">
-                                                    <textarea rows="3" name="description" cols="3" class="form-control" placeholder="Enter Description" aria-invalid="true"
-                                                    value={description} onChange={(e)=>setDescription(e.target.value)}></textarea>
-                                                    <div className="validation-invalid-label">{validation["description"]}</div>
-                                                   </div>
+                                                    <input type="file" class="form-control h-auto" name="image"
+                                                        onChange={onFileChange} />
+                                                    <div className="validation-invalid-label">{validation["image"]}</div>
+                                                </div>
                                             </div>
+
+
 
 
                                             <div class="form-group row mb-0">
                                                 <div class="col-lg-10 ml-lg-auto">
-                                                    <button type="reset" style={{borderColor:"#26a69a"}} class="btn btn-light"
-                                                   >Reset<i class="icon-reset ml-2"></i></button>
+                                                    <button type="reset" style={{ borderColor: "#26a69a" }} class="btn btn-light"
+                                                    >Reset<i class="icon-reset ml-2"></i></button>
                                                     <button type="submit" class="btn bg-teal-400 ml-3">Add <i class="icon-paperplane ml-2"></i></button>
-                                                    <div style={{ color: "red", fontSize: "18px",paddingTop:"5px" }}>{error}</div>
-                                                    
+                                                    <div style={{ color: "red", fontSize: "18px", paddingTop: "5px" }}>{error}</div>
+
                                                 </div>
                                             </div>
                                         </form>
@@ -173,4 +164,4 @@ function AddPortfolio(props) {
     )
 }
 
-export default withRouter(AddPortfolio);
+export default withRouter(AddEvent);
