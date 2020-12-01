@@ -1,4 +1,5 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom';
 
 function Sidebar(proprs) {
 	var style={
@@ -37,8 +38,8 @@ function Sidebar(proprs) {
 								<a  className="nav-link"><i className="icon-list-unordered"></i> <span>Receiver Category</span></a>
 
 								<ul className="nav nav-group-sub" data-submenu-title="Receiver Category">
-									<li className="nav-item"><a href="index.html" className="nav-link">Add Receiver Category</a></li>
-									<li className="nav-item"><a href="index.html" className="nav-link">List of Receiver Category</a></li>
+									<li className="nav-item"><a href="/admin/addreceivercategory" className="nav-link">Add Receiver Category</a></li>
+									<li className="nav-item"><a href="/admin/receivercategorylist" className="nav-link">List of Receiver Category</a></li>
 								</ul>
 							</li>
 							<li className="nav-item nav-item-submenu">
@@ -102,4 +103,4 @@ function Sidebar(proprs) {
 
 	)
 }
-export default Sidebar;
+export default withRouter(Sidebar);

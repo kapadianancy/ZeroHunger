@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import {  withRouter } from 'react-router-dom';
 
 import * as actions from '../../../Actions/LandmarkAction';
 import { useLandmarkDispatch, useLandmarkState } from '../../../Context/LandmarkContext';
@@ -216,4 +217,4 @@ function EditLandmark(props) {
         </>
     )
 }
-export default EditLandmark;
+export default withRouter(EditLandmark);

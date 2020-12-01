@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import * as actions from '../../../Actions/LandmarkAction';
 import { useLandmarkDispatch, useLandmarkState } from '../../../Context/LandmarkContext';
 
+import { withRouter } from 'react-router-dom';
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 
@@ -120,4 +121,4 @@ function LandmarkList(props) {
         </>
     )
 }
-export default LandmarkList;
+export default withRouter(LandmarkList);
