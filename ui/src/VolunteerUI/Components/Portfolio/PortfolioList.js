@@ -6,8 +6,10 @@ import Sidebar from '../Sidebar/Sidebar';
 import * as actions from '../../../Actions/PortfolioAction';
 
 import {usePortfolioDispatch,usePortfolioState} from '../../../Context/PortfolioContext';
+import { Redirect, withRouter } from 'react-router';
 
-function PortfolioList() {
+
+function PortfolioList(props) {
 
     var portfolioDispatch=usePortfolioDispatch();
     var {portfolios}=usePortfolioState();
@@ -16,6 +18,11 @@ function PortfolioList() {
     {
          await actions.getAllPortfolio(portfolioDispatch);
     },[])
+
+    const edit=(id)=>
+    {
+        props.history.push("/volunteer/editportfolio/"+id)
+    }
 
     var data=null;
     data=portfolios.map(p=>
@@ -35,7 +42,7 @@ function PortfolioList() {
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a href="#" class="dropdown-item"><i class="icon-pencil"></i>Edit</a>
+                                <a onClick={() => edit(p._id)} class="dropdown-item"><i class="icon-pencil"></i>Edit</a>
                                 <a href="#" class="dropdown-item"><i class="icon-cross2"></i>Delete</a>
                             </div>
                         </div>
@@ -46,6 +53,11 @@ function PortfolioList() {
             )
             return data;
         })
+
+    const addportfolio=()=>
+    {
+      props.history.push("/volunteer/addportfolio");
+    }
 
 
     return (
@@ -68,7 +80,7 @@ function PortfolioList() {
                         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
                             <div class="d-flex">
                                 <div class="breadcrumb">
-                                    <a href="/admin" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
+                                    <a href="/volunteer" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
                                     <a href="/admin/portfoliolist" class="breadcrumb-item">Portfolio List</a>
 
                                 </div>
@@ -90,7 +102,7 @@ function PortfolioList() {
 						<h5 class="card-title"></h5>
 						<div class="header-elements">
 							<div class="list-icons">
-                            <button type="submit" class="btn bg-teal-400 ml-3">Add <i class="icon-paperplane ml-2"></i></button>
+                            <button  onClick={addportfolio} class="btn bg-teal-400 ml-3">Add <i class="icon-plus3 ml-2"></i></button>
 
 		                	</div>
 	                	</div>
@@ -122,4 +134,4 @@ function PortfolioList() {
     )
 }
 
-export default PortfolioList;
+export default withRouter(PortfolioList);

@@ -13,6 +13,10 @@ function PortfolioReducer(state, action) {
 			return{...state,portfolio:action.data.portfolio}
 		case ActionNames.ADD_PORTFOLIO_FAILED:
 			return{...state,error:action.data.error}
+		case ActionNames.GET_PORTFOLIO:
+			return{...state,portfolio:action.data.portfolio}
+		case ActionNames.UPDATE_PORTFOLIO:
+			return{...state,portfolio:null}
 		default: {
 			throw new Error(`Unhandled action type: ${action.type}`)
 		}

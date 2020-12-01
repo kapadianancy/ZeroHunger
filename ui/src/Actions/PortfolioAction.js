@@ -45,3 +45,37 @@ export const addPortfolio=async(portfolio,portfolioDispatch)=>
             });
         })
 }
+
+export const getPortfolioById = async (portfolioDispatch,id) => {
+    await axios.get('/portfolio/getPortfolioById/'+ id)
+        .then(async (response) => {
+            portfolioDispatch({
+                type: ActionNames.GET_PORTFOLIO,
+                data: {
+                    portfolio: response.data
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
+
+export const updatePortfolio = async (portfolioDispatch, id ,portfolio) => {
+    const token = localStorage.getItem("token");
+    await axios.put('/portfolio/editPortfolio/' + id, portfolio,{
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    })
+        .then(async (response) => {
+            console.log(response)
+            portfolioDispatch({
+                type: ActionNames.UPDATE_PORTFOLIO,
+                data: {
+                    portfolio: response.data
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
