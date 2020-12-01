@@ -1,7 +1,7 @@
 import * as ActionNames from '../ActionNames';
 import axios from '../axios';
 
-import {LandmarkDispatchContext, useLandmarkDispatch} from '../Context/LandmarkContext'
+
 
 export const addLandmark = async (landmarkDispatch, landmark) => {
     const token = localStorage.getItem("token");
@@ -40,26 +40,6 @@ export const getAllLandmark = async (landmarkDispatch) => {
         }).catch(error => {
             throw new Error(error);
         })
-};
-
-export const temp = async() => {
-   //let dispatch=LandmarkDispatchContext
-   
-    console.log("actions");
-        await axios.get('/landmark/getAll').then(response => {
-            console.log(response)
-            LandmarkDispatchContext({
-                type: ActionNames.LANDMARK_LIST,
-                data: {
-                    landmarks: response.data
-                }
-            });
-        }).catch(error => {
-            console.log(error);
-            throw new Error(error);
-        })
-  
-    
 };
 
 export const getLandmarkById = async (landmarkDispatch,id) => {

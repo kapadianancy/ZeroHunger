@@ -57,5 +57,5 @@ function useLandmarkDispatch() {
 	return context
 }
 
-export { LandmarkProvider, useLandmarkState, useLandmarkDispatch,LandmarkStateContext,LandmarkDispatchContext }
+export { LandmarkProvider, useLandmarkState, useLandmarkDispatch }
 

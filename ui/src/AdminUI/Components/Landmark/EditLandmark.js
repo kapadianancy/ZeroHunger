@@ -20,6 +20,9 @@ function EditLandmark(props) {
 
     useEffect(async () => {
         await actions.getLandmarkById(landmarkDispatch, id);
+    }, [])
+    
+    useEffect(async () => {
        // console.log(landmark)
         if (landmark != null) {
             setName(landmark.name)
@@ -28,7 +31,7 @@ function EditLandmark(props) {
             setLongitude(landmark.longitude)
 
         }
-    }, [])
+    }, [landmark])
 
 
 
