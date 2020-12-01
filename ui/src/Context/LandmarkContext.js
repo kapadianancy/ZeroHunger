@@ -5,6 +5,7 @@ var LandmarkStateContext = React.createContext()
 var LandmarkDispatchContext = React.createContext()
 
 function landmarkReducer(state, action) {
+	console.log(action.type);
 	switch (action.type) {
 		case ActionNames.ADD_LANDMARK:
 			return { ...state, landmark: action.data.landmark, error: null }
@@ -56,5 +57,5 @@ function useLandmarkDispatch() {
 	return context
 }
 
-export { LandmarkProvider, useLandmarkState, useLandmarkDispatch }
+export { LandmarkProvider, useLandmarkState, useLandmarkDispatch,LandmarkStateContext,LandmarkDispatchContext }
 

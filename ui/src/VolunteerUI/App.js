@@ -12,6 +12,7 @@ import AddPortfolio from './Components/Portfolio/AddPortfolio';
 
 
 import {useUserState} from '../Context/UserContext';
+import TempClass from './TempClass';
 
 
 function App(props) {
@@ -36,6 +37,8 @@ function App(props) {
         <Route path="/volunteer/editprofile" exact component={EditProfile} />
         <Route path="/volunteer/portfoliolist" exact component={PortfolioList}/>
         <Route path="/volunteer/addportfolio" exact component={AddPortfolio} /> 
+
+        <Route path="/volunteer/temp" exact component={TempClass} /> 
         
       </Switch>
      
