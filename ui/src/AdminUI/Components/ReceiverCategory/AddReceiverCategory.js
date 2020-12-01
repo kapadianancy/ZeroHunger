@@ -9,15 +9,15 @@ import Sidebar from '../Sidebar/Sidebar';
 
 function AddReceiverCategory(props) {
     var receivercategoryDispatch = useReceiverCategoryDispatch();
-    var { error, ReceiverCategory } = useReceiverCategoryState();
+    var { error, receivercategory } = useReceiverCategoryState();
     var [name, setName] = useState("");
     var [validation, setValidation] = useState({});
 
     useEffect(() => {
-        if (ReceiverCategory) {
+        if (receivercategory) {
              props.history.push("/admin/receivercategorylist");
         }
-    }, [error, ReceiverCategory])
+    }, [error, receivercategory])
 
 
     const addReceiverCategory= async (event) => {

@@ -8,17 +8,17 @@ function ReceiverCategoryReducer(state, action) {
 	console.log(action.type);
 	switch (action.type) {
 		case ActionNames.ADD_RECEIVER_CATEGORY:
-			return { ...state, ReceiverCategory: action.data.ReceiverCategory, error: null }
+			return { ...state, receivercategory: action.data.receivercategory, error: null }
 		case ActionNames.ADD_RECEIVER_CATEGORY_FAILED:
-			return { ...state, error: action.data.error, ReceiverCategory: null }
+			return { ...state, error: action.data.error, receivercategory: null }
 		case ActionNames.RECEIVER_CATEGORY_LIST:
-			return { ...state, ReceiverCategories: action.data.ReceiverCategories }
+			return { ...state, receivercategories: action.data.receivercategories }
 		case ActionNames.REMOVE_RECEIVER_CATEGORY:
-			return { ...state, ReceiverCategory:null}
+			return { ...state, receivercategory:null}
 		case ActionNames.GET_RECEIVER_CATEGORY:
-			return { ...state, ReceiverCategory:action.data.ReceiverCategory}
+			return { ...state, receivercategory:action.data.receivercategory}
 		case ActionNames.UPDATE_RECEIVER_CATEGORY:
-			return {...state,ReceiverCategory:null}
+			return {...state,receivercategory:null}
 		default: {
 			throw new Error(`Unhandled action type: ${action.type}`)
 		}
@@ -27,8 +27,8 @@ function ReceiverCategoryReducer(state, action) {
 
 function ReceiverCategoryProvider({ children }) {
 	var [state, dispatch] = React.useReducer(ReceiverCategoryReducer, {
-		ReceiverCategory: null,
-		ReceiverCategories: [],
+		receivercategory: null,
+		receivercategories: [],
 		error: null,
 	})
 

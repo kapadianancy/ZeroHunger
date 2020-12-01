@@ -9,7 +9,7 @@ import Sidebar from '../Sidebar/Sidebar'
 function EditReceiverCategory(props) {
 
     var receivercategoryDispatch = useReceiverCategoryDispatch();
-    var { error, ReceiverCategory } = useReceiverCategoryState();
+    var { error, receivercategory } = useReceiverCategoryState();
     var [id, setId] = useState(props.match.params.id);
     var [name, setName] = useState("");
     var [validation, setValidation] = useState({});
@@ -21,10 +21,10 @@ function EditReceiverCategory(props) {
     }, [])
 
     useEffect(async () => {
-        if (ReceiverCategory != null) {
-            setName(ReceiverCategory.name)
+        if (receivercategory != null) {
+            setName(receivercategory.name)
         }
-    }, [ReceiverCategory])
+    }, [receivercategory])
 
     const editReceiverCategory = async (event) => {
         event.preventDefault();

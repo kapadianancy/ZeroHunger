@@ -12,7 +12,7 @@ export const addReceiverCateogry = async (receivercategoryDispatch, receivercate
             receivercategoryDispatch({
                 type: ActionNames.ADD_RECEIVER_CATEGORY,
                 data: {
-                    ReceiverCategory: JSON.stringify(response.data)
+                    receivercategory: JSON.stringify(response.data)
                 }
             });
         }).catch(error => {
@@ -32,7 +32,7 @@ export const getAllReceiverCategory = async (receivercategoryDispatch) => {
             receivercategoryDispatch({
                 type: ActionNames.RECEIVER_CATEGORY_LIST,
                 data: {
-                    ReceiverCategories: response.data
+                    receivercategories: response.data
                 }
             });
         }).catch(error => {
@@ -46,7 +46,7 @@ export const getReceiverCategoryById = async (receivercategoryDispatch,id) => {
             receivercategoryDispatch({
                 type: ActionNames.GET_RECEIVER_CATEGORY,
                 data: {
-                    ReceiverCategory: response.data
+                    receivercategory: response.data
                 }
             });
         }).catch(error => {
@@ -65,7 +65,7 @@ export const removeReceiverCategory = async (receivercategoryDispatch, id) => {
             receivercategoryDispatch({
                 type: ActionNames.REMOVE_RECEIVER_CATEGORY,
                 data: {
-                    ReceiverCategory: response.data
+                    receivercategory: response.data
                 }
             });
         }).catch(error => {
@@ -84,7 +84,7 @@ export const updateReceiverCategory = async (receivercategoryDispatch, id ,recei
             receivercategoryDispatch({
                 type: ActionNames.UPDATE_RECEIVER_CATEGORY,
                 data: {
-                    ReceiverCategory: response.data
+                    receivercategory: response.data
                 }
             });
         }).catch(error => {

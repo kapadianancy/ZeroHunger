@@ -10,7 +10,7 @@ import Sidebar from '../Sidebar/Sidebar';
 function ReceiverCategoryList(props) {
 
     var receivercategoryDispatch = useReceiverCategoryDispatch();
-    var { ReceiverCategories } = useReceiverCategoryState();
+    var { receivercategories } = useReceiverCategoryState();
 
     useEffect(async () => {
         await actions.getAllReceiverCategory(receivercategoryDispatch);
@@ -30,7 +30,7 @@ function ReceiverCategoryList(props) {
 
 
     var data = null;
-    data = ReceiverCategories.map(r => {
+    data = receivercategories.map(r => {
         data = (
             <tr>
                 <td>{r.name}</td>
