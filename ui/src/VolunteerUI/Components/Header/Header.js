@@ -77,8 +77,8 @@ function Header(props) {
 				<li className="nav-item dropdown dropdown-user">
 					<a href="#" className="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
 						{/* <img src="../assets/images/demo/users/face13.jpg" className="rounded-circle mr-2" height="34" alt=""/> */}
-						<Avatar name={user.name} round={true} size="50" color="#26a69a" style={{margin:"5px 10px 10px auto"}}/>
-						<span>{user.name}</span>
+						<Avatar name={user==null?null:user.name} round={true} size="50" color="#26a69a" style={{margin:"5px 10px 10px auto"}}/>
+						<span>{user==null?null:user.name}</span>
 					</a>
 
 					<div className="dropdown-menu dropdown-menu-right">
