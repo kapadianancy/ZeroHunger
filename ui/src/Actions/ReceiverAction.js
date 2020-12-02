@@ -24,3 +24,70 @@ export const addReceiver = async (receiverDispatch, receiver) => {
             });
         })
 };
+
+
+export const getAllReceivers = async (receiverDispatch) => {
+    await axios.get('/receiver/getAll')
+        .then(async (response) => {
+            receiverDispatch({
+                type: ActionNames.RECEIVER_LIST,
+                data: {
+                    receivers: response.data
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
+
+export const removeReceiver = async (receiverDispatch, id) => {
+    const token = localStorage.getItem("token");
+    await axios.delete('/receiver/delete/' + id, {
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    })
+        .then(async (response) => {
+            receiverDispatch({
+                type: ActionNames.REMOVE_RECEIVER,
+                data: {
+                    receiver: response.data
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
+
+export const getReceiverById = async (receiverDispatch,id) => {
+    await axios.get('/receiver/getById/'+id)
+        .then(async (response) => {
+            receiverDispatch({
+                type: ActionNames.GET_RECEIVER,
+                data: {
+                    receiver: response.data
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
+
+export const updateReceiver = async (receiverDispatch, id ,receiver) => {
+    const token = localStorage.getItem("token");
+    await axios.put('/receiver/edit/' + id, receiver,{
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    })
+        .then(async (response) => {
+            receiverDispatch({
+                type: ActionNames.UPDATE_RECEIVER,
+                data: {
+                    receiver: response.data
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};

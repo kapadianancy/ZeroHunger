@@ -10,7 +10,15 @@ function ReceiverReducer(state, action) {
 		case ActionNames.ADD_RECEIVER:
             return{...state,receiver:action.data.receiver,error:null}
         case ActionNames.ADD_RECEIVER_FAILED:
-            return{...state,error:action.data.error}
+			return{...state,error:action.data.error}
+		case ActionNames.RECEIVER_LIST:
+			return{...state,receivers:action.data.receivers}
+		case ActionNames.REMOVE_RECEIVER:
+			return{...state,receiver:null}	
+		case ActionNames.GET_RECEIVER:
+			return{...state,receiver:action.data.receiver}
+		case ActionNames.UPDATE_RECEIVER:
+			return{...state,receiver:null}	
 		default: {
 			throw new Error(`Unhandled action type: ${action.type}`)
 		}

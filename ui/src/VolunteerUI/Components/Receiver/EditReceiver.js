@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { withRouter } from 'react-router';
+
 
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
@@ -10,10 +12,10 @@ import {useLandmarkDispatch,useLandmarkState} from '../../../Context/LandmarkCon
 import * as actions from '../../../Actions/ReceiverAction';
 import * as cactions from '../../../Actions/ReceiverCategoryAction';
 import * as lactions from '../../../Actions/LandmarkAction';
-import { withRouter } from 'react-router';
 
-function AddReceiver(props) {
 
+
+function EditReceiver(props) {
     var receiverDispatch=useReceiverDispatch();
     var{error,receiver}=useReceiverState();
     var [name,setName]=useState("");
@@ -23,6 +25,8 @@ function AddReceiver(props) {
     var [category,setCategory]=useState("");
     var [population,setPopulation]=useState("");
     var [validation, setValidation] = useState({});
+    var [id, setId] = useState(props.match.params.id);
+    var [checked,setchecked]=useState("");
 
     var receiverCatDispatch=useReceiverCategoryDispatch();
     var{receivercategories}=useReceiverCategoryState();
@@ -40,11 +44,26 @@ function AddReceiver(props) {
         await lactions.getAllLandmark(landmarkdispatch);
     },[])
 
-    useEffect(() => {
-        if (receiver) {
-             props.history.push("/volunteer/receiverlist");
+    useEffect(async()=>{
+        await actions.getReceiverById(receiverDispatch,id);
+       
+    },[])
+
+    
+
+    useEffect(async()=>
+    {
+        if(receiver)
+        {
+            setName(receiver.name);
+            setPhone(receiver.phone_number);
+            setAddress(receiver.address);
+            setLandmark(receiver.landmark_id._id);
+            setCategory(receiver.category_id._id);
+            setPopulation(receiver.population);
+          
         }
-    }, [error, receiver])
+    },[receiver])
 
     const reset=()=>
     {
@@ -57,7 +76,7 @@ function AddReceiver(props) {
         setValidation({});
     }
 
-    const add = async (event) => {
+    const edit = async (event) => {
         event.preventDefault();
         if (await validate()) {
             let receiver = {
@@ -69,7 +88,8 @@ function AddReceiver(props) {
                 population,
                 role:"Receiver"
             }
-            await actions.addReceiver(receiverDispatch,receiver)
+            await actions.updateReceiver(receiverDispatch,id,receiver)
+            props.history.push("/volunteer/receiverlist")
            
         }
     }
@@ -120,17 +140,19 @@ function AddReceiver(props) {
         return isValid;
     }
 
-    var cats=receivercategories.map(c=>
-        {
-            cats=(<option value={c._id}>{c.name}</option>)
-            return cats;
-        })
-
-    var lands=landmarks.map(l=>
-        {
-            lands=(<option value={l._id}>{l.name}</option>)
-            return lands;
-        })
+    
+       var cats=receivercategories.map(c=>
+            {
+           
+                cats=(<option value={c._id}>{c.name}</option>)
+                return cats;
+            })
+    
+       var lands=landmarks.map(l=>
+            {
+                lands=(<option value={l._id}>{l.name}</option>)
+                return lands;
+            })
 
     return (
         <>
@@ -143,7 +165,7 @@ function AddReceiver(props) {
         <div class="page-header page-header-light">
             <div class="page-header-content header-elements-md-inline" style={{height:"55px"}}>
                 <div class="page-title d-flex">
-                    <h4><span class="font-weight-semibold">Add Receiver</span></h4>
+                    <h4><span class="font-weight-semibold">Edit Receiver</span></h4>
                     <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
                 </div>
         
@@ -154,7 +176,7 @@ function AddReceiver(props) {
                 <div class="d-flex">
                     <div class="breadcrumb">
                         <a href="/volunteer" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> dashboard</a>
-                        <a href="/volunteer/addreceiver" class="breadcrumb-item">Add Receiver</a>
+                        <a href="/volunteer/editreceiver" class="breadcrumb-item">Edit Receiver</a>
                         
                     </div>
         
@@ -176,7 +198,7 @@ function AddReceiver(props) {
                         </div>
         
                         <div class="card-body">
-                            <form onSubmit={add} onReset={reset}>
+                            <form onSubmit={edit} onReset={reset}>
                             <div class="form-group row">
 									<label class="col-form-label col-lg-2">Name <span class="text-danger">*</span></label>
 									<div class="col-lg-9">
@@ -248,7 +270,7 @@ function AddReceiver(props) {
                                                 <div class="col-lg-10 ml-lg-auto">
                                                     <button type="reset" style={{borderColor:"#26a69a"}} class="btn btn-light"
                                                    >Reset<i class="icon-reset ml-2"></i></button>
-                                                    <button type="submit" class="btn bg-teal-400 ml-3">Add <i class="icon-paperplane ml-2"></i></button>
+                                                    <button type="submit" class="btn bg-teal-400 ml-3">Edit <i class="icon-paperplane ml-2"></i></button>
                                                     <div style={{ color: "red", fontSize: "18px",paddingTop:"5px" }}>{error}</div>
                                                     
                                                 </div>
@@ -269,4 +291,4 @@ function AddReceiver(props) {
     );
 }
 
-export default   withRouter(AddReceiver);
+export default withRouter(EditReceiver);

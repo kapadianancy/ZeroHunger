@@ -10,6 +10,8 @@ router.get('/total',receiver.totalReceiver);
 
 router.get('/getAll',receiver.getAll);
 
+router.get('/getById/:id',receiver.getById);
+
 router.put('/edit/:id',auth,receiver.edit);
 
 router.delete('/delete/:id',auth,receiver.delete);
