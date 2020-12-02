@@ -1,8 +1,10 @@
 import React from 'react';
-
+import Avatar from 'react-avatar';
 
 function Header(props) {
 
+	var user=JSON.parse(localStorage.getItem('user'));
+	
     var style={
         height:70
     }
@@ -32,8 +34,8 @@ function Header(props) {
 			<ul className="navbar-nav">
 				
 				<li className="nav-item dropdown">
-					<a href="#" className="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown">
-						<i className="icon-bubbles4"></i>
+					<a href="#" className="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown" style={{margin:"15px"}}>
+						<i className="icon-bubbles4 icon-1x"></i>
 						<span className="d-md-none ml-2">Notifications</span>
 						<span className="badge badge-pill bg-warning-400 ml-auto ml-md-0">1</span>
 					</a>
@@ -74,8 +76,9 @@ function Header(props) {
 
 				<li className="nav-item dropdown dropdown-user">
 					<a href="#" className="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
-						<img src="../assets/images/demo/users/face13.jpg" className="rounded-circle mr-2" height="34" alt=""/>
-						<span>Volunteer</span>
+						{/* <img src="../assets/images/demo/users/face13.jpg" className="rounded-circle mr-2" height="34" alt=""/> */}
+						<Avatar name={user.name} round={true} size="50" color="#26a69a" style={{margin:"5px 10px 10px auto"}}/>
+						<span>{user.name}</span>
 					</a>
 
 					<div className="dropdown-menu dropdown-menu-right">
