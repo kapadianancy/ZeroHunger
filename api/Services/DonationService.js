@@ -92,10 +92,19 @@ exports.addFoodRequest = async (req, res) => {
 
 exports.getAllFoodRequest = async (req, res) => {
     try {
-        const data = await Food_request.find({
-            is_deleted: 0
+        Food_request.find({is_deleted:false})
+        .populate("receiver_id")
+        .exec((err,r)=>
+        {
+            if(err)
+            {
+                return res.status(400).send(err);
+            }
+            else
+            {
+                return res.status(200).send(r)
+            }
         })
-        return res.status(200).send(data)
 
 
     } catch (err) {
@@ -108,7 +117,7 @@ exports.getFoodRequestById = async (req, res) => {
         const data = await Food_request.findOne({
             _id: req.params.id,
             is_deleted: 0
-        })
+        }).populate("receiver_id");
         if (data) {
             return res.status(200).send(data)
         }

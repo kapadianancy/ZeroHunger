@@ -5,7 +5,7 @@ import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 import * as actions from '../../../Actions/EventAction';
 
-import { useEventDispatch, useEventState, usePortfolioDispatch, usePortfolioState } from '../../../Context/EventContext';
+import { useEventDispatch, useEventState } from '../../../Context/EventContext';
 import { Redirect, withRouter } from 'react-router';
 
 

@@ -3,122 +3,90 @@ import { withRouter } from 'react-router';
 
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
-import * as actions from '../../../Actions/EventAction';
-
 import config from '../../../config'
+import * as actions from '../../../Actions/FoodRequestAction';
+import * as ractions from '../../../Actions/ReceiverAction';
 
-import { useEventState, useEventDispatch } from '../../../Context/EventContext';
+import { useFoodRequestDispatch, useFoodRequestState } from '../../../Context/FoodRequestContext';
+import { useReceiverDispatch, useReceiverState } from '../../../Context/ReceiverContext';
 
 
 function EditFoodRequest(props) {
 
-    var { error, event } = useEventState();
-    var eventDispatch = useEventDispatch();
-    var [title, setTitle] = useState("");
+    var { error, foodrequest } = useFoodRequestState();
+    var foodrequestDispatch = useFoodRequestDispatch();
     var [date, setDate] = useState("");
     var [time, setTime] = useState("");
-    var [location, setLocation] = useState("");
-    var [purpose, setPurpose] = useState("");
-    var [description, setDescription] = useState("");
-    var [image, setImage] = useState("");
-    var [img, setImg] = useState(null);
+    var [plates, setPlates] = useState(0);
+    var [receiver, setReceiver] = useState("");
     var [validation, setValidation] = useState("");
     var [id, setId] = useState(props.match.params.id);
     var [valid, setValid] = useState(true);
 
+    var receiverDispatch=useReceiverDispatch();
+    var{error,receiver}=useReceiverState();
+
     useEffect(async () => {
-        await actions.getEventById(eventDispatch, id);
+        await actions.getFoodRequestById(foodrequestDispatch, id);
     }, [])
 
+    
+    useEffect(async()=>
+    {
+      //  await ractions.getAllReceiver(receiverDispatch);
+    },[])
+
     useEffect(async () => {
-
-
-        if (event != null) {
-            var i = <img src={config.event_image_path + event.banner} style={{ height: "166px", width: "304px" }} />;
-            const date = new Date(event.date);
+        if (foodrequest != null) {
+            const date = new Date(foodrequest.date);
             var dd = date.getDate();
             var mm = date.getMonth() + 1;
             var yyyy = date.getFullYear();
             var d = yyyy + "-" + mm + "-" + dd
 
-            setImg(i)
-            setImage(event.banner);
-            setTitle(event.title)
             setDate(d)
-            setTime(event.time)
-            setLocation(event.location)
-            setPurpose(event.purpose)
-            setDescription(event.description)
+            setTime(foodrequest.time)
+            setPlates(foodrequest.plates)
+            setReceiver(foodrequest.receiver_id)
 
         }
-    }, [event])
+    }, [foodrequest])
 
+    var receivers="";
+    // var receivers = receiver.map(r => {
+    //     receivers = (<option value={r._id}>{r.name}</option>)
+    //     return receivers;
+    // })
 
 
     const reset = () => {
-        setImg(null)
-        setImage("");
-        setTitle("");
         setDate("");
         setTime("");
-        setLocation("");
-        setPurpose("");
-        setDescription("");
+        setPlates(0);
+        setReceiver("");
         setValidation("");
         error = "";
-        event = "";
+        foodrequest = "";
     }
 
-    const editevent = async (event) => {
+    const editfoodrequest = async (event) => {
         event.preventDefault();
-        if (await validate() && valid == true) {
+        if (await validate()) {
             const data = new FormData()
-            data.append('banner', image)
-            data.append('title', title)
             data.append('date', date)
             data.append('time', time)
-            data.append('location', location)
-            data.append('purpose', purpose)
-            data.append('description', description)
-            await actions.updateEvent(eventDispatch, id, data);
-            props.history.push('/admin/eventlist')
+            data.append('plates', plates)
+            data.append('receiver_id', receiver)
+            await actions.updateFoodRequest(foodrequestDispatch, id, data);
+            props.history.push('/admin/foodrequest')
         }
     }
 
 
-    const onFileChange = (e) => {
-        const imageFile = e.target.files[0];
-        let err = {};
-        if (imageFile) {
-            setImage(imageFile)
-            setImg(null);
-            if (!imageFile) {
-                setValid(false);
-                err["image"] = "Please uplaod image.";
-            }
-            else if (typeof imageFile !== "undefined") {
-                if (!imageFile.name.match(/\.(jpg|jpeg|png)$/)) {
-                    setValid(false)
-                    err["image"] = "Must be an image format."
-                }
-                else {
-                    setValid(true);
-                }
-            }
-            
-            setValidation(err);
-        }
-
-    }
 
     const validate = () => {
         let err = {};
         let isValid = true;
-
-        if (!title) {
-            isValid = false;
-            err["title"] = "Please enter title.";
-        }
 
         if (!date) {
             isValid = false;
@@ -127,30 +95,17 @@ function EditFoodRequest(props) {
 
         if (!time) {
             isValid = false;
-            err["time"] = "Please enter time.";
-        }
-        else if (typeof time !== "undefined") {
-
-            var pattern = new RegExp(/^[0-9]{2}:[0-9]{2} (AM|PM)$/);
-            if (!pattern.test(time)) {
-                isValid = false;
-                err["time"] = "Please enter valid time.(sample : 08:00 AM)";
-            }
+            err["time"] = "Please select time.";
         }
 
-        if (!location) {
+        if (!plates) {
             isValid = false;
-            err["location"] = "Please enter location.";
+            err["plates"] = "Please enter plates.";
         }
 
-        if (!purpose) {
+        if (!receiver) {
             isValid = false;
-            err["purpose"] = "Please enter purpose.";
-        }
-
-        if (!description) {
-            isValid = false;
-            err["description"] = "Please enter description.";
+            err["receiver"] = "Please select receiver.";
         }
 
         setValidation(err)
@@ -167,7 +122,7 @@ function EditFoodRequest(props) {
                     <div class="page-header page-header-light">
                         <div class="page-header-content header-elements-md-inline" style={{ height: "55px" }}>
                             <div class="page-title d-flex">
-                                <h4><span class="font-weight-semibold">Edit Event </span></h4>
+                                <h4><span class="font-weight-semibold">Edit Food Request </span></h4>
                                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
                             </div>
 
@@ -178,7 +133,7 @@ function EditFoodRequest(props) {
                             <div class="d-flex">
                                 <div class="breadcrumb">
                                     <a href="/admin" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>Dashboard</a>
-                                    <a href="#" class="breadcrumb-item">Edit Event</a>
+                                    <a href="#" class="breadcrumb-item">Edit Food Request</a>
 
                                 </div>
 
@@ -200,18 +155,9 @@ function EditFoodRequest(props) {
                                     </div>
 
                                     <div class="card-body">
-                                        <form onSubmit={editevent} onReset={reset}>
+                                        <form onSubmit={editfoodrequest} onReset={reset}>
                                             <input type="hidden" name="id" value={id} />
 
-
-                                            <div class="form-group row">
-                                                <label class="col-form-label col-lg-2">Title <span class="text-danger">*</span></label>
-                                                <div class="col-lg-9">
-                                                    <input class="form-control" type="title" name="title"
-                                                        value={title} onChange={(e) => setTitle(e.target.value)} />
-                                                    <div className="validation-invalid-label">{validation["title"]}</div>
-                                                </div>
-                                            </div>
 
                                             <div class="form-group row">
                                                 <label class="col-form-label col-lg-2">Date <span class="text-danger">*</span></label>
@@ -225,48 +171,44 @@ function EditFoodRequest(props) {
                                             <div class="form-group row">
                                                 <label class="col-form-label col-lg-2">Time <span class="text-danger">*</span></label>
                                                 <div class="col-lg-9">
-                                                    <input class="form-control" type="text" name="time"
-                                                        value={time} onChange={(e) => setTime(e.target.value)} />
+                                                    <select name="time" class="form-control" required=""
+                                                        value={time} onChange={(e) => { setTime(e.target.value) }}>
+                                                        <option value="">Choose Time....</option>
+                                                        <optgroup label="Times">
+                                                            <option value="Morning">Morning</option>
+                                                            <option value="Noon">Noon</option>
+                                                            <option value="Night">Night</option>\
+                                                        </optgroup>
+
+                                                    </select>
                                                     <div className="validation-invalid-label">{validation["time"]}</div>
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
-                                                <label class="col-form-label col-lg-2">Location <span class="text-danger">*</span></label>
+                                                <label class="col-form-label col-lg-2">Plates <span class="text-danger">*</span></label>
                                                 <div class="col-lg-9">
-                                                    <input class="form-control" type="text" name="location"
-                                                        value={location} onChange={(e) => setLocation(e.target.value)} />
-                                                    <div className="validation-invalid-label">{validation["location"]}</div>
+                                                    <input class="form-control" type="number" name="plates"
+                                                        value={plates} onChange={(e) => setPlates(e.target.value)} />
+                                                    <div className="validation-invalid-label">{validation["plates"]}</div>
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
-                                                <label class="col-form-label col-lg-2">Purpose <span class="text-danger">*</span></label>
+                                                <label class="col-form-label col-lg-2">Receiver <span class="text-danger">*</span></label>
                                                 <div class="col-lg-9">
-                                                    <input class="form-control" type="text" name="purpose"
-                                                        value={purpose} onChange={(e) => setPurpose(e.target.value)} />
-                                                    <div className="validation-invalid-label">{validation["purpose"]}</div>
+                                                    <select name="receiver" class="form-control" required=""
+                                                        value={receiver} onChange={(e) => { setReceiver(e.target.value) }}>
+                                                        <option value="">Choose Receiver....</option>
+                                                        <optgroup label="Receivers">
+                                                            {receivers}
+                                                        </optgroup>
+
+                                                    </select>
+                                                    <div className="validation-invalid-label">{validation["receiver"]}</div>
                                                 </div>
                                             </div>
 
-                                            <div class="form-group row">
-                                                <label class="col-form-label col-lg-2">Description <span class="text-danger">*</span></label>
-                                                <div class="col-lg-9">
-                                                    <textarea rows="3" name="description" cols="3" class="form-control" placeholder="Enter Description" aria-invalid="true"
-                                                        value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-                                                    <div className="validation-invalid-label">{validation["description"]}</div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <label class="col-form-label col-lg-2">Image<span class="text-danger">*</span></label>
-                                                <div class="col-lg-9">
-                                                    <input type="file" class="form-control h-auto" name="image" id="image"
-                                                        onChange={onFileChange} />
-                                                    <div className="validation-invalid-label">{validation["image"]}</div>
-                                                    {img}
-                                                </div>
-                                            </div>
 
                                             <div class="form-group row mb-0">
                                                 <div class="col-lg-10 ml-lg-auto">
