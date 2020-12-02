@@ -26,8 +26,8 @@ function Sidebar(proprs) {
 								<a href="#" class="nav-link"><i class="icon-people"></i> <span>Receiver Management</span></a>
 
 								<ul class="nav nav-group-sub" data-submenu-title="Receiver Management">
-									<li class="nav-item"><a href="index.html" class="nav-link">Receiver List</a></li>
-									<li class="nav-item"><a href="index.html" class="nav-link">Add new Receiver</a></li>
+									<li class="nav-item"><a href="/volunteer/receiverlist" class="nav-link">Receiver List</a></li>
+									<li class="nav-item"><a href="/volunteer/addreceiver" class="nav-link">Add new Receiver</a></li>
 									
 								</ul>
 							</li>

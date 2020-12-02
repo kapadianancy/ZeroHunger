@@ -10,6 +10,7 @@ import { PortfolioProvider } from './Context/PortfolioContext';
 import { LandmarkProvider } from './Context/LandmarkContext';
 import { ReceiverCategoryProvider } from './Context/ReceiverCategory';
 import { EventProvider } from './Context/EventContext';
+import {ReceiverProvider} from './Context/ReceiverContext';
 //localStorage.clear();
 ReactDOM.render(
   <React.StrictMode>
@@ -19,7 +20,9 @@ ReactDOM.render(
           <PortfolioProvider>
             <EventProvider>
               <ReceiverCategoryProvider>
+                <ReceiverProvider>
                 <App />
+                </ReceiverProvider>
               </ReceiverCategoryProvider>
             </EventProvider>
           </PortfolioProvider>

@@ -44,6 +44,12 @@ landmarkSchema.virtual('User', {
     foreignField: 'landmark_id'
 })
 
+landmarkSchema.virtual('Receiver', {
+    ref: 'Receiver',
+    localField: '_id',
+    foreignField: 'landmark_id'
+})
+
 
 const Landmark = mongoose.model("Landmark", landmarkSchema);
 

@@ -75,12 +75,6 @@ UserSchema.virtual('Donor', {
     foreignField: 'user_id'
 })
 
-UserSchema.virtual('Receiver', {
-    ref: 'Receiver',
-    localField: '_id',
-    foreignField: 'user_id'
-})
-
 UserSchema.virtual('Volunteer', {
     ref: 'Volunteer',
     localField: '_id',
