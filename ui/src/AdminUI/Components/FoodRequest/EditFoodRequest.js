@@ -21,10 +21,9 @@ function EditFoodRequest(props) {
     var [receiver, setReceiver] = useState("");
     var [validation, setValidation] = useState("");
     var [id, setId] = useState(props.match.params.id);
-    var [valid, setValid] = useState(true);
 
     var receiverDispatch=useReceiverDispatch();
-    var{error,receiver}=useReceiverState();
+    var{receivers}=useReceiverState();
 
     useEffect(async () => {
         await actions.getFoodRequestById(foodrequestDispatch, id);
@@ -33,7 +32,7 @@ function EditFoodRequest(props) {
     
     useEffect(async()=>
     {
-      //  await ractions.getAllReceiver(receiverDispatch);
+       await ractions.getAllReceivers(receiverDispatch);
     },[])
 
     useEffect(async () => {
@@ -47,16 +46,15 @@ function EditFoodRequest(props) {
             setDate(d)
             setTime(foodrequest.time)
             setPlates(foodrequest.plates)
-            setReceiver(foodrequest.receiver_id)
+            setReceiver(foodrequest.receiver_id._id)
 
         }
     }, [foodrequest])
 
-    var receivers="";
-    // var receivers = receiver.map(r => {
-    //     receivers = (<option value={r._id}>{r.name}</option>)
-    //     return receivers;
-    // })
+    var receivers = receivers.map(r => {
+        receivers = (<option value={r._id}>{r.name}</option>)
+        return receivers;
+    })
 
 
     const reset = () => {
@@ -72,13 +70,14 @@ function EditFoodRequest(props) {
     const editfoodrequest = async (event) => {
         event.preventDefault();
         if (await validate()) {
-            const data = new FormData()
-            data.append('date', date)
-            data.append('time', time)
-            data.append('plates', plates)
-            data.append('receiver_id', receiver)
+            let data = {
+                date,
+                time,
+                plates,
+                receiver_id:receiver
+             }
             await actions.updateFoodRequest(foodrequestDispatch, id, data);
-            props.history.push('/admin/foodrequest')
+            props.history.push('/admin/foodrequestlist')
         }
     }
 

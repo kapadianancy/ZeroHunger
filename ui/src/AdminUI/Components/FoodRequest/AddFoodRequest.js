@@ -22,7 +22,7 @@ function AddFoodRequest(props) {
     var [validation, setValidation] = useState("");
 
     var receiverDispatch=useReceiverDispatch();
-    var{error,receiver}=useReceiverState();
+    var{receivers}=useReceiverState();
 
     useEffect(() => {
         if (foodrequest != null) {
@@ -32,7 +32,7 @@ function AddFoodRequest(props) {
 
     useEffect(async()=>
     {
-      //  await ractions.getAllReceiver(receiverDispatch);
+        await ractions.getAllReceivers(receiverDispatch);
     },[])
 
     const reset = () => {
@@ -48,21 +48,20 @@ function AddFoodRequest(props) {
     const addfoodrequest = async (event) => {
         event.preventDefault();
         if (await validate()) {
-            const data = new FormData()
-            data.append('date', date)
-            data.append('time', time)
-            data.append('plates', plates)
-            data.append('receiver_id', receiver)
-
-            await actions.addFoodRequest(data, foodrequestDispatch);
+            let data = {
+               date,
+               time,
+               plates,
+               receiver_id:receiver
+            }
+            await actions.addFoodRequest(data,foodrequestDispatch);
         }
     }
 
-var receivers="";
-    // var receivers = receiver.map(r => {
-    //     receivers = (<option value={r._id}>{r.name}</option>)
-    //     return receivers;
-    // })
+    var receivers = receivers.map(r => {
+        receivers = (<option value={r._id}>{r.name}</option>)
+        return receivers;
+    })
 
     const validate = () => {
         let err = {};

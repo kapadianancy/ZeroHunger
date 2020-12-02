@@ -30,7 +30,7 @@ export const addFoodRequest=async(foodrequest,foodrequestDispatch)=>
             foodrequestDispatch({
                 type: ActionNames.ADD_FOOD_REQUEST,
                 data: {
-                    foodrequest: JSON.stringify(response.data)
+                    foodrequest: response.data
                 }
             });
         }).catch(error => {
