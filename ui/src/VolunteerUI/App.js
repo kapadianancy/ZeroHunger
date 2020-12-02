@@ -11,6 +11,7 @@ import PortfolioList from './Components/Portfolio/PortfolioList';
 import AddPortfolio from './Components/Portfolio/AddPortfolio';
 import EditPortfolio from './Components/Portfolio/EditPortfolio';
 import AddReceiver from './Components/Receiver/AddReceiver'
+import EditReceiver from './Components/Receiver/EditReceiver'
 
 import {useUserState} from '../Context/UserContext';
 import ReceiverList from './Components/Receiver/ReceiverList';
@@ -44,6 +45,7 @@ function App(props) {
 
         <Route path="/volunteer/addreceiver" exact component={AddReceiver} /> 
         <Route path="/volunteer/receiverlist" exact component={ReceiverList} /> 
+        <Route path="/volunteer/editreceiver/:id" exact component={EditReceiver} /> 
       </Switch>
      
     </>

@@ -27,17 +27,20 @@ exports.addReceiver=async(req,res)=>
 exports.getAll = async (req, res) => {
     try {
         receiver.find({is_deleted:false})
-        .populate("user_id")
+        .populate("category_id")
+        .populate("landmark_id")
         .exec((err,v)=>
         {
-            if(err)
-            {
-                return res.status(400).send(err);
-            }
-            else
-            {
-                return res.status(200).send(v)
-            }
+            
+                if(err)
+                {
+                    return res.status(400).send(err);
+                }
+                else
+                {
+                    return res.status(200).send(v)
+                }
+          
         })
         
 
@@ -45,6 +48,32 @@ exports.getAll = async (req, res) => {
         return res.status(400).send("bad request");
     }
 }
+
+exports.getById = async (req, res) => {
+    try {
+        receiver.findOne({is_deleted:false,_id:req.params.id})
+        .populate("category_id")
+        .populate("landmark_id")
+        .exec((err,v)=>
+        {
+            
+                if(err)
+                {
+                    return res.status(400).send(err);
+                }
+                else
+                {
+                    return res.status(200).send(v)
+                }
+          
+        })
+        
+
+    } catch (err) {
+        return res.status(400).send("bad request");
+    }
+}
+
 
 exports.edit = async (req, res) => {
     try {
