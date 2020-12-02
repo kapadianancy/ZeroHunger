@@ -3,11 +3,27 @@ const validator=require("validator");
 
 const receiverSchema=mongoose.Schema({
    
-    user_id:
+    name:
+    {
+        type:String,
+        required:true
+    },
+    phone_number:
+    {
+        type:Number,
+        required:true,
+        minlength:10,
+        maxlength:10
+    },
+    address:{
+        type:String,
+        trim:true
+    },
+    landmark_id:
     {
         type:mongoose.Schema.Types.ObjectId,
         required:true,
-        ref:'User'
+        ref:'Landmark'
     },
     category_id:
     {
@@ -18,6 +34,12 @@ const receiverSchema=mongoose.Schema({
     population:
     {
         type:Number
+    },
+    role_id:
+    {
+        type:mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref:'Role'
     },
     
     is_deleted:

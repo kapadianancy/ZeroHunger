@@ -48,6 +48,14 @@ function EditProfile(props) {
         
                         <div class="card-body">
                             <form action="#">
+
+                            <div class="form-group row">
+									<label class="col-form-label col-lg-2">Name <span class="text-danger">*</span></label>
+									<div class="col-lg-9">
+										<input type="text" name="name" class="form-control" required="" placeholder="enter your name" aria-invalid="true"/>
+                                        <label id="basic-error" class="validation-invalid-label" for="name">This field is required.</label>
+									</div>
+								</div>
                             <div class="form-group row">
 									<label class="col-form-label col-lg-2">Username <span class="text-danger">*</span></label>
 									<div class="col-lg-9">

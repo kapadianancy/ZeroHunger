@@ -1,11 +1,15 @@
 var receiver=require("../models/Receiver");
+const Role = require("../models/Role");
 var User=require('../models/User');
 
 exports.addReceiver=async(req,res)=>
 {
     try
     {
-        const r=new receiver(req.body);
+        var role_id=await Role.findOne({
+            name:req.body.role
+        })
+        const r=new receiver({...req.body,role_id:role_id});
        
         var result=await r.save();
         if(!result)

@@ -9,10 +9,12 @@ import EditProfile from './Components/EditProfile/EditProfile';
 import Logout from './Components/Logout';
 import PortfolioList from './Components/Portfolio/PortfolioList';
 import AddPortfolio from './Components/Portfolio/AddPortfolio';
-
+import EditPortfolio from './Components/Portfolio/EditPortfolio';
+import AddReceiver from './Components/Receiver/AddReceiver'
 
 import {useUserState} from '../Context/UserContext';
-import EditPortfolio from './Components/Portfolio/EditPortfolio';
+import ReceiverList from './Components/Receiver/ReceiverList';
+
 
 
 
@@ -39,6 +41,9 @@ function App(props) {
         <Route path="/volunteer/portfoliolist" exact component={PortfolioList}/>
         <Route path="/volunteer/addportfolio" exact component={AddPortfolio} /> 
         <Route path="/volunteer/editportfolio/:id" exact component={EditPortfolio} /> 
+
+        <Route path="/volunteer/addreceiver" exact component={AddReceiver} /> 
+        <Route path="/volunteer/receiverlist" exact component={ReceiverList} /> 
       </Switch>
      
     </>

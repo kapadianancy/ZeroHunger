@@ -1,0 +1,53 @@
+import React from 'react'
+import  * as ActionNames from '../ActionNames';
+
+var ReceiverStateContext = React.createContext()
+var ReceiverDispatchContext = React.createContext()
+
+function ReceiverReducer(state, action) {
+   
+	switch (action.type) {
+		case ActionNames.ADD_RECEIVER:
+            return{...state,receiver:action.data.receiver,error:null}
+        case ActionNames.ADD_RECEIVER_FAILED:
+            return{...state,error:action.data.error}
+		default: {
+			throw new Error(`Unhandled action type: ${action.type}`)
+		}
+	}
+}
+
+function ReceiverProvider({ children }) {
+	var [state, dispatch] = React.useReducer(ReceiverReducer, {
+        receiver:null,
+        receivers:[],
+        error:null
+	})
+
+	return (
+		<ReceiverStateContext.Provider value={state}>
+			<ReceiverDispatchContext.Provider value={dispatch}>
+				{children}
+			</ReceiverDispatchContext.Provider>
+		</ReceiverStateContext.Provider>
+	)
+}
+
+function useReceiverState() {
+	var context = React.useContext(ReceiverStateContext)
+	if (context === undefined) {
+		throw new Error('useUserState must be used within a UserProvider')
+	}
+	return context
+}
+
+function useReceiverDispatch() {
+	var context = React.useContext(ReceiverDispatchContext)
+	if (context === undefined) {
+		throw new Error('useUserDispatch must be used within a UserProvider')
+	}
+	return context
+}
+
+export { ReceiverProvider,useReceiverDispatch,useReceiverState }
+
