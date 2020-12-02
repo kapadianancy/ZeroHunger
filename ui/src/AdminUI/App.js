@@ -21,6 +21,9 @@ import EditPortfolio from './Components/Portfolio/EditPortfolio';
 import AddEvent from './Components/Event/AddEvent';
 import EventList from './Components/Event/EventList';
 import EditEvent from './Components/Event/EditEvent';
+import AddFoodRequest from './Components/FoodRequest/AddFoodRequest';
+import FoodRequestList from './Components/FoodRequest/FoodRequestList';
+import EditFoodRequest from './Components/FoodRequest/EditFoodRequest';
 
 function App(props) {
 
@@ -35,18 +38,21 @@ function App(props) {
   return (
     <>
 
-      {token == null && content==null ? <Redirect to="/admin/login" /> : null}
+      {token == null && content == null ? <Redirect to="/admin/login" /> : null}
 
       <Switch>
+        <Route path="/admin/addfoodrequest" exact component={AddFoodRequest} />
+        <Route path="/admin/foodrequestlist" exact component={FoodRequestList} />
+        <Route path="/admin/editfoodrequest/:id" exact component={EditFoodRequest} />
         <Route path="/admin/addevent" exact component={AddEvent} />
         <Route path="/admin/eventlist" exact component={EventList} />
         <Route path="/admin/editevent/:id" exact component={EditEvent} />
         <Route path="/admin/addreceivercategory" exact component={AddReceiverCategory} />
         <Route path="/admin/receivercategorylist" exact component={ReceiverCategoryList} />
-        <Route path="/admin/editreceivercategory/:id" exact component={EditReceiverCategory} />  
+        <Route path="/admin/editreceivercategory/:id" exact component={EditReceiverCategory} />
         <Route path="/admin/addportfolio" exact component={AddPortfolio} />
         <Route path="/admin/portfoliolist" exact component={PortfolioList} />
-        <Route path="/admin/editportfolio/:id" exact component={EditPortfolio} />     
+        <Route path="/admin/editportfolio/:id" exact component={EditPortfolio} />
         <Route path="/admin/addlandmark" exact component={AddLandmark} />
         <Route path="/admin/landmarklist" exact component={LandmarkList} />
         <Route path="/admin/editlandmark/:id" exact component={EditLandmark} />

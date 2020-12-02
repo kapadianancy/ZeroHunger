@@ -46,8 +46,8 @@ function Sidebar(proprs) {
 								<a  className="nav-link"><i className="icon-color-sampler"></i> <span>Food Request</span></a>
 
 								<ul className="nav nav-group-sub" data-submenu-title="Food Request">
-									<li className="nav-item"><a href="index.html" className="nav-link">Add Food Request</a></li>
-									<li className="nav-item"><a href="index.html" className="nav-link">List of Food Request</a></li>
+									<li className="nav-item"><a href="/admin/addfoodrequest" className="nav-link">Add Food Request</a></li>
+									<li className="nav-item"><a href="/admin/foodrequestlist" className="nav-link">List of Food Request</a></li>
 								</ul>
 							</li>
 			
