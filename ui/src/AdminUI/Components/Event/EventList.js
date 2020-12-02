@@ -31,14 +31,22 @@ function EventList(props) {
 
     var data = null;
     data = events.map(e => {
-
+        const date = new Date(e.date);
+        var dd = date.getDate();
+        var mm = date.getMonth() + 1;
+        var yyyy = date.getFullYear();
+        
         var image = config.event_image_path + e.banner;
         data = (
             <tr>
                 <td><img src={image} height="50px" width="50px" /></td>
                 <td>{e.title}</td>
-
-                <td colSpan="4" class="text-center">
+                <td>{dd}-{mm}-{yyyy}</td>
+                <td>{e.time}</td>
+                <td>{e.location}</td>
+                <td>{e.purpose}</td>
+                <td>{e.description}</td>
+                <td class="text-center">
                     <div class="list-icons">
                         <div class="dropdown">
                             <a href="#" class="list-icons-item" data-toggle="dropdown">
@@ -115,8 +123,13 @@ function EventList(props) {
                                         <thead>
                                             <tr>
                                                 <th>Image</th>
+                                                <th>Title</th>
+                                                <th>Date</th>
+                                                <th>Time</th>
+                                                <th>Location</th>
+                                                <th>Purpose</th>
                                                 <th>Description</th>
-                                                <th colSpan="4" class="text-center">Actions</th>
+                                                <th class="text-center">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>

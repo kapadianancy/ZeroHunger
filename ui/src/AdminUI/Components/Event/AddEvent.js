@@ -14,6 +14,11 @@ function AddEvent(props) {
     var { error, event } = useEventState();
     var eventDispatch = useEventDispatch();
     var [title, setTitle] = useState("");
+    var [date, setDate] = useState("");
+    var [time, setTime] = useState("");
+    var [location, setLocation] = useState("");
+    var [purpose, setPurpose] = useState("");
+    var [description, setDescription] = useState("");
     var [image, setImage] = useState("");
     var [validation, setValidation] = useState("");
 
@@ -26,6 +31,11 @@ function AddEvent(props) {
     const reset = () => {
         setImage("");
         setTitle("");
+        setDate("");
+        setTime("");
+        setLocation("");
+        setPurpose("");
+        setDescription("");
         setValidation("");
         error = "";
         event = "";
@@ -45,6 +55,11 @@ function AddEvent(props) {
             const data = new FormData()
             data.append('banner', image)
             data.append('title', title)
+            data.append('date', date)
+            data.append('time', time)
+            data.append('location', location)
+            data.append('purpose', purpose)
+            data.append('description', description)
 
             await actions.addEvent(data, eventDispatch);
         }
@@ -57,6 +72,39 @@ function AddEvent(props) {
         if (!title) {
             isValid = false;
             err["title"] = "Please enter title.";
+        }
+
+        if (!date) {
+            isValid = false;
+            err["date"] = "Please enter date.";
+        }
+
+        if (!time) {
+            isValid = false;
+            err["time"] = "Please enter time.";
+        }
+        else if (typeof time !== "undefined") {
+
+            var pattern = new RegExp(/^[0-9]{2}:[0-9]{2} (AM|PM)$/);
+            if (!pattern.test(time)) {
+                isValid = false;
+                err["time"] = "Please enter valid time.(sample : 08:00 AM)";
+            }
+        }
+
+        if (!location) {
+            isValid = false;
+            err["location"] = "Please enter location.";
+        }
+
+        if (!purpose) {
+            isValid = false;
+            err["purpose"] = "Please enter purpose.";
+        }
+
+        if (!description) {
+            isValid = false;
+            err["description"] = "Please enter description.";
         }
 
         if (!image) {
@@ -117,13 +165,58 @@ function AddEvent(props) {
 
                                     <div class="card-body">
                                         <form onSubmit={addevent} onReset={reset}>
-                                            
+
                                             <div class="form-group row">
                                                 <label class="col-form-label col-lg-2">Title <span class="text-danger">*</span></label>
                                                 <div class="col-lg-9">
-                                                    <textarea rows="3" name="title" cols="3" class="form-control" placeholder="Enter Title" aria-invalid="true"
-                                                        value={title} onChange={(e) => setTitle(e.target.value)}></textarea>
+                                                    <input class="form-control" type="title" name="title"
+                                                        value={title} onChange={(e) => setTitle(e.target.value)} />
                                                     <div className="validation-invalid-label">{validation["title"]}</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label class="col-form-label col-lg-2">Date <span class="text-danger">*</span></label>
+                                                <div class="col-lg-9">
+                                                    <input class="form-control" type="date" name="date"
+                                                        value={date} onChange={(e) => setDate(e.target.value)} />
+                                                    <div className="validation-invalid-label">{validation["date"]}</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label class="col-form-label col-lg-2">Time <span class="text-danger">*</span></label>
+                                                <div class="col-lg-9">
+                                                    <input class="form-control" type="text" name="time"
+                                                        value={time} onChange={(e) => setTime(e.target.value)} />
+                                                    <div className="validation-invalid-label">{validation["time"]}</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label class="col-form-label col-lg-2">Location <span class="text-danger">*</span></label>
+                                                <div class="col-lg-9">
+                                                    <input class="form-control" type="text" name="location"
+                                                        value={location} onChange={(e) => setLocation(e.target.value)} />
+                                                    <div className="validation-invalid-label">{validation["location"]}</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label class="col-form-label col-lg-2">Purpose <span class="text-danger">*</span></label>
+                                                <div class="col-lg-9">
+                                                    <input class="form-control" type="text" name="purpose"
+                                                        value={purpose} onChange={(e) => setPurpose(e.target.value)} />
+                                                    <div className="validation-invalid-label">{validation["purpose"]}</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label class="col-form-label col-lg-2">Description <span class="text-danger">*</span></label>
+                                                <div class="col-lg-9">
+                                                    <textarea rows="3" name="description" cols="3" class="form-control" placeholder="Enter Description" aria-invalid="true"
+                                                        value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+                                                    <div className="validation-invalid-label">{validation["description"]}</div>
                                                 </div>
                                             </div>
 

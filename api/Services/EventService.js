@@ -51,11 +51,11 @@ exports.addEvent = async (req, res) => {
 exports.editEvent = async (req, res) => {
     try {
         let event={};
-        if(req.files.image)
+        if(req.files.banner)
         {
             event = {
                 ...req.body,
-                banner:  req.files.image[0].filename  
+                banner:  req.files.banner[0].filename  
             }
         }
         else

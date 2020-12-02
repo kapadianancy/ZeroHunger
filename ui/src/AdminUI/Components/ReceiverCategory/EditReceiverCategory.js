@@ -80,7 +80,7 @@ function EditReceiverCategory(props) {
                             <div class="d-flex">
                                 <div class="breadcrumb">
                                     <a href="/admin" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>Dashboard</a>
-                                    <a href="/admin/editreceivercategory" class="breadcrumb-item">Edit Receiver Category</a>
+                                    <a href="#" class="breadcrumb-item">Edit Receiver Category</a>
 
                                 </div>
 

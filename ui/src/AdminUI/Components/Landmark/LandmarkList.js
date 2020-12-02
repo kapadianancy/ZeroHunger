@@ -16,9 +16,9 @@ function LandmarkList(props) {
         await actions.getAllLandmark(landmarkDispatch);
     }, [])
 
-    
+
     const editLandmark = async (id) => {
-        props.history.push("/admin/editlandmark/"+id);
+        props.history.push("/admin/editlandmark/" + id);
     }
 
     const deleteLandmark = async (id) => {
@@ -57,7 +57,9 @@ function LandmarkList(props) {
         )
         return data;
     })
-
+    const addlandmark = () => {
+        props.history.push("/admin/addlandmark");
+    }
 
     return (
         <>
@@ -96,7 +98,15 @@ function LandmarkList(props) {
                         <div class="row" style={{ marginBottom: "50px" }}>
                             <div class="col-md-12">
                                 <div class="card">
+                                    <div class="card-header header-elements-inline">
+                                        <h5 class="card-title"></h5>
+                                        <div class="header-elements">
+                                            <div class="list-icons">
+                                                <button onClick={addlandmark} class="btn bg-teal-400 ml-3">Add <i class="icon-plus3 ml-2"></i></button>
 
+                                            </div>
+                                        </div>
+                                    </div>
                                     <table class="table datatable-basic table-hover">
                                         <thead>
                                             <tr>
