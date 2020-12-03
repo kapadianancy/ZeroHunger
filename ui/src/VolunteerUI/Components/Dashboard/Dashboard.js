@@ -1,14 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 
 import { Redirect } from 'react-router';
 
+import * as ractions from '../../../Actions/ReceiverAction'
+import {useReceiverDispatch,useReceiverState} from '../../../Context/ReceiverContext';
 
 
 function Dashboard(props) {
 
+    var user=JSON.parse(localStorage.getItem('user'));
+    var receiverDispatch=useReceiverDispatch();
+    var{totalAreawise}=useReceiverState();
+    var[receiver,setReceiver]=useState(null)
+
+    useEffect(async()=>
+    {
+        await ractions.totalAreawiseReceiver(receiverDispatch,user.landmark_id._id);
+        console.log(user.landmark_id._id)
+        setReceiver(totalAreawise)
+        console.log(totalAreawise)
+    },[totalAreawise])
     
     var style = {
         height : "150px"
@@ -50,7 +64,7 @@ function Dashboard(props) {
                         <div class="card bg-indigo-400" style={style}>
                             <div class="card-body">
                                 <div class="d-flex">
-                                    <h3 class="font-weight-semibold mb-0">10</h3>
+                                    <h3 class="font-weight-semibold mb-0">{receiver}</h3>
                                     <div class="list-icons ml-auto"><i class="icon-collaboration mr-3 icon-2x"></i>
                                     </div>
                                 </div>

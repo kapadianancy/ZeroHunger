@@ -70,6 +70,19 @@ exports.getUser = async (req, res) => {
     }
 }
 
+exports.getUserById = async (req, res) => {
+    try {
+       const u=await user.findOne({_id:req.params.id,is_deleted:0}).populate("landmark_id");
+       if(u)
+       {
+          return res.status(200).send(u);
+       }
+       return res.status(400).send("not found");
+
+    } catch (err) {
+        res.status(400).send(err);
+    }
+}
 
 exports.login = async (req, res) => {
     
@@ -82,7 +95,7 @@ exports.login = async (req, res) => {
             username: req.body.username,
             role_id:role_id._id,
             is_deleted: false
-        })
+        }).populate("landmark_id");
         if (u == null) {
             return res.status(401).send("Invalid User");
         }

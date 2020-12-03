@@ -1,3 +1,4 @@
+const Receiver = require("../models/Receiver");
 var receiver=require("../models/Receiver");
 const Role = require("../models/Role");
 var User=require('../models/User');
@@ -123,16 +124,17 @@ exports.totalReceiver=async(req,res)=>
 exports.areaWiseTotal=async(req,res)=>
 {
     try{
-        var total=await User.where({is_deleted:false})
-            .where({role_id:"5fb4b6040281d31dac44564d"}) //role id for receiver
-            .where({landmark_id:"5fb3be57cb07c31f57ab2905"})  //adajan
+        var land_id=req.params.id;
+        var total=await Receiver.where({is_deleted:false})
+            .where({landmark_id:land_id})  //adajan
         .countDocuments();          
-        
+        console.log(total)
         if(total == 0)
         {
-            return res.status(200).send(`no data found`);
+            return res.status(200).send({total:0});
         }
-        return res.status(200).send(`total receiver ${total}`);
+        
+        return res.status(200).send({total:total});
 
     }catch(err)
     {

@@ -91,3 +91,18 @@ export const updateReceiver = async (receiverDispatch, id ,receiver) => {
             throw new Error(error);
         })
 };
+
+export const totalAreawiseReceiver = async (receiverDispatch,id) => {
+    await axios.get('/receiver/areaWiseTotal/'+id)
+        .then(async (response) => {
+            receiverDispatch({
+                type: ActionNames.TOTAL_AREAWSIE_RECEIVER,
+                data: {
+                    total: response.data.total
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
+
