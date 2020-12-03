@@ -1,10 +1,11 @@
 const user = require('../models/User');
 const role = require("../models/Role");
 const util = require('./utils');
-
 const bcrypt = require("bcryptjs");
+
 const nodemailer = require('nodemailer');
 const Role = require('../models/Role');
+const { default: validator } = require('validator');
 
 exports.addUser = async (req, res) => {
     try {
@@ -29,7 +30,7 @@ exports.addRole = async (req, res) => {
         const r = new role(req.body);
 
         var result = await r.save();
-       
+
         if (!result) {
             return res.status(400).send("bad request");
         }
@@ -42,7 +43,7 @@ exports.addRole = async (req, res) => {
 
 exports.edit = async (req, res) => {
     try {
-        await user.findByIdAndUpdate(req.params.id, req.body,{new:true,runValidators:true}, (err) => {
+        await user.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true }, (err) => {
             if (err) {
                 return res.status(400).send(err)
             }
@@ -57,13 +58,12 @@ exports.edit = async (req, res) => {
 
 exports.getUser = async (req, res) => {
     try {
-       var username=req.params.username;
-       const u=await user.findOne({username:username});
-       if(u)
-       {
-          return res.status(200).send(u);
-       }
-       return res.status(400).send("not found");
+        var username = req.params.username;
+        const u = await user.findOne({ username: username });
+        if (u) {
+            return res.status(200).send(u);
+        }
+        return res.status(400).send("not found");
 
     } catch (err) {
         res.status(400).send(err);
@@ -72,12 +72,11 @@ exports.getUser = async (req, res) => {
 
 exports.getUserById = async (req, res) => {
     try {
-       const u=await user.findOne({_id:req.params.id,is_deleted:0}).populate("landmark_id");
-       if(u)
-       {
-          return res.status(200).send(u);
-       }
-       return res.status(400).send("not found");
+        const u = await user.findOne({ _id: req.params.id, is_deleted: 0 }).populate("landmark_id");
+        if (u) {
+            return res.status(200).send(u);
+        }
+        return res.status(400).send("not found");
 
     } catch (err) {
         res.status(400).send(err);
@@ -85,15 +84,15 @@ exports.getUserById = async (req, res) => {
 }
 
 exports.login = async (req, res) => {
-    
+
     try {
-        var role_id=await Role.findOne({
-            name:req.body.role
+        var role_id = await Role.findOne({
+            name: req.body.role
         })
-        
+
         const u = await user.findOne({
             username: req.body.username,
-            role_id:role_id._id,
+            role_id: role_id._id,
             is_deleted: false
         }).populate("landmark_id");
         if (u == null) {
@@ -112,8 +111,6 @@ exports.login = async (req, res) => {
 
 }
 
-
-
 exports.changePassword = async (req, res) => {
     try {
         let validpass = await bcrypt.compare(req.body.oldpass, req.validUser.password)
@@ -121,12 +118,11 @@ exports.changePassword = async (req, res) => {
         if (!validpass) {
             return res.status(401).send("Not Valid Old Password");
         }
-
-        const password = await gethash(req.body.newpass);
+        const password = await util.gethash(req.body.newpass);
 
         const User = await user.findByIdAndUpdate(req.validUser._id, {
             password: password
-        },{new:true,runValidators:true})
+        }, { new: true, runValidators: true })
 
         if (User) {
             return res.status(201).send("Successfully Password Changed");
@@ -142,7 +138,7 @@ exports.changePassword = async (req, res) => {
 
 exports.forgetPassword = async (req, res) => {
     try {
-        const email=req.body.email;
+        const email = req.body.email;
         const u = await user.find({
             email: req.body.email,
             is_deleted: 0
@@ -167,11 +163,11 @@ exports.forgetPassword = async (req, res) => {
 
 exports.updatePassword = async (req, res) => {
     try {
-        const password = await gethash(req.body.newpass);
-    
+        const password = await util.gethash(req.body.newpass);
+
         const User = await user.findByIdAndUpdate(req.params.id, {
             password: password
-        },{new:true,runValidators:true})
+        }, { new: true, runValidators: true })
 
         if (User) {
             return res.status(201).send("Successfully Password Changed");
