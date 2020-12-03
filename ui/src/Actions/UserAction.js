@@ -9,7 +9,7 @@ export const loginAction = async (userDispatch, user) => {
             userDispatch({
                 type: ActionNames.LOGIN,
                 data: {
-                    user: JSON.stringify(response.data.user),
+                    user: response.data.user,
                     token: response.data.token
                 }
             });
@@ -35,7 +35,7 @@ export const getUserById = async (userDispatch, id) => {
             userDispatch({
                 type: ActionNames.GET_USER,
                 data: {
-                    user: response.data
+                    user: response.data.user
                 }
             });
         }).catch(error => {

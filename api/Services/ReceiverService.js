@@ -128,7 +128,7 @@ exports.areaWiseTotal=async(req,res)=>
         var total=await Receiver.where({is_deleted:false})
             .where({landmark_id:land_id})  //adajan
         .countDocuments();          
-        console.log(total)
+       
         if(total == 0)
         {
             return res.status(200).send({total:0});

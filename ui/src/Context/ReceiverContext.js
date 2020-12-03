@@ -20,7 +20,7 @@ function ReceiverReducer(state, action) {
 		case ActionNames.UPDATE_RECEIVER:
 			return{...state,receiver:null}	
 		case ActionNames.TOTAL_AREAWSIE_RECEIVER:
-			return{...state,totalAreawise:action.data.total}
+			return{...state,totalAreawiseReceiver:action.data.total}
 		default: {
 			throw new Error(`Unhandled action type: ${action.type}`)
 		}
@@ -32,7 +32,7 @@ function ReceiverProvider({ children }) {
         receiver:null,
         receivers:[],
 		error:null,
-		totalAreawise:null
+		totalAreawiseReceiver:0
 	})
 
 	return (

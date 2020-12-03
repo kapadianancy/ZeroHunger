@@ -194,27 +194,33 @@ exports.totalMoney = async (req, res) => {
 
 exports.areaWiseTotalRequest = async (req, res) => {
     try {
-        Food_request.find().populate("receiver_id")
+        var total=0;
+        var land_id=req.params.id;
+        Food_request.find({is_deleted:false}).populate("receiver_id")
             .exec((err, data) => {
                 if (err) {
                     return res.status(400).send(err);
                 }
                 else {
+                    console.log(data);
+                    if(data.length==0)
+                    {
+                        return res.status(200).send({total:0,plates:0});
+                    }
                     data.map((d) => {
-                        Receiver.findById(d.receiver_id).populate("user_id").exec(async (err, user) => {
-                            var total = await User.where({ landmark_id: "5fb61f9fc169f922bcff6519" }).count();
-                            if (total == 0) {
-                                return res.status(200).send(`no data found`);
+                            if(d.receiver_id.landmark_id==land_id)
+                            {
+                                total+=1;
                             }
-                            return res.status(200).send(`total area wise food request ${total}`);
-
                         })
-                    });
-                }
+
+                        if (total == 0) {
+                            return res.status(200).send({total:0});
+                        }
+                        return res.status(200).send({total:total});
+                    }
+                
             })
-
-
-
     } catch (err) {
         return res.status(400).send("bad request");
     }
@@ -223,26 +229,62 @@ exports.areaWiseTotalRequest = async (req, res) => {
 
 exports.areaWiseTotalDonation = async (req, res) => {
     try {
-        Food_listing.find().populate("donor_id")
-            .exec((err, data) => {
+        var total=0;
+              
+        var land_id=req.params.id;
+        Food_listing.find({is_deleted:false}).populate("donor_id")
+            .exec(async(err, data) => {
                 if (err) {
                     return res.status(400).send(err);
                 }
                 else {
                     var plates = 0;
-                    data.map((d) => {
-                        Donor.findById(d.donor_id).populate("user_id").exec(async (err, user) => {
-                            var total = await User.where({ landmark_id: "5fb3be57cb07c31f57ab2905" }).count();
-                            if (total == 0) {
-                                return res.status(200).send(`no data found`);
-                            }
-                            else {
-                                plates += d.plates;
-                                return res.status(200).send(`total area wise food donation ${total} and total plates ${plates}`);
-                            }
+                    if(data.length==0)
+                    {
+                        return res.status(200).send({total:0,plates:0});
+                    }
+                    
+                    // data.map(async(d) => {
+                    //      pro1=Donor.findById(d.donor_id).populate("user_id").exec(async (err, user) => {
+                    //         console.log(user.user_id.landmark_id)
+                    //         if(user.user_id.landmark_id==land_id)
+                    //         {
+                    //             total+=1;
+                    //             plates+=d.plates
+                    //             console.log(total)
+                    //         }
+                           
+                    //     })
+                       
+                        
+                    // });
+                    console.log(total)
 
-                        })
-                    });
+                    // let result = await Promise.all(
+                    //     data.map(async(d) => {
+                    //         await Donor.findById(d.donor_id).populate("user_id").exec(async (err, user) => {
+                    //            console.log(user.user_id.landmark_id)
+                    //            if(user.user_id.landmark_id==land_id)
+                    //            {
+                    //                total+=1;
+                    //                plates+=d.plates
+                    //                console.log(total)
+                    //            }
+                               
+                    //            return total;
+                    //        }) 
+                    //         }) ) 
+                   
+                    //         console.log(result)
+                        if (total == 0) {
+                            return res.status(200).send({total:0,plates:0});
+                        }
+                        else {
+                        
+                            return res.status(200).send({total:total,plates:plates});
+                        }
+                    
+
                 }
             })
 
@@ -265,7 +307,7 @@ exports.areaWiseRequest=async(req,res)=>
             }
             else{
                 var userIds=requests.map((r)=>{return r.receiver_id.user_id});
-                User.find({_id: {$in: userIds},landmark_id:"5fb4f93e50a9a41abf1b5e9f"}, async(err, users)=> {
+                User.find({_id: {$in: userIds},landmark_id:"5fb3be57cb07c31f57ab2905"}, async(err, users)=> {
                     if (err) {
                       
                       return res.status(400).send(err);
@@ -306,7 +348,7 @@ exports.areaWiseFoodDonation=async(req,res)=>
             }
             else{
                 var userIds=requests.map((r)=>{return r.donor_id.user_id});
-                User.find({_id: {$in: userIds},landmark_id:"5fb4f93e50a9a41abf1b5e9f"}, async(err, users)=> {
+                User.find({_id: {$in: userIds},landmark_id:"5fb3be57cb07c31f57ab2905"}, async(err, users)=> {
                     if (err) {
                       
                       return res.status(400).send(err);

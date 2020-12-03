@@ -1,6 +1,7 @@
 var volunteer = require('../models/Volunteer');
 var landmarkManager = require('../models/Landmark_manager');
 const User = require('../models/User');
+const Role = require('../models/Role');
 
 exports.signup = async (req, res) => {
     try {
@@ -82,15 +83,19 @@ exports.total=async(req,res)=>
 
 exports.areaWiseTotal = async (req, res) => {
     try {
+        var role_id = await Role.findOne({
+            name: "Volunteer"
+        })
+        var land_id=req.params.id;
         var total = await User.where({ is_deleted: false })
-            .where({ role_id: "5fb3be8ccb07c31f57ab2908" }) //role id for volunteer
-            .where({ landmark_id: "5fb3be57cb07c31f57ab2905" })
+            .where({ role_id: role_id }) //role id for volunteer
+            .where({ landmark_id: land_id})
             .countDocuments();
 
         if (total == 0) {
-            return res.status(200).send(`no data found`);
+            return res.status(200).send({total:0});
         }
-        return res.status(200).send(`total volunteers ${total}`);
+        return res.status(200).send({total:total});
 
     } catch (err) {
         return res.status(400).send("bad request");

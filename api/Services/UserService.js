@@ -74,7 +74,7 @@ exports.getUserById = async (req, res) => {
     try {
         const u = await user.findOne({ _id: req.params.id, is_deleted: 0 }).populate("landmark_id");
         if (u) {
-            return res.status(200).send(u);
+            return res.status(200).send({user:u});
         }
         return res.status(400).send("not found");
 
