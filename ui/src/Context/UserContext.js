@@ -14,9 +14,13 @@ function userReducer(state, action) {
 		case ActionNames.LOGOUT:
 			return { ...state, user: null, token: null, error: null }
 		case ActionNames.GET_USER:
-			return {...state,user:action.data.user}
+			return { ...state, user: action.data.user }
 		case ActionNames.EDIT_PROFILE_ADMIN:
-			return { ...state,user:null }
+			return { ...state, user: null }
+		case ActionNames.CHANGE_PASSWORD:
+			return { ...state, message: action.data.message,error:null }
+		case ActionNames.CHANGE_PASSWORD_FAILED:
+			return { ...state, error: action.data.error,message:null }
 		default: {
 			throw new Error(`Unhandled action type: ${action.type}`)
 		}
@@ -27,7 +31,8 @@ function UserProvider({ children }) {
 	var [state, dispatch] = React.useReducer(userReducer, {
 		token: localStorage.getItem('token') ? localStorage.getItem('token') : null,
 		user: JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')) : null,
-		error: null
+		error: null,
+		message: null
 	})
 
 	return (

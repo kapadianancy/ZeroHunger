@@ -216,7 +216,7 @@ function EditProfile(props) {
 
                                             <div class="form-group row mb-0">
                                                 <div class="col-lg-10 ml-lg-auto">
-                                                    <button type="submit" class="btn btn-light">Cancel</button>
+                                                    <button type="reset" class="btn btn-light">Reset</button>
                                                     <button type="submit" class="btn bg-teal-400 ml-3">Edit <i class="icon-paperplane ml-2"></i></button>
                                                 </div>
                                             </div>

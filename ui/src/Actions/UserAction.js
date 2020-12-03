@@ -61,3 +61,32 @@ export const updateProfileAdmin = async (userDispatch, id, user) => {
             throw new Error(error);
         })
 };
+
+export const changePassword = async (userDispatch, data) => {
+    const token = localStorage.getItem("token");
+    await axios.put('/user/changePassword', data, {
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    }).then(response => {
+        userDispatch({
+            type: ActionNames.CHANGE_PASSWORD,
+            data: {
+                message: "Successfully Changed"
+            }
+
+        });
+    }).catch(error => {
+        let err = "";
+        if(error.message == "Request failed with status code 401")
+        {
+            err = "Not Valid Old Password"
+        }
+        userDispatch({
+            type: ActionNames.CHANGE_PASSWORD_FAILED,
+            data: {
+                error: err
+            }
+        });
+    })
+};
