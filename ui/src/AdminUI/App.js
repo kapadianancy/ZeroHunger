@@ -25,19 +25,20 @@ import AddFoodRequest from './Components/FoodRequest/AddFoodRequest';
 import FoodRequestList from './Components/FoodRequest/FoodRequestList';
 import EditFoodRequest from './Components/FoodRequest/EditFoodRequest';
 
+
 function App(props) {
 
   var { token } = useUserState();
 
   var content = null;
+  console.log(props.location.pathname)
   if (props.location.pathname.startsWith("/admin/forgetpassword")) {
     content = (<Redirect to="/admin/forgetpassword" />
     )
   }
-
+ 
   return (
     <>
-
       {token == null && content == null ? <Redirect to="/admin/login" /> : null}
 
       <Switch>

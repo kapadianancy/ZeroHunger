@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 
@@ -57,7 +57,7 @@ function ChangePassword(props) {
 
         if (newpass != conpass) {
             isValid = false;
-            err["conpass"] = "Old Password And New Password Must be Same";
+            err["conpass"] = "New Password And Confirm Password Must be Same";
         }
 
         setValidation(err)
@@ -109,8 +109,8 @@ function ChangePassword(props) {
                                     </div>
 
                                     <div class="card-body">
-                                        <div style={{ color: "red", fontSize: "18px", paddingTop: "5px" }}>{error}</div>
-                                        <div style={{ color: "green", fontSize: "18px", paddingTop: "5px" }}>{message}</div>
+                                        <div style={{ color: "red", fontSize: "18px", paddingTop: "5px" , textAlign: "center" }}>{error}</div>
+                                        <div style={{ color: "green", fontSize: "18px", paddingTop: "5px" , textAlign: "center" }}>{message}</div>
 
                                         <form onSubmit={changepassword} onReset={reset}>
                                             <div class="form-group row">

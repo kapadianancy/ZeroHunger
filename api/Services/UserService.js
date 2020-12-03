@@ -74,7 +74,7 @@ exports.getUserById = async (req, res) => {
     try {
         const u = await user.findOne({ _id: req.params.id, is_deleted: 0 }).populate("landmark_id");
         if (u) {
-            return res.status(200).send(u);
+            return res.status(200).send({user:u});
         }
         return res.status(400).send("not found");
 
@@ -197,7 +197,7 @@ const sendMail = async function (email) {
         is_deleted: 0
     })
 
-    const path = 'http://localhost:8000/updatePassword/' + u[0]._id
+    const path = 'http://localhost:3000/updatepassword/' + u[0]._id
     let msg = '<html><body><a href=' + path + '>Click Here To Set Your New Password</a></body></htm>'
 
     var mailOptions = {

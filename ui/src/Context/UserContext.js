@@ -18,9 +18,17 @@ function userReducer(state, action) {
 		case ActionNames.EDIT_PROFILE_ADMIN:
 			return { ...state, user: null }
 		case ActionNames.CHANGE_PASSWORD:
-			return { ...state, message: action.data.message,error:null }
+			return { ...state, message: action.data.message, error: null }
 		case ActionNames.CHANGE_PASSWORD_FAILED:
-			return { ...state, error: action.data.error,message:null }
+			return { ...state, error: action.data.error, message: null }
+		case ActionNames.FORGET_PASSWORD:
+			return { ...state, message: action.data.message, error: null }
+		case ActionNames.FORGET_PASSWORD_FAILED:
+			return { ...state, error: action.data.error, message: null }
+		case ActionNames.UPDATE_PASSWORD:
+			return { ...state, message: action.data.message, error: null }
+		case ActionNames.UPDATE_PASSWORD_FAILED:
+			return { ...state, error: action.data.error, message: null }
 		default: {
 			throw new Error(`Unhandled action type: ${action.type}`)
 		}
