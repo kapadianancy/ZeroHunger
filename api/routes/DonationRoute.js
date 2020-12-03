@@ -43,9 +43,9 @@ router.get('/total',Donation.total);
 
 router.get('/totalMoney',Donation.totalMoney);
 
-router.get('/areaWiseTotalRequest',Donation.areaWiseTotalRequest);
+router.get('/areaWiseTotalRequest/:id',Donation.areaWiseTotalRequest);
 
-router.get('/areaWiseTotalDonation',Donation.areaWiseTotalDonation);
+router.get('/areaWiseTotalDonation/:id',Donation.areaWiseTotalDonation);
 
 router.get('/areaWiseRequest',auth,Donation.areaWiseRequest);
 

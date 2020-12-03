@@ -19,6 +19,8 @@ function ReceiverReducer(state, action) {
 			return{...state,receiver:action.data.receiver}
 		case ActionNames.UPDATE_RECEIVER:
 			return{...state,receiver:null}	
+		case ActionNames.TOTAL_AREAWSIE_RECEIVER:
+			return{...state,totalAreawiseReceiver:action.data.total}
 		default: {
 			throw new Error(`Unhandled action type: ${action.type}`)
 		}
@@ -29,7 +31,8 @@ function ReceiverProvider({ children }) {
 	var [state, dispatch] = React.useReducer(ReceiverReducer, {
         receiver:null,
         receivers:[],
-        error:null
+		error:null,
+		totalAreawiseReceiver:0
 	})
 
 	return (

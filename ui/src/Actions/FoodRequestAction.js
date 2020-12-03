@@ -95,3 +95,19 @@ export const removeFoodRequest = async (foodrequestDispatch, id) => {
             throw new Error(error);
         })
 };
+
+
+export const totalAreawiseFoodRequest = async (foodrequestDispatch,id) => {
+    await axios.get('/donation/areaWiseTotalRequest/'+id)
+        .then(async (response) => {
+            
+            foodrequestDispatch({
+                type: ActionNames.TOTAL_AREAWSIE_FOODREQUEST,
+                data: {
+                    total: response.data.total
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};

@@ -19,6 +19,8 @@ function FoodRequestReducer(state, action) {
 			return { ...state, foodrequest: null }
 		case ActionNames.REMOVE_FOOD_REQUEST:
 			return { ...state, foodrequest: null }
+		case ActionNames.TOTAL_AREAWSIE_FOODREQUEST:
+			return{...state,totalAreaWiseFoodRequest:action.data.total}
 		default: {
 			throw new Error(`Unhandled action type: ${action.type}`)
 		}
@@ -29,7 +31,8 @@ function FoodRequestProvider({ children }) {
 	var [state, dispatch] = React.useReducer(FoodRequestReducer, {
 		foodrequests: [],
 		foodrequest: null,
-		error: null
+		error: null,
+		totalAreaWiseFoodRequest:0
 	})
 
 	return (

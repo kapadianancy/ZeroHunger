@@ -35,7 +35,7 @@ export const getUserById = async (userDispatch, id) => {
             userDispatch({
                 type: ActionNames.GET_USER,
                 data: {
-                    user: response.data
+                    user: response.data.user
                 }
             });
         }).catch(error => {

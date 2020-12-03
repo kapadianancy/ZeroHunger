@@ -1,14 +1,66 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 
 import { Redirect } from 'react-router';
 
+import * as ractions from '../../../Actions/ReceiverAction'
+import * as uactions from '../../../Actions/UserAction'
+import * as vactions from '../../../Actions/VolunteerAction'
+import * as factions from '../../../Actions/FoodRequestAction'
 
+import {useReceiverDispatch,useReceiverState} from '../../../Context/ReceiverContext';
+import {useUserDispatch,useUserState} from '../../../Context/UserContext';
+import {useVolunteerDispatch,useVolunteerState} from '../../../Context/VolunteerContext';
+import {useFoodRequestDispatch,useFoodRequestState} from '../../../Context/FoodRequestContext';
 
 function Dashboard(props) {
 
+    var loggedin=JSON.parse(localStorage.getItem('user'));
+    var userdispatch=useUserDispatch();
+    var{user}=useUserState();
+   
+    var receiverDispatch=useReceiverDispatch();
+    var{totalAreawiseReceiver}=useReceiverState();
+
+    var volunteerDispatch=useVolunteerDispatch();
+    var{totalAreaWiseVolunteer}=useVolunteerState();
+
+    var foodRequestDispatch=useFoodRequestDispatch();
+    var{totalAreaWiseFoodRequest}=useFoodRequestState();
+
+    var[u,setU]=useState(null)
+    var[receiver,setReceiver]=useState(null);
+    var[volunteer,setVolunteer]=useState(null);
+    var[foodRequest,setFoodRequest]=useState(null);
+
+    useEffect(async()=>
+    {
+       
+        await uactions.getUserById(userdispatch,loggedin._id)
+        
+        
+    },[user])
+
+    useEffect(async()=>
+    {
+        await ractions.totalAreawiseReceiver(receiverDispatch,user.landmark_id._id);
+        
+        await vactions.totalAreawiseVolunteer(volunteerDispatch,user.landmark_id._id);
+
+        await factions.totalAreawiseFoodRequest(foodRequestDispatch,user.landmark_id._id)
+
+
+        setReceiver(totalAreawiseReceiver);
+        setVolunteer(totalAreaWiseVolunteer);
+        setFoodRequest(totalAreaWiseFoodRequest)
+
+    },[totalAreawiseReceiver,totalAreaWiseVolunteer,totalAreaWiseFoodRequest])
+
+  
+
+    
     
     var style = {
         height : "150px"
@@ -50,7 +102,7 @@ function Dashboard(props) {
                         <div class="card bg-indigo-400" style={style}>
                             <div class="card-body">
                                 <div class="d-flex">
-                                    <h3 class="font-weight-semibold mb-0">10</h3>
+                                    <h3 class="font-weight-semibold mb-0">{receiver}</h3>
                                     <div class="list-icons ml-auto"><i class="icon-collaboration mr-3 icon-2x"></i>
                                     </div>
                                 </div>
@@ -65,7 +117,7 @@ function Dashboard(props) {
                         <div class="card bg-pink-400" style={style}>
                             <div class="card-body">
                                 <div class="d-flex">
-                                    <h3 class="font-weight-semibold mb-0">35</h3>
+                                    <h3 class="font-weight-semibold mb-0">{volunteer}</h3>
                                     <div class="list-icons ml-auto"><i class="icon-users mr-3 icon-2x"></i>
                                     </div>
                                 </div>
@@ -82,7 +134,7 @@ function Dashboard(props) {
                         <div class="card bg-green-600" style={style}>
                             <div class="card-body">
                                 <div class="d-flex">
-                                    <h3 class="font-weight-semibold mb-0">15 </h3>
+                                    <h3 class="font-weight-semibold mb-0">{foodRequest} </h3>
                                     <div class="list-icons ml-auto"><i class="icon-store mr-3 icon-2x"></i>
                                     </div>
                                 </div>
@@ -101,7 +153,7 @@ function Dashboard(props) {
                         <div class="card bg-primary-600"  style={style}>
                             <div class="card-body">
                                 <div class="d-flex">
-                                    <h3 class="font-weight-semibold mb-0">12</h3>
+                                    <h3 class="font-weight-semibold mb-0">0</h3>
                                     <div class="list-icons ml-auto"><i class="icon-coffee mr-3 icon-2x"></i>
                                     </div>
                                 </div>
