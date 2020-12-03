@@ -6,23 +6,30 @@ import Sidebar from '../Sidebar/Sidebar';
 import { Redirect } from 'react-router';
 
 import * as ractions from '../../../Actions/ReceiverAction'
+import * as uactions from '../../../Actions/UserAction'
 import {useReceiverDispatch,useReceiverState} from '../../../Context/ReceiverContext';
-
+import {useUserDispatch,useUserState} from '../../../Context/UserContext';
 
 function Dashboard(props) {
 
-    var user=JSON.parse(localStorage.getItem('user'));
+    var loggedin=JSON.parse(localStorage.getItem('user'));
+    var userdispatch=useUserDispatch();
+    var{user}=useUserState();
     var receiverDispatch=useReceiverDispatch();
     var{totalAreawise}=useReceiverState();
     var[receiver,setReceiver]=useState(null)
 
     useEffect(async()=>
     {
+        await uactions.getUserById(userdispatch,loggedin._id)
+        
+    },[user])
+
+    useEffect(async()=>
+    {
         await ractions.totalAreawiseReceiver(receiverDispatch,user.landmark_id._id);
-        console.log(user.landmark_id._id)
-        setReceiver(totalAreawise)
-        console.log(totalAreawise)
-    },[totalAreawise])
+        setReceiver(totalAreawise);
+    })
     
     var style = {
         height : "150px"
