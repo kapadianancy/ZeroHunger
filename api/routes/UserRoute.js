@@ -9,6 +9,8 @@ router.post("/addRole",user.addRole);
 
 //get single user by username
 router.get('/get/:username',user.getUser)
+//get single user by id
+router.get('/getUserById/:id',auth,user.getUserById)
 
 //adduser
 router.post("/add",user.addUser);

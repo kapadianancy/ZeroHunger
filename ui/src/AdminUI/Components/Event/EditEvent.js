@@ -31,8 +31,6 @@ function EditEvent(props) {
     }, [])
 
     useEffect(async () => {
-
-
         if (event != null) {
             var i = <img src={config.event_image_path + event.banner} style={{ height: "166px", width: "304px" }} />;
             const date = new Date(event.date);

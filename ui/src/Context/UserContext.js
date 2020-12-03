@@ -1,18 +1,22 @@
 import React from 'react'
-import  * as ActionNames from '../ActionNames';
+import * as ActionNames from '../ActionNames';
 
 var UserStateContext = React.createContext()
 var UserDispatchContext = React.createContext()
 
 function userReducer(state, action) {
-   
+
 	switch (action.type) {
-		case ActionNames.LOGIN:           
-			return { ...state, user:action.data.user, token:action.data.token,error:null}
+		case ActionNames.LOGIN:
+			return { ...state, user: action.data.user, token: action.data.token, error: null }
 		case ActionNames.LOGIN_FAILED:
-			return{...state,error:action.data.error}
+			return { ...state, error: action.data.error }
 		case ActionNames.LOGOUT:
-			return {...state,user:null,token:null,error:null}
+			return { ...state, user: null, token: null, error: null }
+		case ActionNames.GET_USER:
+			return {...state,user:action.data.user}
+		case ActionNames.EDIT_PROFILE_ADMIN:
+			return { ...state,user:null }
 		default: {
 			throw new Error(`Unhandled action type: ${action.type}`)
 		}
@@ -21,9 +25,9 @@ function userReducer(state, action) {
 
 function UserProvider({ children }) {
 	var [state, dispatch] = React.useReducer(userReducer, {
-		token: localStorage.getItem('token')?localStorage.getItem('token'):null,
-		user: JSON.parse(localStorage.getItem('user'))?JSON.parse(localStorage.getItem('user')):null,
-		error:null
+		token: localStorage.getItem('token') ? localStorage.getItem('token') : null,
+		user: JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')) : null,
+		error: null
 	})
 
 	return (
