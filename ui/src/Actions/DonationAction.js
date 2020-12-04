@@ -1,12 +1,11 @@
 import * as ActionNames from '../ActionNames';
 import axios from '../axios';
 
-export const totalAreawiseVolunteer = async (volunteerDispatch,id) => {
-    await axios.get('/volunteer/areaWiseTotal/'+id)
+export const totalMoneyDonation = async (donationDispatch) => {
+    await axios.get('/donation/totalMoney')
         .then(async (response) => {
-            //console.log(response)
-            volunteerDispatch({
-                type: ActionNames.TOTAL_AREAWSIE_VOLUNTEER,
+            donationDispatch({
+                type: ActionNames.TOTAL_MONEY_DONATION,
                 data: {
                     total: response.data.total
                 }
@@ -16,11 +15,11 @@ export const totalAreawiseVolunteer = async (volunteerDispatch,id) => {
         })
 };
 
-export const totalVolunteer = async (volunteerDispatch) => {
-    await axios.get('/volunteer/total/')
+export const totalFoodDonation = async (donationDispatch) => {
+    await axios.get('/donation/totalFood')
         .then(async (response) => {
-            volunteerDispatch({
-                type: ActionNames.TOTAL_VOLUNTEER,
+            donationDispatch({
+                type: ActionNames.TOTAL_FOOD_DONATION,
                 data: {
                     total: response.data.total
                 }

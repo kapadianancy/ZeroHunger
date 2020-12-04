@@ -111,9 +111,9 @@ exports.totalReceiver=async(req,res)=>
         
         if(total == 0)
         {
-            return res.status(200).send(`no data found`);
+            return res.status(200).send({total:0});
         }
-        return res.status(200).send(`total receivers ${total}`);
+        return res.status(200).send({total});
 
     }catch(err)
     {

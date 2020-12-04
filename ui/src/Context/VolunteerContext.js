@@ -7,9 +7,10 @@ var VolunteerDispatchContext = React.createContext()
 function VolunteerReducer(state, action) {
 
 	switch (action.type) {
-        case ActionNames.TOTAL_AREAWSIE_VOLUNTEER:
-            return{...state,totalAreaWiseVolunteer:action.data.total}
-		
+		case ActionNames.TOTAL_AREAWSIE_VOLUNTEER:
+			return { ...state, totalAreaWiseVolunteer: action.data.total }
+		case ActionNames.TOTAL_VOLUNTEER:
+			return { ...state, totalVolunteer: action.data.total }
 		default: {
 			throw new Error(`Unhandled action type: ${action.type}`)
 		}
@@ -18,7 +19,8 @@ function VolunteerReducer(state, action) {
 
 function VolunteerProvider({ children }) {
 	var [state, dispatch] = React.useReducer(VolunteerReducer, {
-		totalAreaWiseVolunteer:0
+		totalAreaWiseVolunteer: 0,
+		totalVolunteer: 0
 	})
 
 	return (

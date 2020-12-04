@@ -13,6 +13,8 @@ import { EventProvider } from './Context/EventContext';
 import { ReceiverProvider } from './Context/ReceiverContext';
 import { FoodRequestProvider } from './Context/FoodRequestContext';
 import { VolunteerProvider } from './Context/VolunteerContext';
+import { DonorProvider } from './Context/DonorContext';
+import { DonationProvider } from './Context/DonationContext';
 //localStorage.clear();
 ReactDOM.render(
   <React.StrictMode>
@@ -25,7 +27,11 @@ ReactDOM.render(
                 <ReceiverProvider>
                   <FoodRequestProvider>
                     <VolunteerProvider>
-                    <App />
+                      <DonorProvider>
+                        <DonationProvider>
+                          <App />
+                        </DonationProvider>
+                      </DonorProvider>
                     </VolunteerProvider>
                   </FoodRequestProvider>
                 </ReceiverProvider>

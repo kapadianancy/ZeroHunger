@@ -101,9 +101,9 @@ exports.totalDonor=async(req,res)=>
         
         if(total == 0)
         {
-            return res.status(200).send(`no data found`);
+            return res.status(200).send({total:0});
         }
-        return res.status(200).send(`total donors ${total}`);
+        return res.status(200).send({total});
 
     }catch(err)
     {

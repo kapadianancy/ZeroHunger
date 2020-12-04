@@ -101,9 +101,9 @@ exports.total = async (req, res) => {
         var total = await CharityEvent.where({ is_deleted: false }).count();
 
         if (total == 0) {
-            return res.status(200).send(`no data found`);
+            return res.status(200).send({total:0});
         }
-        return res.status(200).send(`total events ${total}`);
+        return res.status(200).send({total});
 
     } catch (err) {
         return res.status(400).send("bad request");

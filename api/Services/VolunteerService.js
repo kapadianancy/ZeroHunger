@@ -72,9 +72,9 @@ exports.total=async(req,res)=>
         
         if(total == 0)
         {
-            return res.status(200).send(`no data found`);
+            return res.status(200).send({total:0});
         }
-        return res.status(200).send(`total volunteers ${total}`);
+        return res.status(200).send({total});
 
     } catch (err) {
         return res.status(400).send("bad request");
@@ -166,3 +166,4 @@ exports.areaWise=async(req,res)=>
         return res.status(400).send("bad request");
     }
 }
+

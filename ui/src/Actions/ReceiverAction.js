@@ -106,3 +106,16 @@ export const totalAreawiseReceiver = async (receiverDispatch,id) => {
         })
 };
 
+export const totalReceiver = async (receiverDispatch) => {
+    await axios.get('/receiver/total/')
+        .then(async (response) => {
+            receiverDispatch({
+                type: ActionNames.TOTAL_RECEIVER,
+                data: {
+                    total: response.data.total
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};

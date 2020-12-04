@@ -39,7 +39,7 @@ router.put('/editFoodRequest/:id',auth,Donation.editFoodRequest)
 router.delete('/deleteFoodRequest/:id',auth,Donation.deleteFoodRequest)
 
 //total food donation
-router.get('/total',Donation.total);
+router.get('/totalFood',Donation.totalFood);
 
 router.get('/totalMoney',Donation.totalMoney);
 

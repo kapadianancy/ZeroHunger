@@ -96,3 +96,17 @@ export const removeEvent = async (eventDispatch, id) => {
             throw new Error(error);
         })
 };
+
+export const totalEvent = async (eventDispatch) => {
+    await axios.get('/event/total')
+        .then(async (response) => {
+            eventDispatch({
+                type: ActionNames.TOTAL_EVENT,
+                data: {
+                    total: response.data.total
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};

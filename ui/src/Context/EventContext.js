@@ -19,6 +19,8 @@ function EventReducer(state, action) {
 			return { ...state, event: null }
 		case ActionNames.REMOVE_EVENT:
 			return { ...state, event: null }
+		case ActionNames.TOTAL_EVENT:
+			return { ...state, totalEvent: action.data.total }
 		default: {
 			throw new Error(`Unhandled action type: ${action.type}`)
 		}
@@ -29,7 +31,8 @@ function EventProvider({ children }) {
 	var [state, dispatch] = React.useReducer(EventReducer, {
 		events: [],
 		event: null,
-		error: null
+		error: null,
+		totalEvent: 0
 	})
 
 	return (
