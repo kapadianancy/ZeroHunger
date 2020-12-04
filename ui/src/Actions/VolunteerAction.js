@@ -29,3 +29,43 @@ export const totalVolunteer = async (volunteerDispatch) => {
             throw new Error(error);
         })
 };
+
+export const getVolunteerById = async (volunteerDispatch, id) => {
+    const token = localStorage.getItem("token");
+    await axios.get('/volunteer/getVolunteerById/' + id, {
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    })
+        .then(async (response) => {
+            volunteerDispatch({
+                type: ActionNames.GET_VOLUNTEER,
+                data: {
+                    volunteer: response.data.volunteer
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
+
+
+export const editVolunteer = async (volunteerDispatch, id ,volunteer) => {
+    const token = localStorage.getItem("token");
+    await axios.put('/volunteer/edit/' + id, volunteer,{
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    })
+        .then(async (response) => {
+            volunteerDispatch({
+                type: ActionNames.UPDATE_VOLUNTEER,
+                data: {
+                    volunteer: response.data
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
+

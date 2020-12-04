@@ -37,24 +37,31 @@ function Dashboard(props) {
 
     useEffect(async()=>
     {
-       
+       if(loggedin!=null)
+       {
         await uactions.getUserById(userdispatch,loggedin._id)
+       }
+       
         
         
     },[user])
 
     useEffect(async()=>
     {
-        await ractions.totalAreawiseReceiver(receiverDispatch,user.landmark_id._id);
+        if(user!=null)
+        {
+            await ractions.totalAreawiseReceiver(receiverDispatch,user.landmark_id._id);
         
-        await vactions.totalAreawiseVolunteer(volunteerDispatch,user.landmark_id._id);
-
-        await factions.totalAreawiseFoodRequest(foodRequestDispatch,user.landmark_id._id)
-
-
-        setReceiver(totalAreawiseReceiver);
-        setVolunteer(totalAreaWiseVolunteer);
-        setFoodRequest(totalAreaWiseFoodRequest)
+            await vactions.totalAreawiseVolunteer(volunteerDispatch,user.landmark_id._id);
+    
+            await factions.totalAreawiseFoodRequest(foodRequestDispatch,user.landmark_id._id)
+    
+    
+            setReceiver(totalAreawiseReceiver);
+            setVolunteer(totalAreaWiseVolunteer);
+            setFoodRequest(totalAreaWiseFoodRequest)
+        }
+        
 
     },[totalAreawiseReceiver,totalAreaWiseVolunteer,totalAreaWiseFoodRequest])
 

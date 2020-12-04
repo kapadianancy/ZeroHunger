@@ -28,12 +28,12 @@ function ForgetPassword() {
                                     <i className="icon-mail5 text-muted"></i>
                                 </div>
                             </div>
+
                             <div className="text-right">
                                 <a href="/volunteer/login">Back to login</a>
                             </div>
-                            
+
                             <button type="submit" className="btn bg-blue btn-block"><i className="icon-spinner11 mr-2"></i> Forget password</button>
-                           
                         </div>
                     </div>
                 </form>

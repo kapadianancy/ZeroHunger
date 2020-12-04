@@ -16,6 +16,8 @@ router.get('/areaWiseTotal/:id',volunteer.areaWiseTotal)
 
 router.get('/areaWise',volunteer.areaWise)
 
+router.get('/getVolunteerById/:id',auth,volunteer.getVolunteerById);
+
 router.put('/edit/:id',auth,volunteer.edit);
 
 //-----------------------------------------------------------------------------------

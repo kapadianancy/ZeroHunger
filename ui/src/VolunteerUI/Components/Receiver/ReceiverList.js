@@ -112,10 +112,10 @@ function ReceiverList(props) {
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>PHone number</th>
+                                                <th>Phone number</th>
                                                 <th>Address</th>
                                                 <th>Landmark</th>
-                                                <th>Catehory</th>
+                                                <th>Category</th>
                                                 <th>Population</th>
                                                 <th class="text-center">Actions</th>
                                             </tr>

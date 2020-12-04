@@ -50,16 +50,34 @@ exports.delete = async (req, res) => {
     }
 }
 
+exports.getVolunteerById = async (req, res) => {
+    try {
+        const u = await volunteer.findOne({ user_id: req.params.id, is_deleted: 0 })
+        .populate("landmark_id")
+        .populate("user_id");
+        if (u) {
+            return res.status(200).send({volunteer:u});
+        }
+        return res.status(400).send("not found");
+
+    } catch (err) {
+        res.status(400).send(err);
+    }
+}
+
 exports.edit = async (req, res) => {
     try {
-        await volunteer.findByIdAndUpdate(req.params.id, req.body,{new:true,runValidators:true}, (err) => {
-            if (err) {
+        var v=await volunteer.findByIdAndUpdate(req.params.id, req.body,{new:true,runValidators:true})
+
+            if (!v) {
                 return res.status(400).send(err)
             }
             else {
-                return res.status(201).send("volunteer Updated")
+                var u=await User.findByIdAndUpdate(v.user_id, req.body,{new:true,runValidators:true})
+                if(u)
+                return res.status(201).send(v)
             }
-        });
+       
     } catch (e) {
         return res.status(400).send("Not Updated")
     }
@@ -115,6 +133,9 @@ exports.addLandmarkManager = async (req, res) => {
         res.status(400).send(err);
     }
 }
+
+
+
 
 exports.getAllLandmarkManager = async (req, res) => {
     try {
