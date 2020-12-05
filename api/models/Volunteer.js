@@ -11,11 +11,13 @@ const volunteerSchema=mongoose.Schema({
     },
     DOB:
     {
-        type:Date
+        type:Date,
+        required:true
     },
     gender:
     {
         type:String,
+        required:true
 
     },
     profession:
@@ -36,7 +38,7 @@ const volunteerSchema=mongoose.Schema({
     },
     vehicle_mode:
     {
-        type:String
+        type:Array
     },
     
     is_deleted:

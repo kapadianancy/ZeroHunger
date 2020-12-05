@@ -39,13 +39,13 @@ router.put('/editFoodRequest/:id',auth,Donation.editFoodRequest)
 router.delete('/deleteFoodRequest/:id',auth,Donation.deleteFoodRequest)
 
 //total food donation
-router.get('/total',Donation.total);
+router.get('/totalFood',Donation.totalFood);
 
 router.get('/totalMoney',Donation.totalMoney);
 
-router.get('/areaWiseTotalRequest',Donation.areaWiseTotalRequest);
+router.get('/areaWiseTotalRequest/:id',Donation.areaWiseTotalRequest);
 
-router.get('/areaWiseTotalDonation',Donation.areaWiseTotalDonation);
+router.get('/areaWiseTotalDonation/:id',Donation.areaWiseTotalDonation);
 
 router.get('/areaWiseRequest',auth,Donation.areaWiseRequest);
 

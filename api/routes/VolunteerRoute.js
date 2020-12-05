@@ -12,9 +12,11 @@ router.get('/total',volunteer.total);
 
 router.delete('/delete/:id',auth,volunteer.delete);
 
-router.get('/areaWiseTotal',volunteer.areaWiseTotal)
+router.get('/areaWiseTotal/:id',volunteer.areaWiseTotal)
 
 router.get('/areaWise',volunteer.areaWise)
+
+router.get('/getVolunteerById/:id',auth,volunteer.getVolunteerById);
 
 router.put('/edit/:id',auth,volunteer.edit);
 

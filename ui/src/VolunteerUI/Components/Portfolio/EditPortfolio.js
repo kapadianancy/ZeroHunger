@@ -54,10 +54,8 @@ function EditPortfolio(props) {
     const editportfolio= async (event) => {
         event.preventDefault();
         await validate();
-        if(valid==true)
+        if(await validate() && valid==true)
         {
-         
-            // var f=new File(image)
             const data = new FormData()
             data.append('image', image)
             data.append('description', description)
@@ -86,6 +84,9 @@ function EditPortfolio(props) {
                setValid(false)
                err["image"]="Must be an image format."
            }
+           else{
+               setValid(true)
+           }
         }
         setValidation(err);
         }
@@ -93,18 +94,16 @@ function EditPortfolio(props) {
     }
 
     const validate=()=> {
-        console.log(image);
         let err = {};
-        
-       
+        let isValid = true;
+
         if (!description) {
-            setValid(false);
+            isValid = false;
             err["description"] = "Please enter description.";
         }
-
        
         setValidation(err);
-        return;
+        return isValid;
     }
     return (
         <>
@@ -117,7 +116,7 @@ function EditPortfolio(props) {
                     <div class="page-header page-header-light">
                         <div class="page-header-content header-elements-md-inline" style={{ height: "55px" }}>
                             <div class="page-title d-flex">
-                                <h4><span class="font-weight-semibold">Add Portfolio </span></h4>
+                                <h4><span class="font-weight-semibold">Edit Portfolio </span></h4>
                                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
                             </div>
 
@@ -127,8 +126,8 @@ function EditPortfolio(props) {
                         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
                             <div class="d-flex">
                                 <div class="breadcrumb">
-                                    <a href="/admin" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>Dashboard</a>
-                                    <a href="/admin/addportfolio" class="breadcrumb-item">Add Portfolio</a>
+                                    <a href="/volunteer" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>Dashboard</a>
+                                    <a href="/volunteer/editportfolio" class="breadcrumb-item">Edit Portfolio</a>
 
                                 </div>
 

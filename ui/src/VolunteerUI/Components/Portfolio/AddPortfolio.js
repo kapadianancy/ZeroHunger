@@ -106,8 +106,8 @@ function AddPortfolio(props) {
                         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
                             <div class="d-flex">
                                 <div class="breadcrumb">
-                                    <a href="/admin" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>Dashboard</a>
-                                    <a href="/admin/addportfolio" class="breadcrumb-item">Add Portfolio</a>
+                                    <a href="/volunteer" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>Dashboard</a>
+                                    <a href="/volunteer/addportfolio" class="breadcrumb-item">Add Portfolio</a>
 
                                 </div>
 

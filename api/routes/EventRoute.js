@@ -8,20 +8,15 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'public/images/event');
+        cb(null, 'public/images/event')
     },
     filename: (req, file, cb) => {
-        cb(null,'event'+file.originalname);
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 100)
+        cb(null, file.fieldname + '-' + uniqueSuffix+"."+ file.originalname.split(".")[1])
     }
 });
-const fileFilter = (req, file, cb) => {
-    if (file.mimetype == 'image/jpeg' || file.mimetype == 'image/png') {
-        cb(null, true);
-    } else {
-        cb("Must be an Image", false);
-    }
-}
-const upload = multer({ storage: storage, fileFilter: fileFilter });
+const cpUpload = multer({ storage: storage });
+var upload = cpUpload.fields([{ name: 'banner', maxCount: 1 }])
 
 //get all events
 router.get('/getAllEvent',Event.getAllEvent)
@@ -30,10 +25,10 @@ router.get('/getAllEvent',Event.getAllEvent)
 router.get('/getEventById/:id',Event.getEventById)
 
 //add event
-router.post('/addEvent',auth,upload.single('banner'),Event.addEvent)
+router.post('/addEvent',auth,upload,Event.addEvent)
 
 //edit event
-router.put('/editEvent/:id',auth,upload.single('banner'),Event.editEvent)
+router.put('/editEvent/:id',auth,upload,Event.editEvent)
 
 //delete event
 router.delete('/deleteEvent/:id',auth,Event.deleteEvent);

@@ -10,7 +10,11 @@ import { PortfolioProvider } from './Context/PortfolioContext';
 import { LandmarkProvider } from './Context/LandmarkContext';
 import { ReceiverCategoryProvider } from './Context/ReceiverCategory';
 import { EventProvider } from './Context/EventContext';
-import {ReceiverProvider} from './Context/ReceiverContext';
+import { ReceiverProvider } from './Context/ReceiverContext';
+import { FoodRequestProvider } from './Context/FoodRequestContext';
+import { VolunteerProvider } from './Context/VolunteerContext';
+import { DonorProvider } from './Context/DonorContext';
+import { DonationProvider } from './Context/DonationContext';
 //localStorage.clear();
 ReactDOM.render(
   <React.StrictMode>
@@ -21,7 +25,15 @@ ReactDOM.render(
             <EventProvider>
               <ReceiverCategoryProvider>
                 <ReceiverProvider>
-                <App />
+                  <FoodRequestProvider>
+                    <VolunteerProvider>
+                      <DonorProvider>
+                        <DonationProvider>
+                          <App />
+                        </DonationProvider>
+                      </DonorProvider>
+                    </VolunteerProvider>
+                  </FoodRequestProvider>
                 </ReceiverProvider>
               </ReceiverCategoryProvider>
             </EventProvider>

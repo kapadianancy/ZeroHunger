@@ -1,42 +1,47 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
+import config from '../../../config';
 
-import * as actions from '../../../Actions/ReceiverCategoryAction';
-import { useReceiverCategoryDispatch, useReceiverCategoryState } from '../../../Context/ReceiverCategory';
-
-import { withRouter } from 'react-router-dom';
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
+import * as actions from '../../../Actions/FoodRequestAction';
 
-function ReceiverCategoryList(props) {
+import { useFoodRequestDispatch, useFoodRequestState } from '../../../Context/FoodRequestContext';
+import { Redirect, withRouter } from 'react-router';
 
-    var receivercategoryDispatch = useReceiverCategoryDispatch();
-    var { receivercategories } = useReceiverCategoryState();
+
+function FoodRequestList(props) {
+
+    var { foodrequests } = useFoodRequestState();
+    var foodrequestDispatch = useFoodRequestDispatch();
 
     useEffect(async () => {
-        await actions.getAllReceiverCategory(receivercategoryDispatch);
+        await actions.getAllFoodRequest(foodrequestDispatch);
     }, [])
 
-
-    const editReceiverCategory = async (id) => {
-        props.history.push("/admin/editreceivercategory/" + id);
+    const edit = (id) => {
+        props.history.push("/admin/editfoodrequest/" + id)
     }
 
-    const deleteReceiverCategory = async (id) => {
-        if (window.confirm('Are you sure to delete this receiver category???')) {
-            await actions.removeReceiverCategory(receivercategoryDispatch, id);
-            await actions.getAllReceiverCategory(receivercategoryDispatch);
+    const remove = async (id) => {
+        if (window.confirm('Are you sure to delete this food request ?')) {
+            await actions.removeFoodRequest(foodrequestDispatch, id);
+            await actions.getAllFoodRequest(foodrequestDispatch);
         }
     }
 
-
     var data = null;
-    data = receivercategories.map(r => {
+    data = foodrequests.map(r => {
+        const date = new Date(r.date);
+        var dd = date.getDate();
+        var mm = date.getMonth() + 1;
+        var yyyy = date.getFullYear();
+        
         data = (
             <tr>
-                <td>{r.name}</td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{dd}-{mm}-{yyyy}</td>
+                <td>{r.time}</td>
+                <td>{r.plates}</td>
+                <td>{r.receiver_id.name}</td>
                 <td></td>
                 <td class="text-center">
                     <div class="list-icons">
@@ -46,8 +51,8 @@ function ReceiverCategoryList(props) {
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a onClick={() => editReceiverCategory(r._id)} class="dropdown-item"><i class="icon-pencil"></i>Edit</a>
-                                <a onClick={() => deleteReceiverCategory(r._id)} class="dropdown-item"> <i class="icon-cross2"></i>Delete</a>
+                                <a onClick={() => edit(r._id)} class="dropdown-item"><i class="icon-pencil"></i>Edit</a>
+                                <a onClick={() => remove(r._id)} class="dropdown-item"><i class="icon-cross2"></i>Delete</a>
                             </div>
                         </div>
                     </div>
@@ -58,9 +63,10 @@ function ReceiverCategoryList(props) {
         return data;
     })
 
-    const addreceivercategory = () => {
-        props.history.push("/admin/addreceivercategory");
+    const addfoodrequest = () => {
+        props.history.push("/admin/addfoodrequest");
     }
+
 
     return (
         <>
@@ -72,7 +78,7 @@ function ReceiverCategoryList(props) {
                     <div class="page-header page-header-light">
                         <div class="page-header-content header-elements-md-inline" style={{ height: "55px" }}>
                             <div class="page-title d-flex">
-                                <h4> <span class="font-weight-semibold">Receiver Category List</span></h4>
+                                <h4> <span class="font-weight-semibold">Food Request List</span></h4>
                                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
                             </div>
 
@@ -83,7 +89,7 @@ function ReceiverCategoryList(props) {
                             <div class="d-flex">
                                 <div class="breadcrumb">
                                     <a href="/admin" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
-                                    <a href="/admin/receivercategorylist" class="breadcrumb-item">Receiver Category List</a>
+                                    <a href="/admin/foodrequestlist" class="breadcrumb-item">Food Request List</a>
 
                                 </div>
 
@@ -98,27 +104,35 @@ function ReceiverCategoryList(props) {
 
                         <div class="row" style={{ marginBottom: "50px" }}>
                             <div class="col-md-12">
+
                                 <div class="card">
                                     <div class="card-header header-elements-inline">
                                         <h5 class="card-title"></h5>
                                         <div class="header-elements">
                                             <div class="list-icons">
-                                                <button onClick={addreceivercategory} class="btn bg-teal-400 ml-3">Add <i class="icon-plus3 ml-2"></i></button>
+                                                <button onClick={addfoodrequest} class="btn bg-teal-400 ml-3">Add <i class="icon-plus3 ml-2"></i></button>
 
                                             </div>
                                         </div>
                                     </div>
+
                                     <table class="table datatable-basic table-hover">
                                         <thead>
                                             <tr>
-                                                <th colSpan="5">Name</th>
-                                                <th class="text-center">Actions</th>
+                                                <th>Title</th>
+                                                <th>Date</th>
+                                                <th>Plates</th>
+                                                <th>Receiver</th>
+                                                <th colSpan="2" class="text-center">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+
                                             {data}
+
                                         </tbody>
                                     </table>
+
                                 </div>
 
                             </div>
@@ -129,4 +143,5 @@ function ReceiverCategoryList(props) {
         </>
     )
 }
-export default withRouter(ReceiverCategoryList);
+
+export default withRouter(FoodRequestList);

@@ -134,7 +134,7 @@ function EditLandmark(props) {
                             <div class="d-flex">
                                 <div class="breadcrumb">
                                     <a href="/admin" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>Dashboard</a>
-                                    <a href="/admin/editlandmark" class="breadcrumb-item">Edit Landmark</a>
+                                    <a href="#" class="breadcrumb-item">Edit Landmark</a>
 
                                 </div>
 

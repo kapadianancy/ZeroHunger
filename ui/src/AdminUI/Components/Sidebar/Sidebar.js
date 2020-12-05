@@ -46,8 +46,8 @@ function Sidebar(proprs) {
 								<a  className="nav-link"><i className="icon-color-sampler"></i> <span>Food Request</span></a>
 
 								<ul className="nav nav-group-sub" data-submenu-title="Food Request">
-									<li className="nav-item"><a href="index.html" className="nav-link">Add Food Request</a></li>
-									<li className="nav-item"><a href="index.html" className="nav-link">List of Food Request</a></li>
+									<li className="nav-item"><a href="/admin/addfoodrequest" className="nav-link">Add Food Request</a></li>
+									<li className="nav-item"><a href="/admin/foodrequestlist" className="nav-link">List of Food Request</a></li>
 								</ul>
 							</li>
 			
@@ -67,8 +67,8 @@ function Sidebar(proprs) {
 							<li className="nav-item nav-item-submenu">
 								<a className="nav-link"><i className="icon-calendar3"></i> <span>Event</span></a>
 								<ul className="nav nav-group-sub" data-submenu-title="Event">
-									<li className="nav-item"><a href="widgets_content.html" className="nav-link">Add Events</a></li>
-									<li className="nav-item"><a href="widgets_content.html" className="nav-link">List of Events</a></li>
+									<li className="nav-item"><a href="/admin/addevent" className="nav-link">Add Events</a></li>
+									<li className="nav-item"><a href="/admin/eventlist" className="nav-link">List of Events</a></li>
 								</ul>
 							</li>
 

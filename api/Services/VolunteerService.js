@@ -1,6 +1,7 @@
 var volunteer = require('../models/Volunteer');
 var landmarkManager = require('../models/Landmark_manager');
 const User = require('../models/User');
+const Role = require('../models/Role');
 
 exports.signup = async (req, res) => {
     try {
@@ -49,16 +50,34 @@ exports.delete = async (req, res) => {
     }
 }
 
+exports.getVolunteerById = async (req, res) => {
+    try {
+        const u = await volunteer.findOne({ user_id: req.params.id, is_deleted: 0 })
+        .populate("landmark_id")
+        .populate("user_id");
+        if (u) {
+            return res.status(200).send({volunteer:u});
+        }
+        return res.status(400).send("not found");
+
+    } catch (err) {
+        res.status(400).send(err);
+    }
+}
+
 exports.edit = async (req, res) => {
     try {
-        await volunteer.findByIdAndUpdate(req.params.id, req.body,{new:true,runValidators:true}, (err) => {
-            if (err) {
+        var v=await volunteer.findByIdAndUpdate(req.params.id, req.body,{new:true,runValidators:true})
+
+            if (!v) {
                 return res.status(400).send(err)
             }
             else {
-                return res.status(201).send("volunteer Updated")
+                var u=await User.findByIdAndUpdate(v.user_id, req.body,{new:true,runValidators:true})
+                if(u)
+                return res.status(201).send(v)
             }
-        });
+       
     } catch (e) {
         return res.status(400).send("Not Updated")
     }
@@ -71,9 +90,9 @@ exports.total=async(req,res)=>
         
         if(total == 0)
         {
-            return res.status(200).send(`no data found`);
+            return res.status(200).send({total:0});
         }
-        return res.status(200).send(`total volunteers ${total}`);
+        return res.status(200).send({total});
 
     } catch (err) {
         return res.status(400).send("bad request");
@@ -82,15 +101,19 @@ exports.total=async(req,res)=>
 
 exports.areaWiseTotal = async (req, res) => {
     try {
+        var role_id = await Role.findOne({
+            name: "Volunteer"
+        })
+        var land_id=req.params.id;
         var total = await User.where({ is_deleted: false })
-            .where({ role_id: "5fb3be8ccb07c31f57ab2908" }) //role id for volunteer
-            .where({ landmark_id: "5fb3be57cb07c31f57ab2905" })
+            .where({ role_id: role_id }) //role id for volunteer
+            .where({ landmark_id: land_id})
             .countDocuments();
 
         if (total == 0) {
-            return res.status(200).send(`no data found`);
+            return res.status(200).send({total:0});
         }
-        return res.status(200).send(`total volunteers ${total}`);
+        return res.status(200).send({total:total});
 
     } catch (err) {
         return res.status(400).send("bad request");
@@ -110,6 +133,9 @@ exports.addLandmarkManager = async (req, res) => {
         res.status(400).send(err);
     }
 }
+
+
+
 
 exports.getAllLandmarkManager = async (req, res) => {
     try {
@@ -161,3 +187,4 @@ exports.areaWise=async(req,res)=>
         return res.status(400).send("bad request");
     }
 }
+

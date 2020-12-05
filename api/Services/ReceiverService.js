@@ -1,3 +1,4 @@
+const Receiver = require("../models/Receiver");
 var receiver=require("../models/Receiver");
 const Role = require("../models/Role");
 var User=require('../models/User');
@@ -27,17 +28,20 @@ exports.addReceiver=async(req,res)=>
 exports.getAll = async (req, res) => {
     try {
         receiver.find({is_deleted:false})
-        .populate("user_id")
+        .populate("category_id")
+        .populate("landmark_id")
         .exec((err,v)=>
         {
-            if(err)
-            {
-                return res.status(400).send(err);
-            }
-            else
-            {
-                return res.status(200).send(v)
-            }
+            
+                if(err)
+                {
+                    return res.status(400).send(err);
+                }
+                else
+                {
+                    return res.status(200).send(v)
+                }
+          
         })
         
 
@@ -45,6 +49,32 @@ exports.getAll = async (req, res) => {
         return res.status(400).send("bad request");
     }
 }
+
+exports.getById = async (req, res) => {
+    try {
+        receiver.findOne({is_deleted:false,_id:req.params.id})
+        .populate("category_id")
+        .populate("landmark_id")
+        .exec((err,v)=>
+        {
+            
+                if(err)
+                {
+                    return res.status(400).send(err);
+                }
+                else
+                {
+                    return res.status(200).send(v)
+                }
+          
+        })
+        
+
+    } catch (err) {
+        return res.status(400).send("bad request");
+    }
+}
+
 
 exports.edit = async (req, res) => {
     try {
@@ -81,9 +111,9 @@ exports.totalReceiver=async(req,res)=>
         
         if(total == 0)
         {
-            return res.status(200).send(`no data found`);
+            return res.status(200).send({total:0});
         }
-        return res.status(200).send(`total receivers ${total}`);
+        return res.status(200).send({total});
 
     }catch(err)
     {
@@ -94,16 +124,17 @@ exports.totalReceiver=async(req,res)=>
 exports.areaWiseTotal=async(req,res)=>
 {
     try{
-        var total=await User.where({is_deleted:false})
-            .where({role_id:"5fb4b6040281d31dac44564d"}) //role id for receiver
-            .where({landmark_id:"5fb3be57cb07c31f57ab2905"})  //adajan
+        var land_id=req.params.id;
+        var total=await Receiver.where({is_deleted:false})
+            .where({landmark_id:land_id})  //adajan
         .countDocuments();          
-        
+       
         if(total == 0)
         {
-            return res.status(200).send(`no data found`);
+            return res.status(200).send({total:0});
         }
-        return res.status(200).send(`total receiver ${total}`);
+        
+        return res.status(200).send({total:total});
 
     }catch(err)
     {
