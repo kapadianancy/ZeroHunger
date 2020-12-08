@@ -69,3 +69,22 @@ export const editVolunteer = async (volunteerDispatch, id ,volunteer) => {
         })
 };
 
+
+export const getAllVolunteer = async (volunteerDispatch) => {
+    const token = localStorage.getItem("token");
+    await axios.get('/volunteer/getAll/', {
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    })
+        .then(async (response) => {
+            volunteerDispatch({
+                type: ActionNames.VOLUNTEER_LIST,
+                data: {
+                    volunteers: response.data
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};

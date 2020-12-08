@@ -1,9 +1,67 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 
+import * as actions from '../../../Actions/VolunteerAction';
+import { useVolunteerDispatch, useVolunteerState } from '../../../Context/VolunteerContext';
+
+
 function VolunteerList(props) {
+	var volunteerDispatch = useVolunteerDispatch();
+	var { volunteers } = useVolunteerState();
+
+	useEffect(async () => {
+		await actions.getAllVolunteer(volunteerDispatch);
+	}, [])
+
+
+
+
+	var data = null;
+	data = volunteers.map(v => {
+		const date = new Date(v.DOB);
+		var dd = date.getDate();
+		var mm = date.getMonth() + 1;
+		var yyyy = date.getFullYear();
+		var d = yyyy + "-" + mm + "-" + dd
+
+		var weekday = "";
+		v.weekdays.forEach(w => {
+			weekday += w + " "
+		});
+
+		var weekend = "";
+		v.weekends.forEach(w => {
+			weekend += w + " "
+		});
+
+		var vehicle_mode = "";
+		v.vehicle_mode.forEach(v => {
+			vehicle_mode += v + " "
+		});
+		data = (
+
+			<tr>
+				<td>{v.user_id.name}</td>
+				<td>{v.user_id.email}</td>
+				<td>{v.user_id.phone_number}</td>
+				<td>{v.user_id.address}</td>
+				<td>{d}</td>
+				<td>{v.gender}</td>
+				<td>{v.profession}</td>
+				<td>{v.skillset}</td>
+				<td>{weekday}</td>
+				<td>{weekend}</td>
+				<td>{vehicle_mode}</td>
+			</tr>
+
+		)
+		return data;
+	})
+
 	return (
+
 		<>
 			<Header />
 			<div className="page-content" style={{ height: "100%" }} >
@@ -44,36 +102,21 @@ function VolunteerList(props) {
 									<table class="table datatable-basic table-hover">
 										<thead>
 											<tr>
-												<th>First Name</th>
-												<th>Last Name</th>
-												<th>Job Title</th>
-												<th>DOB</th>
-												<th>Status</th>
-												<th class="text-center">Actions</th>
+												<th>Name</th>
+												<th>Email</th>
+												<th>Phone Number</th>
+												<th>Address</th>
+												<th>Date Of Birth</th>
+												<th>Gender</th>
+												<th>Profession</th>
+												<th>Skillset</th>
+												<th>WeekDays</th>
+												<th>WeekEnds</th>
+												<th>Vehicle</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>Marth</td>
-												<td><a href="#">Enright</a></td>
-												<td>Traffic Court Referee</td>
-												<td>22 Jun 1972</td>
-												<td><span class="badge badge-success">Active</span></td>
-												<td class="text-center">
-													<div class="list-icons">
-														<div class="dropdown">
-															<a href="#" class="list-icons-item" data-toggle="dropdown">
-																<i class="icon-menu9"></i>
-															</a>
-
-															<div class="dropdown-menu dropdown-menu-right">
-																<a href="#" class="dropdown-item"><i class="icon-pencil"></i>Edit</a>
-																<a href="#" class="dropdown-item"><i class="icon-cross2"></i>Delete</a>
-															</div>
-														</div>
-													</div>
-												</td>
-											</tr>
+											{data}
 										</tbody>
 									</table>
 								</div>

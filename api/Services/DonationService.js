@@ -202,7 +202,7 @@ exports.areaWiseTotalRequest = async (req, res) => {
                     return res.status(400).send(err);
                 }
                 else {
-                    console.log(data);
+                  //  console.log(data);
                     if(data.length==0)
                     {
                         return res.status(200).send({total:0,plates:0});
@@ -258,7 +258,7 @@ exports.areaWiseTotalDonation = async (req, res) => {
                        
                         
                     // });
-                    console.log(total)
+                    //console.log(total)
 
                     // let result = await Promise.all(
                     //     data.map(async(d) => {
