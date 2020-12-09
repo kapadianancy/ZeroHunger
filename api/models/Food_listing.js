@@ -23,7 +23,7 @@ const foodlistingSchema=mongoose.Schema({
     {
         type:mongoose.Schema.Types.ObjectId,
         required:true,
-        ref:'Reciever'
+        ref:'Receiver'
     },
     event:
     {

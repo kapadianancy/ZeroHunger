@@ -11,6 +11,10 @@ function DonationReducer(state, action) {
             return { ...state, totalMoney: action.data.total }
         case ActionNames.TOTAL_FOOD_DONATION:
             return { ...state, totalFood: action.data.total }
+        case ActionNames.MONEY_DONATION_LIST:
+            return { ...state, moneydonation: action.data.moneydonation }
+        case ActionNames.FOOD_DONATION_LIST:
+            return { ...state, fooddonation: action.data.fooddonation }
         default: {
             throw new Error(`Unhandled action type: ${action.type}`)
         }
@@ -20,7 +24,9 @@ function DonationReducer(state, action) {
 function DonationProvider({ children }) {
     var [state, dispatch] = React.useReducer(DonationReducer, {
         totalMoney: 0,
-        totalFood: 0
+        totalFood: 0,
+        moneydonation: [],
+        fooddonation : []
     })
 
     return (
