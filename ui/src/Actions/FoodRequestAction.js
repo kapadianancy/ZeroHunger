@@ -111,3 +111,23 @@ export const totalAreawiseFoodRequest = async (foodrequestDispatch,id) => {
             throw new Error(error);
         })
 };
+
+export const areaWiseFoodRequest = async (foodrequestDispatch, id) => {
+    const token = localStorage.getItem("token");
+    await axios.get('/donation/areaWiseRequest/' + id, {
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    })
+        .then(async (response) => {
+            foodrequestDispatch({
+                type: ActionNames.AREAWSIE_FOODREQUEST,
+                data: {
+                    areaWiseFoodRequest: response.data
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
+

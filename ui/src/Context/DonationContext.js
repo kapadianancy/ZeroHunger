@@ -27,6 +27,7 @@ function DonationProvider({ children }) {
         totalFood: 0,
         moneydonation: [],
         fooddonation : []
+       
     })
 
     return (

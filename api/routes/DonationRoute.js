@@ -49,6 +49,6 @@ router.get('/areaWiseTotalDonation/:id',Donation.areaWiseTotalDonation);
 
 router.get('/areaWiseRequest/:id',auth,Donation.areaWiseRequest);
 
-router.get('/areaWiseFoodDonation',auth,Donation.areaWiseFoodDonation);
+router.get('/areaWiseFoodDonation/:id',auth,Donation.areaWiseFoodDonation);
 
 module.exports = router;
