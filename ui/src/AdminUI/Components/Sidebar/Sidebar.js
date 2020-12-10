@@ -55,8 +55,8 @@ function Sidebar(proprs) {
 								<a  className="nav-link"><i className="icon-coins"></i> <span>Donation</span></a>
 
 								<ul className="nav nav-group-sub" data-submenu-title="Donation">
-									<li className="nav-item"><a href="index.html" className="nav-link">List of Money Donation</a></li>
-									<li className="nav-item"><a href="index.html" className="nav-link">List of Food Donation</a></li>
+									<li className="nav-item"><a href="/admin/moneydonationlist" className="nav-link">List of Money Donation</a></li>
+									<li className="nav-item"><a href="/admin/fooddonationlist" className="nav-link">List of Food Donation</a></li>
 								</ul>
 							</li>
 

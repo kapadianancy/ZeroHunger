@@ -12,7 +12,7 @@ exports.addDonor=async(req,res)=>
         {
             return res.status(400).send("bad request");
         }
-        return res.status(201).send("registered "+r);
+        return res.status(201).send(r);
 
     }catch(err)
     {
@@ -43,7 +43,7 @@ exports.addCat=async(req,res)=>
         const result=await cat.save();
         if(result)
         {
-            return res.status(201).send("category inserted"+cat);
+            return res.status(201).send(cat);
         }
         else
         {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 
@@ -24,6 +24,14 @@ function ChangePassword(props) {
         message = "";
     }
 
+    useEffect(async () => {
+        if(message == "Successfully Changed")
+        {
+            props.history.push('/admin/')
+        }
+    },[message]) 
+    
+
     const changepassword = async (event) => {
         event.preventDefault();
         if (await validate()) {
@@ -33,6 +41,10 @@ function ChangePassword(props) {
             }
             await actions.changePassword(userDispatch, data);
             reset()
+           
+            
+            
+           
         }
     }
 
