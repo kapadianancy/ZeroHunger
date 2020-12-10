@@ -97,7 +97,7 @@ function VolunteerList(props) {
 
 						<div class="row" style={{ marginBottom: "50px" }}>
 							<div class="col-md-12">
-								<div class="card">
+								<div class="card" >
 
 									<table class="table datatable-basic table-hover">
 										<thead>
