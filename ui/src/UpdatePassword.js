@@ -106,7 +106,7 @@ function UpdatePassword(props) {
 
                             </div>
                             <div className="text-right">
-                                <a href="/admin/login">Back to login</a>
+                                <a href="/">Back to login</a>
                             </div>
 
                             <div className="form-group">
