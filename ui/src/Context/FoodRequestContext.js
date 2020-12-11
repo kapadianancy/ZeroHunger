@@ -21,6 +21,8 @@ function FoodRequestReducer(state, action) {
 			return { ...state, foodrequest: null }
 		case ActionNames.TOTAL_AREAWSIE_FOODREQUEST:
 			return{...state,totalAreaWiseFoodRequest:action.data.total}
+		case ActionNames.AREAWSIE_FOODREQUEST:
+			return{...state,areaWiseFoodRequest:action.data.areaWiseFoodRequest}
 		default: {
 			throw new Error(`Unhandled action type: ${action.type}`)
 		}
@@ -32,7 +34,8 @@ function FoodRequestProvider({ children }) {
 		foodrequests: [],
 		foodrequest: null,
 		error: null,
-		totalAreaWiseFoodRequest:0
+		totalAreaWiseFoodRequest:0,
+		areaWiseFoodRequest:[]
 	})
 
 	return (

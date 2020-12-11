@@ -295,15 +295,19 @@ exports.areaWiseTotalDonation = async (req, res) => {
 }
 
 
-exports.areaWiseRequest = async (req, res) => {
-    try {
-        Food_request.find().populate("receiver_id").exec(async (err, requests) => {
-            if (err) {
+exports.areaWiseRequest=async(req,res)=>
+{
+    try{
+        var land_id=req.params.id;
+        Food_request.find().populate("receiver_id").exec(async(err,requests)=>
+        {
+            if(err)
+            {
                 return res.status(400).send(err);
             }
-            else {
-                var userIds = requests.map((r) => { return r.receiver_id.user_id });
-                User.find({ _id: { $in: userIds }, landmark_id: "5fb3be57cb07c31f57ab2905" }, async (err, users) => {
+            else{
+                var userIds=requests.map((r)=>{return r.receiver_id._id});
+                Receiver.find({_id: {$in: userIds},landmark_id:land_id}, async(err, users)=> {
                     if (err) {
 
                         return res.status(400).send(err);
@@ -312,11 +316,12 @@ exports.areaWiseRequest = async (req, res) => {
                         if (users.length == 0) {
                             return res.status(400).send("No data found");
                         }
-                        var uids = users.map((u) => { return u._id.toString() })
-                        var result = requests.filter(function (x) {
-                            return uids.includes(x.receiver_id.user_id.toString());
-                        })
-                        res.status(200).send(result);
+                       var uids=users.map((u)=>{return u._id.toString()})
+                       var result=requests.filter(function(x)
+                       {
+                         return uids.includes(x.receiver_id._id.toString());
+                       })
+                       res.status(200).send(result);
                     }
                 })
 
@@ -331,13 +336,14 @@ exports.areaWiseRequest = async (req, res) => {
 
 exports.areaWiseFoodDonation = async (req, res) => {
     try {
+        var land_id=req.params.id;
         Food_listing.find().populate("donor_id").exec(async (err, requests) => {
             if (err) {
                 return res.status(400).send(err);
             }
             else {
                 var userIds = requests.map((r) => { return r.donor_id.user_id });
-                User.find({ _id: { $in: userIds }, landmark_id: "5fb3be57cb07c31f57ab2905" }, async (err, users) => {
+                User.find({ _id: { $in: userIds }, landmark_id: land_id }, async (err, users) => {
                     if (err) {
 
                         return res.status(400).send(err);
