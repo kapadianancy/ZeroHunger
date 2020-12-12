@@ -58,3 +58,17 @@ export const getAllFoodDonation = async (donationDispatch) => {
             throw new Error(error);
         })
 };
+
+export const getAllFoodDelivered = async (donationDispatch) => {
+    await axios.get('/donation/getAllDeliveredFood')
+        .then(async (response) => {
+            donationDispatch({
+                type: ActionNames.FOOD_DELIVERY_LIST,
+                data: {
+                    fooddelivery: response.data
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};

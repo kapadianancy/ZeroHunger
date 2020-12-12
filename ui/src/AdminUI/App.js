@@ -26,6 +26,7 @@ import FoodRequestList from './Components/FoodRequest/FoodRequestList';
 import EditFoodRequest from './Components/FoodRequest/EditFoodRequest';
 import MoneyDonationList from './Components/Donation/MoneyDonationList';
 import FoodDonationList from './Components/Donation/FoodDonationList';
+import FoodDeliveryList from './Components/Donation/FoodDeliveryList';
 
 
 function App(props) {
@@ -44,6 +45,7 @@ function App(props) {
       {token == null && content == null ? <Redirect to="/admin/login" /> : null}
 
       <Switch>
+        <Route path="/admin/fooddeliverylist" exact component={FoodDeliveryList} />
         <Route path="/admin/fooddonationlist" exact component={FoodDonationList} />
         <Route path="/admin/moneydonationlist" exact component={MoneyDonationList} />
         <Route path="/admin/addfoodrequest" exact component={AddFoodRequest} />

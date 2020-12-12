@@ -61,7 +61,7 @@ function Sidebar(proprs) {
 							</li>
 
 							<li className="nav-item">
-								<a className="nav-link"><i className="icon-list"></i> <span>List of Food Delivered</span></a>
+								<a className="nav-link" href="/admin/fooddeliverylist"><i className="icon-list"></i> <span>List of Food Delivered</span></a>
 							</li>
 
 							<li className="nav-item nav-item-submenu">
