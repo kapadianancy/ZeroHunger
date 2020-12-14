@@ -21,6 +21,13 @@ exports.getAll = async (req, res) => {
     try {
         volunteer.find({ is_deleted: false })
             .populate("user_id")
+            .populate({
+                path: 'user_id',
+                populate: {
+                    path: 'landmark_id',
+                    model: 'Landmark'
+                }
+            })
             .exec((err, v) => {
                 if (err) {
                     return res.status(400).send(err);
@@ -127,7 +134,7 @@ exports.addLandmarkManager = async (req, res) => {
         if (!result) {
             return res.status(400).send("bad request");
         }
-        return res.status(201).send("registered");
+        return res.status(201).send(result);
 
     } catch (err) {
         res.status(400).send(err);
@@ -140,6 +147,27 @@ exports.addLandmarkManager = async (req, res) => {
 exports.getAllLandmarkManager = async (req, res) => {
     try {
         landmarkManager.find({ is_deleted: false })
+            .populate("landmark_id")
+            .populate("volunteer_id")
+            .exec((err, v) => {
+                if (err) {
+                    return res.status(400).send(err);
+                }
+                else {
+                    return res.status(200).send(v);
+
+                }
+            })
+
+
+    } catch (err) {
+        return res.status(400).send("bad request");
+    }
+}
+
+exports.getLandmarkManagerByVolunteer = async (req, res) => {
+    try {
+        landmarkManager.findOne({ is_deleted: false ,volunteer_id:req.params.id})
             .populate("landmark_id")
             .populate("volunteer_id")
             .exec((err, v) => {

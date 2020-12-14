@@ -15,6 +15,7 @@ import { FoodRequestProvider } from './Context/FoodRequestContext';
 import { VolunteerProvider } from './Context/VolunteerContext';
 import { DonorProvider } from './Context/DonorContext';
 import { DonationProvider } from './Context/DonationContext';
+import { LandmarkManagerProvider } from './Context/LandmarkManagerContext';
 //localStorage.clear();
 ReactDOM.render(
   <React.StrictMode>
@@ -29,7 +30,9 @@ ReactDOM.render(
                     <VolunteerProvider>
                       <DonorProvider>
                         <DonationProvider>
-                          <App />
+                          <LandmarkManagerProvider>
+                            <App />
+                          </LandmarkManagerProvider>
                         </DonationProvider>
                       </DonorProvider>
                     </VolunteerProvider>

@@ -4,18 +4,42 @@ import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 
 import * as actions from '../../../Actions/VolunteerAction';
+import * as lactions from '../../../Actions/LandmarkManagerAction';
+
 import { useVolunteerDispatch, useVolunteerState } from '../../../Context/VolunteerContext';
+import { useLandmarkManagerDispatch, useLandmarkManagerState } from '../../../Context/LandmarkManagerContext';
 
 
 function VolunteerList(props) {
 	var volunteerDispatch = useVolunteerDispatch();
 	var { volunteers } = useVolunteerState();
 
+	var landmarkmanagerDispatch = useLandmarkManagerDispatch();
+	var { landmarkmanager } = useLandmarkManagerState();
+
 	useEffect(async () => {
 		await actions.getAllVolunteer(volunteerDispatch);
 	}, [])
 
+	const assignlandmark = async (landmark, volunteer) => {
+		let manager = {
+			volunteer_id: volunteer,
+			landmark_id: landmark
+		}
+		await lactions.addLandmarkManager(landmarkmanagerDispatch, manager);
+	}
 
+	// const checklandmarkmanager = async (volunteer) => {
+	// 	await lactions.getLandmarkManagerByVolunteer(landmarkmanagerDispatch, volunteer);
+	// 	console.log("in")
+	// 	if(landmarkmanager != null)
+	// 	{
+	// 		return "true";
+	// 	}
+	// 	else{
+	// 		return "false";
+	// 	}
+	// }
 
 
 	var data = null;
@@ -40,13 +64,27 @@ function VolunteerList(props) {
 		v.vehicle_mode.forEach(v => {
 			vehicle_mode += v + " "
 		});
+
+		//var result = checklandmarkmanager(v._id);
+
+		var assign = null;
+		if (!landmarkmanager) {
+			assign = (<a class="btn bg-teal-400 ml-3" onClick={() => assignlandmark(v.user_id.landmark_id._id, v._id)} >Assign</a>);
+		}
+		else {
+			assign = (<a class="btn bg-success-400 ml-3" >Assigned</a>);
+
+		}
+
 		data = (
 
 			<tr>
+				<td>{assign}</td>
 				<td>{v.user_id.name}</td>
 				<td>{v.user_id.email}</td>
 				<td>{v.user_id.phone_number}</td>
 				<td>{v.user_id.address}</td>
+				<td>{v.user_id.landmark_id.name}</td>
 				<td>{d}</td>
 				<td>{v.gender}</td>
 				<td>{v.profession}</td>
@@ -102,10 +140,12 @@ function VolunteerList(props) {
 									<table class="table datatable-basic table-hover">
 										<thead>
 											<tr>
+												<th>Assign Landmark</th>
 												<th>Name</th>
 												<th>Email</th>
 												<th>Phone Number</th>
 												<th>Address</th>
+												<th>Landmark</th>
 												<th>Date Of Birth</th>
 												<th>Gender</th>
 												<th>Profession</th>
