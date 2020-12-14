@@ -324,7 +324,14 @@ exports.areaWiseTotalDonation = async (req, res) => {
 exports.areaWiseRequest = async (req, res) => {
     try {
         var land_id = req.params.id;
-        Food_request.find().populate("receiver_id").exec(async (err, requests) => {
+        Food_request.find({is_deleted:0}).populate({
+            path: 'receiver_id',
+            populate: {
+                path: 'category_id',
+                model: 'Receiver_category'
+            }
+        })
+        .exec(async (err, requests) => {
             if (err) {
                 return res.status(400).send(err);
             }
@@ -359,7 +366,29 @@ exports.areaWiseRequest = async (req, res) => {
 exports.areaWiseFoodDonation = async (req, res) => {
     try {
         var land_id = req.params.id;
-        Food_listing.find().populate("donor_id").exec(async (err, requests) => {
+        Food_listing.find({is_deleted:0})
+        .populate({
+            path: 'receiver_id',
+            populate: {
+                path: 'category_id',
+                model: 'Receiver_category'
+            }
+        })
+        .populate({
+            path: 'donor_id',
+            populate: {
+                path: 'donor_category_id',
+                model: 'Donor_category'
+            }
+        })
+        .populate({
+            path: 'donor_id',
+            populate: {
+                path: 'user_id',
+                model: 'User'
+            }
+        })
+        .exec(async (err, requests) => {
             if (err) {
                 return res.status(400).send(err);
             }
@@ -376,7 +405,7 @@ exports.areaWiseFoodDonation = async (req, res) => {
                         }
                         var uids = users.map((u) => { return u._id.toString() })
                         var result = requests.filter(function (x) {
-                            return uids.includes(x.donor_id.user_id.toString());
+                            return uids.includes(x.donor_id.user_id._id.toString());
                         })
                         res.status(200).send(result);
                     }
