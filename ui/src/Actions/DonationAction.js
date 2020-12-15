@@ -72,3 +72,22 @@ export const getAllFoodDelivered = async (donationDispatch) => {
             throw new Error(error);
         })
 };
+
+export const areaWiseFoodDonation = async (donationDispatch,id) => {
+    const token = localStorage.getItem("token");
+    await axios.get('/donation/areaWiseFoodDonation/' + id,{
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    })
+        .then(async (response) => {
+            donationDispatch({
+                type: ActionNames.AREAWSIE_FOODDONATION,
+                data: {
+                    fooddonation: response.data
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};

@@ -3,21 +3,21 @@ import React, { useEffect } from 'react'
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 
-import * as actions from '../../../Actions/FoodRequestAction';
+import * as actions from '../../../Actions/DonationAction';
 import * as uactions from '../../../Actions/UserAction'
 
-import { useFoodRequestDispatch,useFoodRequestState } from '../../../Context/FoodRequestContext';
+import { useDonationDispatch,useDonationState} from '../../../Context/DonationContext';
 import {useUserDispatch,useUserState} from '../../../Context/UserContext';
 
 
-function FoodRequest(props) {
+function FoodDonation(props) {
 
     var loggedin=JSON.parse(localStorage.getItem('user'));
     var userdispatch=useUserDispatch();
     var{user}=useUserState();
 
-    var foodrequestDispatch=useFoodRequestDispatch();
-    var{areaWiseFoodRequest}=useFoodRequestState();
+    var foodDonationDispatch=useDonationDispatch();
+    var{areaWiseFoodDonation}=useDonationState();
 
     useEffect(async()=>
     {
@@ -31,16 +31,16 @@ function FoodRequest(props) {
 	useEffect(async () => {
         if(user!=null)
         {
-            console.log(user.landmark_id._id)
-            await actions.areaWiseFoodRequest(foodrequestDispatch,user.landmark_id._id);
+            //console.log(user.landmark_id._id)
+            await actions.areaWiseFoodDonation(foodDonationDispatch,user.landmark_id._id);
         }
-	}, [areaWiseFoodRequest])
+	}, [areaWiseFoodDonation])
 
 
 
 
 	var data = null;
-	data = areaWiseFoodRequest.map(v => {
+	data = areaWiseFoodDonation.map(v => {
 		const date = new Date(v.date);
 		var dd = date.getDate();
 		var mm = date.getMonth() + 1;
@@ -55,10 +55,12 @@ function FoodRequest(props) {
 				<td>{v.time}</td>
 				<td>{v.plates}</td>
 				<td>{v.receiver_id.name}</td>
-				<td>{v.receiver_id.category_id.name}</td>
-				<td>{v.receiver_id.phone_number}</td>
-				<td>{v.receiver_id.address}</td>
+				<td>{v.receiver_id.category_id.name}</td>				
 				<td>{v.receiver_id.population}</td>
+                <td>{v.receiver_id.phone_number}</td>
+                <td>{v.donor_id.user_id.name}</td>
+                <td>{v.donor_id.donor_category_id.category}</td>
+                <td>{v.donor_id.user_id.phone_number}</td>
 				
 			</tr>
 
@@ -77,7 +79,7 @@ function FoodRequest(props) {
 					<div class="page-header page-header-light">
 						<div class="page-header-content header-elements-md-inline" style={{ height: "55px" }}>
 							<div class="page-title d-flex">
-								<h4> <span class="font-weight-semibold">Volunteer List</span></h4>
+								<h4> <span class="font-weight-semibold">Food Donation</span></h4>
 								<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 							</div>
 
@@ -88,7 +90,7 @@ function FoodRequest(props) {
 							<div class="d-flex">
 								<div class="breadcrumb">
 									<a href="/volunteer" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
-									<a href="/volunteer/foodrequestlist" class="breadcrumb-item">Volunteer List</a>
+									<a href="/volunteer/fooddonationlist" class="breadcrumb-item">Food Donation</a>
 
 								</div>
 
@@ -113,9 +115,11 @@ function FoodRequest(props) {
                                                 <th>Plates</th>
                                                 <th>Receiver Name</th>
 												<th>Receiver Categoory</th>
-												<th>Receiver Phone Number</th>
-												<th>Receiver Address</th>
                                                 <th>Receiver Population</th>
+                                                <th>Receiver Phone Number</th>
+                                                <th>donor Name</th>
+                                                <th>donor Category</th>
+                                                <th>donor Phone Number</th>
 												
 											</tr>
 										</thead>
@@ -133,4 +137,4 @@ function FoodRequest(props) {
 		</>
 	)
 }
-export default FoodRequest;
+export default FoodDonation;
