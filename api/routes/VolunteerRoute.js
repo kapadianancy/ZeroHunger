@@ -23,7 +23,9 @@ router.put('/edit/:id',auth,volunteer.edit);
 //-----------------------------------------------------------------------------------
 router.post('/addLandmarkManager',auth,volunteer.addLandmarkManager);
 
-router.get('/getAllLandmarkManager',volunteer.getAllLandmarkManager)
+router.get('/getAllLandmarkManager',volunteer.getAllLandmarkManager);
+
+router.get('/getLandmarkManagerByVolunteer/:id',volunteer.getLandmarkManagerByVolunteer);
 
 router.delete('/deleteLandmarkManager/:id',auth,volunteer.deleteLandmarkManager);
 
