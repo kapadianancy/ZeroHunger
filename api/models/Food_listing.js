@@ -22,7 +22,7 @@ const foodlistingSchema=mongoose.Schema({
     receiver_id:
     {
         type:mongoose.Schema.Types.ObjectId,
-        required:true,
+        //required:true,
         ref:'Receiver'
     },
     event:
@@ -35,7 +35,9 @@ const foodlistingSchema=mongoose.Schema({
         type:Number,
         required:true
     },
-   
+    quality_status : {
+
+    },
     is_deleted:
     {
         type:Boolean,

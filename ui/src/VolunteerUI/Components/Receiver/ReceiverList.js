@@ -38,7 +38,7 @@ function ReceiverList(props) {
                 <td>{r.address}</td>
                 <td>{r.landmark_id.name}</td>
                 <td>{r.category_id.name}</td>
-                <td>{r.population}</td>
+                <td>{r.population?r.population:"-"}</td>
                 <td class="text-center">
                     <div class="list-icons">
                         <div class="dropdown">

@@ -110,12 +110,6 @@ function AddReceiver(props) {
             isValid = false;
             err["category"] = "Please enter receiver category.";
         }
-
-        if (!population) {
-            isValid = false;
-            err["population"] = "Please enter receiver population.";
-        }
-
         setValidation(err)
         return isValid;
     }
@@ -239,8 +233,8 @@ function AddReceiver(props) {
 									<div class="col-lg-9">
 										<input type="number" name="population" class="form-control" 
                                         value={population} onChange={(e)=>{setPopulation(e.target.value)}}
-                                        required="" placeholder="enter population" aria-invalid="true"/>
-                                        <div className="validation-invalid-label">{validation["population"]}</div></div>
+                                         placeholder="enter population" aria-invalid="true"/>
+                                        </div>
 								</div>
                            
 

@@ -37,7 +37,8 @@ function Sidebar(proprs) {
 								<ul class="nav nav-group-sub" data-submenu-title="Food Management">
 									<li class="nav-item"><a href="/volunteer/foodrequestlist" class="nav-link">List of Request</a></li>
 									<li class="nav-item"><a href="/volunteer/fooddonationlist" class="nav-link">List of Donated Food</a></li>
-									<li class="nav-item"><a href="index.html" class="nav-link">Redirect Food</a></li>
+									<li class="nav-item"><a href="/volunteer/qualitychecking" class="nav-link">Quality checking</a></li>
+									<li class="nav-item"><a href="/volunteer/redirectfood" class="nav-link">Redirect Food</a></li>
 								</ul>
 							</li>
 							<li class="nav-item">
