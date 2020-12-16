@@ -16,6 +16,7 @@ import EditReceiver from './Components/Receiver/EditReceiver'
 import {useUserState} from '../Context/UserContext';
 import ReceiverList from './Components/Receiver/ReceiverList';
 import FoodRequest from './Components/FoodManagement/FoodRequest';
+import FoodDonation from './Components/FoodManagement/FoodDonation';
 
 
 
@@ -49,6 +50,7 @@ function App(props) {
         <Route path="/volunteer/editreceiver/:id" exact component={EditReceiver} /> 
 
         <Route path="/volunteer/foodrequestlist" exact component={FoodRequest} /> 
+        <Route path="/volunteer/fooddonationlist" exact component={FoodDonation} /> 
       </Switch>
      
     </>

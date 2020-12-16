@@ -17,6 +17,8 @@ function DonationReducer(state, action) {
             return { ...state, fooddonation: action.data.fooddonation }
         case ActionNames.FOOD_DELIVERY_LIST:
             return { ...state, fooddelivery: action.data.fooddelivery }
+        case ActionNames.AREAWSIE_FOODDONATION:
+            return{...state,areaWiseFoodDonation:action.data.fooddonation}
         default: {
             throw new Error(`Unhandled action type: ${action.type}`)
         }
@@ -29,7 +31,8 @@ function DonationProvider({ children }) {
         totalFood: 0,
         moneydonation: [],
         fooddonation: [],
-        fooddelivery: []
+        fooddelivery: [],
+        areaWiseFoodDonation:[]
 
     })
 
