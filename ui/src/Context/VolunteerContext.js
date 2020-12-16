@@ -5,7 +5,6 @@ var VolunteerStateContext = React.createContext()
 var VolunteerDispatchContext = React.createContext()
 
 function VolunteerReducer(state, action) {
-	console.log(action.type)
 	switch (action.type) {
 		case ActionNames.TOTAL_AREAWSIE_VOLUNTEER:
 			return { ...state, totalAreaWiseVolunteer: action.data.total }
