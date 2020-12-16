@@ -5,7 +5,6 @@ var LandmarkManagerStateContext = React.createContext()
 var LandmarkManagerDispatchContext = React.createContext()
 
 function landmarkManagerReducer(state, action) {
-
 	switch (action.type) {
 		case ActionNames.ADD_LANDMARK_MANAGER:
 			return { ...state, landmarkmanager: action.data.landmarkmanager, error: null }
@@ -13,7 +12,11 @@ function landmarkManagerReducer(state, action) {
 			return { ...state, error: action.data.error, landmarkmanager: null }
 		case ActionNames.GET_LANDMARK_MANAGER_BY_VOLUNTEER:
 			return { ...state, landmarkmanager: action.data.landmarkmanager, error: null }
-		 default: {
+		case ActionNames.LANDMARK_MANAGER_LIST:
+			return { ...state, landmarkmanagers: action.data.landmarkmanagers, error: null }
+		case ActionNames.REMOVE_LANDMARK_MANAGER:
+			return { ...state, landmarkmanager: null }
+		default: {
 			throw new Error(`Unhandled action type: ${action.type}`)
 		}
 	}
@@ -22,6 +25,7 @@ function landmarkManagerReducer(state, action) {
 function LandmarkManagerProvider({ children }) {
 	var [state, dispatch] = React.useReducer(landmarkManagerReducer, {
 		landmarkmanager: null,
+		landmarkmanagers: [],
 		error: null
 	})
 

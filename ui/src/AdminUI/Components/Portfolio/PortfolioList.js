@@ -41,8 +41,8 @@ function PortfolioList(props) {
                 <tr>
                 <td><img src={image} height="50px" width="50px" /></td>
                 <td>{p.description}</td>
-
-                <td colSpan="4" class="text-center">
+                <td></td> <td></td>
+                <td  class="text-center">
                     <div class="list-icons">
                         <div class="dropdown">
                             <a href="#" class="list-icons-item" data-toggle="dropdown">
@@ -56,6 +56,7 @@ function PortfolioList(props) {
                         </div>
                     </div>
                 </td>
+               <td></td>
             </tr>
 
             )

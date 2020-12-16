@@ -29,8 +29,7 @@ function Sidebar(proprs) {
 
 								<ul className="nav nav-group-sub" data-submenu-title="Volunteer">
 									<li className="nav-item"><a href="/admin/volunteerlist" className="nav-link">Volunteer List</a></li>
-									<li className="nav-item"><a href="index.html" className="nav-link">Assign Landmark</a></li>
-									<li className="nav-item"><a href="index.html" className="nav-link">Landmark Manager List</a></li>
+									<li className="nav-item"><a href="/admin/landmarkmanagerlist" className="nav-link">Landmark Manager List</a></li>
 
 								</ul>
 							</li>

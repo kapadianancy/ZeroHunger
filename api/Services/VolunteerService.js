@@ -148,7 +148,13 @@ exports.getAllLandmarkManager = async (req, res) => {
     try {
         landmarkManager.find({ is_deleted: false })
             .populate("landmark_id")
-            .populate("volunteer_id")
+            .populate({
+                path: 'volunteer_id',
+                populate: {
+                    path: 'user_id',
+                    model: 'User'
+                }
+            })
             .exec((err, v) => {
                 if (err) {
                     return res.status(400).send(err);
@@ -167,18 +173,17 @@ exports.getAllLandmarkManager = async (req, res) => {
 
 exports.getLandmarkManagerByVolunteer = async (req, res) => {
     try {
-        landmarkManager.findOne({ is_deleted: false ,volunteer_id:req.params.id})
+       const data =await landmarkManager.findOne({ is_deleted: false ,volunteer_id:req.params.id})
             .populate("landmark_id")
-            .populate("volunteer_id")
-            .exec((err, v) => {
-                if (err) {
-                    return res.status(400).send(err);
+            .populate("volunteer_id");
+           
+                if (data) {
+                    return res.status(200).send("True");             
                 }
-                else {
-                    return res.status(200).send(v);
-
+                else {                   
+                    return res.status(200).send("False");
                 }
-            })
+            
 
 
     } catch (err) {

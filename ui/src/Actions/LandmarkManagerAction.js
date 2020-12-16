@@ -28,13 +28,48 @@ export const addLandmarkManager = async (landmarkmanagerDispatch, landmarkmanage
 };
 
 
-export const getLandmarkManagerByVolunteer = async (landmarkmanagerDispatch,id) => {
-    await axios.get('volunteer/getLandmarkManagerByVolunteer/'+ id)
+export const getLandmarkManagerByVolunteer = async (landmarkmanagerDispatch, id) => {
+    await axios.get('volunteer/getLandmarkManagerByVolunteer/' + id)
         .then(async (response) => {
             landmarkmanagerDispatch({
                 type: ActionNames.GET_LANDMARK_MANAGER_BY_VOLUNTEER,
                 data: {
                     lanadmarkmanager: response.data
+                }
+            });
+
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
+
+export const getAllLandmarkManager = async (landmarkmanagerDispatch) => {
+    await axios.get('/volunteer/getAllLandmarkManager')
+        .then(async (response) => {
+            landmarkmanagerDispatch({
+                type: ActionNames.LANDMARK_MANAGER_LIST,
+                data: {
+                    landmarkmanagers: response.data
+                }
+            });
+
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
+
+export const removeLandmarkManager = async (landmarkmanagerDispatch, id) => {
+    const token = localStorage.getItem("token");
+    await axios.delete('/volunteer/deleteLandmarkManager/' + id, {
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    })
+        .then(async (response) => {
+            landmarkmanagerDispatch({
+                type: ActionNames.REMOVE_LANDMARK_MANAGER,
+                data: {
+                    landmarkmanager: response.data
                 }
             });
         }).catch(error => {
