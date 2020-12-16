@@ -36,7 +36,8 @@ const foodlistingSchema=mongoose.Schema({
         required:true
     },
     quality_status : {
-
+        type:String,
+        default:"unchecked"
     },
     is_deleted:
     {

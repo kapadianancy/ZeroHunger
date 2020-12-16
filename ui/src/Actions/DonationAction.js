@@ -91,3 +91,22 @@ export const areaWiseFoodDonation = async (donationDispatch,id) => {
             throw new Error(error);
         })
 };
+
+export const uncheckedQuality = async (donationDispatch,id) => {
+    const token = localStorage.getItem("token");
+    await axios.get('/donation/uncheckedquality/' + id,{
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    })
+        .then(async (response) => {
+            donationDispatch({
+                type: ActionNames.UNCHECKED_QUALITY,
+                data: {
+                    uncheckedQuality: response.data
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};

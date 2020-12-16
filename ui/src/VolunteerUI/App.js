@@ -17,6 +17,7 @@ import {useUserState} from '../Context/UserContext';
 import ReceiverList from './Components/Receiver/ReceiverList';
 import FoodRequest from './Components/FoodManagement/FoodRequest';
 import FoodDonation from './Components/FoodManagement/FoodDonation';
+import QualityChecking from './Components/FoodManagement/QualityChecking';
 
 
 
@@ -51,6 +52,7 @@ function App(props) {
 
         <Route path="/volunteer/foodrequestlist" exact component={FoodRequest} /> 
         <Route path="/volunteer/fooddonationlist" exact component={FoodDonation} /> 
+        <Route path="/volunteer/qualitychecking" exact component={QualityChecking} /> 
       </Switch>
      
     </>
