@@ -454,6 +454,77 @@ exports.uncheckedQuality = async (req, res) => {
                 return res.status(400).send(err);
             }
             else {
+                if(requests.length!=0)
+                {
+                 
+                var userIds = requests.map((r) => { return r.donor_id.user_id });
+                User.find({ _id: { $in: userIds }, landmark_id: land_id }, async (err, users) => {
+                    if (err) {
+
+                        return res.status(400).send(err);
+                    }
+                    else {
+                        if (users.length == 0) {
+                            return res.status(200).send("");
+                        }
+                        var uids = users.map((u) => { return u._id.toString() })
+                        var result = requests.filter(function (x) {
+                            return uids.includes(x.donor_id.user_id._id.toString());
+                        })
+                        res.status(200).send(result);
+                    }
+                })
+                }
+                else
+                {
+                    return res.status(200).send("");
+                }
+                
+
+                //res.status(200).send(userIds);
+            }
+        })
+
+
+    } catch (err) {
+        return res.status(400).send("bad request");
+    }
+}
+
+
+exports.checkedQuality = async (req, res) => {
+    try {
+        var land_id = req.params.id;
+        Food_listing.find({
+            is_deleted:0,
+            quality_status: { $ne: "unchecked" }
+        })
+        .populate({
+            path: 'receiver_id',
+            populate: {
+                path: 'category_id',
+                model: 'Receiver_category'
+            }
+        })
+        .populate({
+            path: 'donor_id',
+            populate: {
+                path: 'donor_category_id',
+                model: 'Donor_category'
+            }
+        })
+        .populate({
+            path: 'donor_id',
+            populate: {
+                path: 'user_id',
+                model: 'User'
+            }
+        })
+        .exec(async (err, requests) => {
+            if (err) {
+                return res.status(400).send(err);
+            }
+            else {
                 var userIds = requests.map((r) => { return r.donor_id.user_id });
                 User.find({ _id: { $in: userIds }, landmark_id: land_id }, async (err, users) => {
                     if (err) {
@@ -479,5 +550,21 @@ exports.uncheckedQuality = async (req, res) => {
 
     } catch (err) {
         return res.status(400).send("bad request");
+    }
+}
+
+
+exports.updateQuality = async (req, res) => {
+    try {
+        await Food_listing.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true }, (err) => {
+            if (err) {
+                return res.status(400).send(err)
+            }
+            else {
+                return res.status(201).send("food quality updated")
+            }
+        });
+    } catch (e) {
+        return res.status(400).send("Not Updated")
     }
 }

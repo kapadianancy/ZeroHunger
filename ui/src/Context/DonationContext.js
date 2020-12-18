@@ -21,6 +21,8 @@ function DonationReducer(state, action) {
             return{...state,areaWiseFoodDonation:action.data.fooddonation}
         case ActionNames.UNCHECKED_QUALITY:
             return{...state,uncheckedQuality:action.data.uncheckedQuality}
+        case ActionNames.UPDATE_QUALITY:
+            return{...state}
         default: {
             throw new Error(`Unhandled action type: ${action.type}`)
         }
@@ -35,7 +37,8 @@ function DonationProvider({ children }) {
         fooddonation: [],
         fooddelivery: [],
         areaWiseFoodDonation:[],
-        uncheckedQuality:[]
+        uncheckedQuality:[],
+        
 
     })
 

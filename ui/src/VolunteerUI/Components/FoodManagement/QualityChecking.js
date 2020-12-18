@@ -34,52 +34,67 @@ function QualityChecking(props) {
             //console.log(user.landmark_id._id)
             await actions.uncheckedQuality(foodDonationDispatch,user.landmark_id._id);
         }
-	}, [uncheckedQuality])
+	}, [])
 
+	const updateQuality=async(id,status)=>
+	{
+		//event.preventDefault();
+		let data={
+			quality_status:status
+		}
+		await actions.updateQuality(foodDonationDispatch,id,data);
+		await actions.uncheckedQuality(foodDonationDispatch,user.landmark_id._id);
+		window.location.reload();
+	}
 
 
 
 	var data = null;
-	data = uncheckedQuality.map(v => {
-		const date = new Date(v.date);
-		var dd = date.getDate();
-		var mm = date.getMonth() + 1;
-		var yyyy = date.getFullYear();
-		var d = yyyy + "-" + mm + "-" + dd
-
+	if(uncheckedQuality.length!=0)
+	{
 		
-		data = (
+		data = uncheckedQuality.map(v => {
+			const date = new Date(v.date);
+			var dd = date.getDate();
+			var mm = date.getMonth() + 1;
+			var yyyy = date.getFullYear();
+			var d = yyyy + "-" + mm + "-" + dd
 
-			<tr>
-				<td>{d}</td>
-				<td>{v.time}</td>
-				<td>{v.plates}</td>
-				
-                <td>{v.donor_id.user_id.name}</td>
-                <td>{v.donor_id.donor_category_id.category}</td>
-                <td>{v.donor_id.user_id.phone_number}</td>
-                <td>
-                    <div class="dropdown"  >
-                        <a href="#" class="badge badge-flat border-indigo text-indigo-600 dropdown-toggle" data-toggle="dropdown">Unchecked</a>
+			
+			data = (
 
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a href="#" class="dropdown-item">
-                                <span class="badge badge-mark mr-2 border-danger"></span>
-                                Bad
-                            </a>
-                           
-                            <a href="#" class="dropdown-item">
-                                <span class="badge badge-mark mr-2 border-success"></span>
-                                Good
-                            </a>
-                        </div>
-                    </div>
-                </td>
-			</tr>
+				<tr>
+					<td>{d}</td>
+					<td>{v.time}</td>
+					<td>{v.plates}</td>
+					
+					<td>{v.donor_id.user_id.name}</td>
+					<td>{v.donor_id.donor_category_id.category}</td>
+					<td>{v.donor_id.user_id.phone_number}</td>
+					<td>
+						<div class="dropdown"  >
+							<a href="#" class="badge badge-flat border-indigo text-indigo-600 dropdown-toggle" data-toggle="dropdown"
+							 style={{fontSize:"93%"}}>Unchecked</a>
 
-		)
-		return data;
-	})
+							<div class="dropdown-menu dropdown-menu-right">
+								<a onClick={()=>updateQuality(v._id,"bad")} class="dropdown-item">
+									<span class="badge badge-mark mr-2 border-danger"></span>
+									Bad
+								</a>
+							
+								<a onClick={()=>updateQuality(v._id,"good")} class="dropdown-item">
+									<span class="badge badge-mark mr-2 border-success"></span>
+									Good
+								</a>
+							</div>
+						</div>
+					</td>
+				</tr>
+
+			)
+			return data;
+		})
+	}
 
 	return (
 

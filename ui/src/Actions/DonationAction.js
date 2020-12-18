@@ -100,11 +100,28 @@ export const uncheckedQuality = async (donationDispatch,id) => {
         }
     })
         .then(async (response) => {
+            console.log(response)
             donationDispatch({
                 type: ActionNames.UNCHECKED_QUALITY,
                 data: {
-                    uncheckedQuality: response.data
+                    uncheckedQuality: response.data?response.data:[]
                 }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
+
+export const updateQuality = async (donationDispatch,id,status) => {
+    const token = localStorage.getItem("token");
+    await axios.put('/donation/updatequality/' + id,status,{
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    })
+        .then(async (response) => {
+            donationDispatch({
+                type: ActionNames.UPDATE_QUALITY
             });
         }).catch(error => {
             throw new Error(error);
