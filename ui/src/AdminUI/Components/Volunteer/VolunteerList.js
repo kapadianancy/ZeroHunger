@@ -27,44 +27,38 @@ function VolunteerList(props) {
 			landmark_id: landmark
 		}
 		await lactions.addLandmarkManager(landmarkmanagerDispatch, manager);
+		await actions.getAllVolunteer(volunteerDispatch);
 	}
 
-	const checklandmarkmanager = async (volunteer) => {
-		await lactions.getLandmarkManagerByVolunteer(landmarkmanagerDispatch, volunteer);
-	}
-
-	var [data, setData] = useState(null);
-	useEffect(() => {
 		var result;
 		result = volunteers.map((v) => {
-			const date = new Date(v.DOB);
+			const date = new Date(v.volunteer.DOB);
 			var dd = date.getDate();
 			var mm = date.getMonth() + 1;
 			var yyyy = date.getFullYear();
 			var d = yyyy + "-" + mm + "-" + dd
 
 			var weekday = "";
-			v.weekdays.forEach((w) => {
+			v.volunteer.weekdays.forEach((w) => {
 				weekday += w + " "
 			});
 
 			var weekend = "";
-			v.weekends.forEach(w => {
+			v.volunteer.weekends.forEach(w => {
 				weekend += w + " "
 			});
 
 			var vehicle_mode = "";
-			v.vehicle_mode.forEach(v => {
+			v.volunteer.vehicle_mode.forEach(v => {
 				vehicle_mode += v + " "
 			});
 			var assign = null;
-			checklandmarkmanager(v._id);
 
-			if (landmarkmanager == "False") {
+			if (v.manager == "True") {
 				assign = (<a class="btn bg-success-400 ml-3" >Assigned</a>);
 			}
 			else {
-				assign = (<a class="btn bg-teal-400 ml-3" onClick={() => assignlandmark(v.user_id.landmark_id._id, v._id)} >Assign</a>);
+				assign = (<a class="btn bg-teal-400 ml-3" onClick={() => assignlandmark(v.volunteer.user_id.landmark_id._id, v.volunteer._id)} >Assign</a>);
 			}
 
 
@@ -72,15 +66,15 @@ function VolunteerList(props) {
 
 				<tr>
 					<td>{assign}</td>
-					<td>{v.user_id.name}</td>
-					<td>{v.user_id.email}</td>
-					<td>{v.user_id.phone_number}</td>
-					<td>{v.user_id.address}</td>
-					<td>{v.user_id.landmark_id.name}</td>
+					<td>{v.volunteer.user_id.name}</td>
+					<td>{v.volunteer.user_id.email}</td>
+					<td>{v.volunteer.user_id.phone_number}</td>
+					<td>{v.volunteer.user_id.address}</td>
+					<td>{v.volunteer.user_id.landmark_id.name}</td>
 					<td>{d}</td>
-					<td>{v.gender}</td>
-					<td>{v.profession}</td>
-					<td>{v.skillset}</td>
+					<td>{v.volunteer.gender}</td>
+					<td>{v.volunteer.profession}</td>
+					<td>{v.volunteer.skillset}</td>
 					<td>{weekday}</td>
 					<td>{weekend}</td>
 					<td>{vehicle_mode}</td>
@@ -89,10 +83,6 @@ function VolunteerList(props) {
 			)
 			return result;
 		})
-		setData(result);
-
-	}, [volunteers, landmarkmanager])
-
 
 
 	return (
@@ -154,7 +144,7 @@ function VolunteerList(props) {
 											</tr>
 										</thead>
 										<tbody>
-											{data}
+											{result}
 										</tbody>
 									</table>
 								</div>
