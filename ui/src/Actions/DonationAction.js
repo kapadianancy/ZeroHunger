@@ -127,3 +127,69 @@ export const updateQuality = async (donationDispatch,id,status) => {
             throw new Error(error);
         })
 };
+
+export const goodQuality = async (donationDispatch,id) => {
+    const token = localStorage.getItem("token");
+    await axios.get('/donation/pickupdeliver/' + id,{
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    })
+        .then(async (response) => {
+            console.log(response)
+            donationDispatch({
+                type: ActionNames.GOOD_QUALITY,
+                data: {
+                    goodQuality: response.data?response.data:[]
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
+
+export const addFoodDelivery = async (donationDispatch,food) => {
+    const token = localStorage.getItem("token");
+    await axios.post('/donation/addFoodDelivery',food,{
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    })
+        .then(async (response) => {
+            donationDispatch({
+                type: ActionNames.ADD_FOOD_DELIVERY
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
+
+export const getAllPendingFood = async (donationDispatch,id) => {
+    await axios.get('/donation/getAllPendingFood/'+id)
+        .then(async (response) => {
+            donationDispatch({
+                type: ActionNames.PENDING_DELIVERY,
+                data: {
+                    pendingDelivery: response.data
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
+
+export const updatedeliverystatus = async (donationDispatch,id,status) => {
+    const token = localStorage.getItem("token");
+    await axios.put('/donation/updatedeliverystatus/' + id,status,{
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    })
+        .then(async (response) => {
+            donationDispatch({
+                type: ActionNames.UPDATE_DELIVERY_STATUS
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};

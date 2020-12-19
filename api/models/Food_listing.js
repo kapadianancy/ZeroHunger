@@ -23,7 +23,8 @@ const foodlistingSchema=mongoose.Schema({
     {
         type:mongoose.Schema.Types.ObjectId,
         //required:true,
-        ref:'Receiver'
+        ref:'Receiver',
+        default:null
     },
     event:
     {
@@ -44,6 +45,11 @@ const foodlistingSchema=mongoose.Schema({
         type:Boolean,
         required:true,
         default:false
+    },
+    assigned:
+    {
+        type:Boolean,
+        default:0
     }
 },
 {
