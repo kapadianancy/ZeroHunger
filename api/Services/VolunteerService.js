@@ -19,7 +19,8 @@ exports.signup = async (req, res) => {
 
 exports.getAll = async (req, res) => {
     try {
-        volunteer.find({ is_deleted: false })
+        var final = [];
+        await volunteer.find({ is_deleted: false })
             .populate("user_id")
             .populate({
                 path: 'user_id',
@@ -28,15 +29,26 @@ exports.getAll = async (req, res) => {
                     model: 'Landmark'
                 }
             })
-            .exec((err, v) => {
-                if (err) {
-                    return res.status(400).send(err);
-                }
-                else {
-                    return res.status(200).send(v)
-                }
-            })
+            .exec()
+            .then(async (data1) => {
+                var i = 0;
+                await data1.forEach(async (d) => {
+                    var manager = "False";
+                    await landmarkManager.findOne({ is_deleted: false, volunteer_id: d._id })
+                        .exec()
+                        .then((res) => {
 
+                            if (res) {
+                                manager = "True"
+                            }
+                            i++;
+                            final.push({ volunteer: d, manager })
+                        })
+                    if (i == data1.length) {
+                        res.status(200).send(final)
+                    }
+                })
+            })
 
     } catch (err) {
         return res.status(400).send("bad request");
@@ -60,10 +72,10 @@ exports.delete = async (req, res) => {
 exports.getVolunteerById = async (req, res) => {
     try {
         const u = await volunteer.findOne({ user_id: req.params.id, is_deleted: 0 })
-        .populate("landmark_id")
-        .populate("user_id");
+            .populate("landmark_id")
+            .populate("user_id");
         if (u) {
-            return res.status(200).send({volunteer:u});
+            return res.status(200).send({ volunteer: u });
         }
         return res.status(400).send("not found");
 
@@ -74,32 +86,30 @@ exports.getVolunteerById = async (req, res) => {
 
 exports.edit = async (req, res) => {
     try {
-        var v=await volunteer.findByIdAndUpdate(req.params.id, req.body,{new:true,runValidators:true})
+        var v = await volunteer.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
 
-            if (!v) {
-                return res.status(400).send(err)
-            }
-            else {
-                var u=await User.findByIdAndUpdate(v.user_id, req.body,{new:true,runValidators:true})
-                if(u)
+        if (!v) {
+            return res.status(400).send(err)
+        }
+        else {
+            var u = await User.findByIdAndUpdate(v.user_id, req.body, { new: true, runValidators: true })
+            if (u)
                 return res.status(201).send(v)
-            }
-       
+        }
+
     } catch (e) {
         return res.status(400).send("Not Updated")
     }
 }
 
-exports.total=async(req,res)=>
-{
-    try{
-        var total=await volunteer.where({is_deleted:false}).count();          
-        
-        if(total == 0)
-        {
-            return res.status(200).send({total:0});
+exports.total = async (req, res) => {
+    try {
+        var total = await volunteer.where({ is_deleted: false }).count();
+
+        if (total == 0) {
+            return res.status(200).send({ total: 0 });
         }
-        return res.status(200).send({total});
+        return res.status(200).send({ total });
 
     } catch (err) {
         return res.status(400).send("bad request");
@@ -111,16 +121,16 @@ exports.areaWiseTotal = async (req, res) => {
         var role_id = await Role.findOne({
             name: "Volunteer"
         })
-        var land_id=req.params.id;
+        var land_id = req.params.id;
         var total = await User.where({ is_deleted: false })
             .where({ role_id: role_id }) //role id for volunteer
-            .where({ landmark_id: land_id})
+            .where({ landmark_id: land_id })
             .countDocuments();
 
         if (total == 0) {
-            return res.status(200).send({total:0});
+            return res.status(200).send({ total: 0 });
         }
-        return res.status(200).send({total:total});
+        return res.status(200).send({ total: total });
 
     } catch (err) {
         return res.status(400).send("bad request");
@@ -173,17 +183,17 @@ exports.getAllLandmarkManager = async (req, res) => {
 
 exports.getLandmarkManagerByVolunteer = async (req, res) => {
     try {
-       const data =await landmarkManager.findOne({ is_deleted: false ,volunteer_id:req.params.id})
+        const data = await landmarkManager.findOne({ is_deleted: false, volunteer_id: req.params.id })
             .populate("landmark_id")
             .populate("volunteer_id");
-           
-                if (data) {
-                    return res.status(200).send("True");             
-                }
-                else {                   
-                    return res.status(200).send("False");
-                }
-            
+
+        if (data) {
+            return res.status(200).send("True");
+        }
+        else {
+            return res.status(200).send("False");
+        }
+
 
 
     } catch (err) {
@@ -248,8 +258,7 @@ exports.areaWise=async(req,res)=>
             }
         })
 
-    }catch(err)
-    {
+    } catch (err) {
         return res.status(400).send("bad request");
     }
 }
