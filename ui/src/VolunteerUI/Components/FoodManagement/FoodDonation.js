@@ -33,7 +33,8 @@ function FoodDonation(props) {
         {
             //console.log(user.landmark_id._id)
             await actions.areaWiseFoodDonation(foodDonationDispatch,user.landmark_id._id);
-        }
+		}
+		console.log(areaWiseFoodDonation);
 	}, [areaWiseFoodDonation])
 
 
@@ -54,10 +55,10 @@ function FoodDonation(props) {
 				<td>{d}</td>
 				<td>{v.time}</td>
 				<td>{v.plates}</td>
-				<td>{v.receiver_id.name}</td>
-				<td>{v.receiver_id.category_id.name}</td>				
-				<td>{v.receiver_id.population}</td>
-                <td>{v.receiver_id.phone_number}</td>
+				{v.receiver_id==null?<td>-</td>:<td>{v.receiver_id.name}</td>}
+				{v.receiver_id==null?<td>-</td>:<td>{v.receiver_id.category_id.name}</td>}				
+				{v.receiver_id==null?<td>-</td>:<td>{v.receiver_id.population}</td>}
+				{v.receiver_id==null?<td>-</td>:<td>{v.receiver_id.phone_number}</td> }
                 <td>{v.donor_id.user_id.name}</td>
                 <td>{v.donor_id.donor_category_id.category}</td>
                 <td>{v.donor_id.user_id.phone_number}</td>

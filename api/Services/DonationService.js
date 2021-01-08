@@ -582,10 +582,10 @@ exports.pickupDeliver = async (req, res) => {
     try {
         var land_id = req.params.id;
         Food_listing.find({
-            is_deleted:0,
+            is_deleted:false,
             quality_status:"good",
             receiver_id:{$ne:null},
-            assigned:0
+            assigned:false
         })
         .populate({
             path: 'receiver_id',
@@ -699,5 +699,23 @@ exports.updateDeliverystatus = async (req, res) => {
         return res.status(400).send("Not Updated")
     }
 }
+
+
+exports.redirectfood = async (req, res) => {
+    try {
+        await Food_listing.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true }, (err) => {
+            if (err) {
+                return res.status(400).send(err)
+            }
+            else {
+                return res.status(201).send("status updated")
+            }
+        });
+    } catch (e) {
+        return res.status(400).send("Not Updated")
+    }
+}
+
+
 
 

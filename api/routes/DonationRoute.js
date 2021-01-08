@@ -63,4 +63,6 @@ router.get('/getAllPendingFood/:id',Donation.getAllPendingFood);
 
 router.put('/updatedeliverystatus/:id',auth,Donation.updateDeliverystatus);
 
+router.put('/redirectfood/:id',auth,Donation.redirectfood)
+
 module.exports = router;

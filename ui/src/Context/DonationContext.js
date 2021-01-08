@@ -18,7 +18,7 @@ function DonationReducer(state, action) {
         case ActionNames.FOOD_DELIVERY_LIST:
             return { ...state, fooddelivery: action.data.fooddelivery }
         case ActionNames.AREAWSIE_FOODDONATION:
-            return{...state,areaWiseFoodDonation:action.data.fooddonation}
+            return{...state,areaWiseFoodDonation:action.data.areaWiseFoodDonation}
         case ActionNames.UNCHECKED_QUALITY:
             return{...state,uncheckedQuality:action.data.uncheckedQuality}
         case ActionNames.UPDATE_QUALITY:
@@ -28,6 +28,8 @@ function DonationReducer(state, action) {
         case ActionNames.ADD_FOOD_DELIVERY:
             return{...state}
         case ActionNames.UPDATE_DELIVERY_STATUS:
+            return{...state}
+        case ActionNames.REDIRECT_FOOD:
             return{...state}
         case ActionNames.PENDING_DELIVERY:
             return{...state,pendingDelivery :action.data.pendingDelivery}

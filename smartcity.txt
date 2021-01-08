@@ -231,8 +231,13 @@ dashboard
 	donation history
 	new donation (donor category wise form)
 	logout
+----------------------------------------------------------
 	
-		
+graph-admin = area wise food donation
+	area wise volunteers
+
+graph-volunteeer= receiver wise total food request
+		volunteer wise food delivery		
 	
 
 

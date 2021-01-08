@@ -81,10 +81,11 @@ export const areaWiseFoodDonation = async (donationDispatch,id) => {
         }
     })
         .then(async (response) => {
+            //console.log(response)
             donationDispatch({
                 type: ActionNames.AREAWSIE_FOODDONATION,
                 data: {
-                    fooddonation: response.data
+                    areaWiseFoodDonation: response.data
                 }
             });
         }).catch(error => {
@@ -127,6 +128,25 @@ export const updateQuality = async (donationDispatch,id,status) => {
             throw new Error(error);
         })
 };
+
+export const redirectFood = async (donationDispatch,id,data) => {
+    console.log(data);
+    const token = localStorage.getItem("token");
+    await axios.put('/donation/redirectfood/' + id,data,{
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    })
+        .then(async (response) => {
+            console.log(response);
+            donationDispatch({
+                type: ActionNames.REDIRECT_FOOD
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
+
 
 export const goodQuality = async (donationDispatch,id) => {
     const token = localStorage.getItem("token");
