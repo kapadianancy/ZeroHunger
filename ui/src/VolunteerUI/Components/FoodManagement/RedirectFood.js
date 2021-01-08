@@ -141,7 +141,7 @@ function FoodDonation(props) {
 					<div class="page-header page-header-light">
 						<div class="page-header-content header-elements-md-inline" style={{ height: "55px" }}>
 							<div class="page-title d-flex">
-								<h4> <span class="font-weight-semibold">Food Donation</span></h4>
+								<h4> <span class="font-weight-semibold">Redirect Food</span></h4>
 								<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 							</div>
 
@@ -152,7 +152,7 @@ function FoodDonation(props) {
 							<div class="d-flex">
 								<div class="breadcrumb">
 									<a href="/volunteer" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
-									<a href="/volunteer/fooddonationlist" class="breadcrumb-item">Food Donation</a>
+									<a href="/volunteer/redirectfood" class="breadcrumb-item">Redirect Food</a>
 
 								</div>
 
