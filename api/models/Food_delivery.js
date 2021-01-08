@@ -8,7 +8,8 @@ const fooddeliverySchema=mongoose.Schema({
     {
         type:mongoose.Schema.Types.ObjectId,
         required:true,
-        ref:'Food_listing'
+        ref:'Food_listing',
+        unique:true
     },
     volunteer_id:
     {
@@ -19,9 +20,16 @@ const fooddeliverySchema=mongoose.Schema({
     status:
     {
         type:String,
-        required:true
+        required:true,
+        default:"Pending"
     },
-    
+    landmark_id:
+    {
+        type:mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref:'Landmark',
+        unique:true
+    },
     is_deleted:
     {
         type:Boolean,

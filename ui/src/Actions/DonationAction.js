@@ -81,10 +81,11 @@ export const areaWiseFoodDonation = async (donationDispatch,id) => {
         }
     })
         .then(async (response) => {
+            //console.log(response)
             donationDispatch({
                 type: ActionNames.AREAWSIE_FOODDONATION,
                 data: {
-                    fooddonation: response.data
+                    areaWiseFoodDonation: response.data
                 }
             });
         }).catch(error => {
@@ -122,6 +123,91 @@ export const updateQuality = async (donationDispatch,id,status) => {
         .then(async (response) => {
             donationDispatch({
                 type: ActionNames.UPDATE_QUALITY
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
+
+export const redirectFood = async (donationDispatch,id,data) => {
+    console.log(data);
+    const token = localStorage.getItem("token");
+    await axios.put('/donation/redirectfood/' + id,data,{
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    })
+        .then(async (response) => {
+            console.log(response);
+            donationDispatch({
+                type: ActionNames.REDIRECT_FOOD
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
+
+
+export const goodQuality = async (donationDispatch,id) => {
+    const token = localStorage.getItem("token");
+    await axios.get('/donation/pickupdeliver/' + id,{
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    })
+        .then(async (response) => {
+            console.log(response)
+            donationDispatch({
+                type: ActionNames.GOOD_QUALITY,
+                data: {
+                    goodQuality: response.data?response.data:[]
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
+
+export const addFoodDelivery = async (donationDispatch,food) => {
+    const token = localStorage.getItem("token");
+    await axios.post('/donation/addFoodDelivery',food,{
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    })
+        .then(async (response) => {
+            donationDispatch({
+                type: ActionNames.ADD_FOOD_DELIVERY
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
+
+export const getAllPendingFood = async (donationDispatch,id) => {
+    await axios.get('/donation/getAllPendingFood/'+id)
+        .then(async (response) => {
+            donationDispatch({
+                type: ActionNames.PENDING_DELIVERY,
+                data: {
+                    pendingDelivery: response.data
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
+
+export const updatedeliverystatus = async (donationDispatch,id,status) => {
+    const token = localStorage.getItem("token");
+    await axios.put('/donation/updatedeliverystatus/' + id,status,{
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    })
+        .then(async (response) => {
+            donationDispatch({
+                type: ActionNames.UPDATE_DELIVERY_STATUS
             });
         }).catch(error => {
             throw new Error(error);

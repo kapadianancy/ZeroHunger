@@ -81,6 +81,8 @@ exports.getAllDeliveredFood = async (req, res) => {
     }
 }
 
+
+
 exports.addFoodListing = async (req, res) => {
     const event = new Food_listing(req.body)
     try {
@@ -102,10 +104,15 @@ exports.addMoneyDonation = async (req, res) => {
 }
 
 exports.addFoodDelivery = async (req, res) => {
-    const event = new Food_delivery(req.body)
+    
     try {
-        await event.save();
-        return res.status(201).send("Food Delivery Inserted")
+        
+        const data = new Food_delivery(req.body);
+        await data.save();
+        const f=await Food_listing.findOne({_id:req.body.food_listing_id});
+        f.assigned=true;
+        await f.save();
+        return res.status(201).send(data)
     } catch (e) {
         return res.status(400).send(e)
     }
@@ -568,3 +575,147 @@ exports.updateQuality = async (req, res) => {
         return res.status(400).send("Not Updated")
     }
 }
+
+
+
+exports.pickupDeliver = async (req, res) => {
+    try {
+        var land_id = req.params.id;
+        Food_listing.find({
+            is_deleted:false,
+            quality_status:"good",
+            receiver_id:{$ne:null},
+            assigned:false
+        })
+        .populate({
+            path: 'receiver_id',
+            populate: {
+                path: 'category_id',
+                model: 'Receiver_category'
+            }
+        })
+        .exec(async (err, requests) => {
+            if (err) {
+                return res.status(400).send(err);
+            }
+            else {
+                if(requests.length!=0)
+                {
+                 
+                var userIds = requests.map((r) => { return r.receiver_id._id });
+                Receiver.find({ _id: { $in: userIds }, landmark_id: land_id }, async (err, users) => {
+                    if (err) {
+
+                        return res.status(400).send(err);
+                    }
+                    else {
+                        if (users.length == 0) {
+                            return res.status(200).send("");
+                        }
+                        var uids = users.map((u) => { return u._id.toString() })
+                        var result = requests.filter(function (x) {
+                            return uids.includes(x.receiver_id._id.toString());
+                        })
+                        res.status(200).send(result);
+                    }
+                })
+                }
+                else
+                {
+                    return res.status(200).send("");
+                }
+                
+
+                //res.status(200).send(userIds);
+            }
+        })
+
+
+    } catch (err) {
+        return res.status(400).send("bad request");
+    }
+}
+
+exports.getAllPendingFood = async (req, res) => {
+    try {
+        let land_id=req.params.id;
+        const data = await Food_delivery.find({
+            status: "Pending",
+            is_deleted: 0,
+            landmark_id:land_id
+        }).populate("food_listing_id")
+            .populate({
+                path: 'volunteer_id',
+                populate: {
+                    path: 'user_id',
+                    model: 'User'
+                }
+            })
+            .populate({
+                path: 'food_listing_id',
+                populate: {
+                    path: 'receiver_id',
+                    model: 'Receiver'
+                }
+            })
+            .populate({
+                path: 'food_listing_id',
+                populate: {
+                    path: 'donor_id',
+                    model: 'Donor',
+                    populate: {
+                        path: 'user_id',
+                        model: 'User',
+                    }
+                }
+            })
+            .populate({
+                path: 'volunteer_id',
+                populate: {
+                    path: 'user_id',
+                    model: 'User'
+                }
+            })
+
+        return res.status(200).send(data)
+
+
+    } catch (err) {
+        return res.status(400).send("Bad request");
+    }
+}
+
+exports.updateDeliverystatus = async (req, res) => {
+    try {
+        await Food_delivery.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true }, (err) => {
+            if (err) {
+                return res.status(400).send(err)
+            }
+            else {
+                return res.status(201).send("status updated")
+            }
+        });
+    } catch (e) {
+        return res.status(400).send("Not Updated")
+    }
+}
+
+
+exports.redirectfood = async (req, res) => {
+    try {
+        await Food_listing.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true }, (err) => {
+            if (err) {
+                return res.status(400).send(err)
+            }
+            else {
+                return res.status(201).send("status updated")
+            }
+        });
+    } catch (e) {
+        return res.status(400).send("Not Updated")
+    }
+}
+
+
+
+

@@ -6,18 +6,21 @@ import Sidebar from '../Sidebar/Sidebar';
 import * as actions from '../../../Actions/DonationAction';
 import * as uactions from '../../../Actions/UserAction'
 
+
 import { useDonationDispatch,useDonationState} from '../../../Context/DonationContext';
 import {useUserDispatch,useUserState} from '../../../Context/UserContext';
 
 
-function FoodDonation(props) {
+
+function DeliveryStatus(props) {
 
     var loggedin=JSON.parse(localStorage.getItem('user'));
     var userdispatch=useUserDispatch();
     var{user}=useUserState();
 
     var foodDonationDispatch=useDonationDispatch();
-    var{areaWiseFoodDonation}=useDonationState();
+	var{pendingDelivery}=useDonationState();
+	
 
     useEffect(async()=>
     {
@@ -32,37 +35,46 @@ function FoodDonation(props) {
         if(user!=null)
         {
             //console.log(user.landmark_id._id)
-            await actions.areaWiseFoodDonation(foodDonationDispatch,user.landmark_id._id);
+			await actions.getAllPendingFood(foodDonationDispatch,user.landmark_id._id);
+        }
+	}, [pendingDelivery])
+
+	const update=async(id)=>
+	{
+		let data={
+			status:"Delivered"
 		}
-		console.log(areaWiseFoodDonation);
-	}, [areaWiseFoodDonation])
+		await actions.updatedeliverystatus(foodDonationDispatch,id,data);
+		await actions.getAllPendingFood(foodDonationDispatch,user.landmark_id._id);
+		window.location.reload();		
+	}
 
-
+	
 
 
 	var data = null;
-	data = areaWiseFoodDonation.map(v => {
-		const date = new Date(v.date);
+	data = pendingDelivery.map(v => {
+		const date = new Date(v.food_listing_id.date);
 		var dd = date.getDate();
 		var mm = date.getMonth() + 1;
 		var yyyy = date.getFullYear();
 		var d = yyyy + "-" + mm + "-" + dd
-
-		
+        
+        
 		data = (
 
 			<tr>
 				<td>{d}</td>
-				<td>{v.time}</td>
-				<td>{v.plates}</td>
-				{v.receiver_id==null?<td>-</td>:<td>{v.receiver_id.name}</td>}
-				{v.receiver_id==null?<td>-</td>:<td>{v.receiver_id.category_id.name}</td>}				
-				{v.receiver_id==null?<td>-</td>:<td>{v.receiver_id.population}</td>}
-				{v.receiver_id==null?<td>-</td>:<td>{v.receiver_id.phone_number}</td> }
-                <td>{v.donor_id.user_id.name}</td>
-                <td>{v.donor_id.donor_category_id.category}</td>
-                <td>{v.donor_id.user_id.phone_number}</td>
-				
+				<td>{v.food_listing_id.time}</td>
+				<td>{v.food_listing_id.plates}</td>
+				<td>{v.food_listing_id.receiver_id.name}</td>	
+                <td>{v.food_listing_id.donor_id.user_id.name}</td>			
+				<td>{v.volunteer_id.user_id.name}</td>
+                <td><span class="badge bg-danger-400">{v.status}</span></td>
+                <td>
+                <button type="button" onClick={()=>update(v._id)} class="btn bg-teal-400 btn-labeled btn-labeled-left rounded-round">
+                    <b><i class="icon-truck"></i></b> Delivered</button>
+                </td>
 			</tr>
 
 		)
@@ -80,7 +92,7 @@ function FoodDonation(props) {
 					<div class="page-header page-header-light">
 						<div class="page-header-content header-elements-md-inline" style={{ height: "55px" }}>
 							<div class="page-title d-flex">
-								<h4> <span class="font-weight-semibold">Food Donation</span></h4>
+								<h4> <span class="font-weight-semibold">Delivery status</span></h4>
 								<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 							</div>
 
@@ -91,7 +103,7 @@ function FoodDonation(props) {
 							<div class="d-flex">
 								<div class="breadcrumb">
 									<a href="/volunteer" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
-									<a href="/volunteer/fooddonationlist" class="breadcrumb-item">Food Donation</a>
+									<a href="/volunteer/deliverystatus" class="breadcrumb-item">Delivery status</a>
 
 								</div>
 
@@ -115,12 +127,10 @@ function FoodDonation(props) {
 												<th>Time</th>
                                                 <th>Plates</th>
                                                 <th>Receiver Name</th>
-												<th>Receiver Categoory</th>
-                                                <th>Receiver Population</th>
-                                                <th>Receiver Phone Number</th>
-                                                <th>donor Name</th>
-                                                <th>donor Category</th>
-                                                <th>donor Phone Number</th>
+												<th>Donor Name</th>
+                                                <th>volunteer Name</th>
+                                                <th>Current Status</th>
+                                                <th>Delivered ?</th>
 												
 											</tr>
 										</thead>
@@ -138,4 +148,4 @@ function FoodDonation(props) {
 		</>
 	)
 }
-export default FoodDonation;
+export default DeliveryStatus;

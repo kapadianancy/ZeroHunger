@@ -16,6 +16,8 @@ function VolunteerReducer(state, action) {
 			return { ...state, volunteer: null }
 		case ActionNames.VOLUNTEER_LIST:
 			return { ...state, volunteers: action.data.volunteers }
+		case ActionNames.AREAWSIE_VOLUNTEER:
+			return { ...state, areaWiseVolunteers: action.data.volunteers }
 		default: {
 			throw new Error(`Unhandled action type: ${action.type}`)
 		}
@@ -27,7 +29,8 @@ function VolunteerProvider({ children }) {
 		totalAreaWiseVolunteer: 0,
 		totalVolunteer: 0,
 		volunteer: null,
-		volunteers: []
+		volunteers: [],
+		areaWiseVolunteers:[]
 	})
 
 	return (

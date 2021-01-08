@@ -5,19 +5,24 @@ import Sidebar from '../Sidebar/Sidebar';
 
 import * as actions from '../../../Actions/DonationAction';
 import * as uactions from '../../../Actions/UserAction'
+import * as vactions from '../../../Actions/VolunteerAction'
 
 import { useDonationDispatch,useDonationState} from '../../../Context/DonationContext';
 import {useUserDispatch,useUserState} from '../../../Context/UserContext';
+import { useVolunteerDispatch,useVolunteerState} from '../../../Context/VolunteerContext';
 
 
-function FoodDonation(props) {
+function PickupDeliver(props) {
 
     var loggedin=JSON.parse(localStorage.getItem('user'));
     var userdispatch=useUserDispatch();
     var{user}=useUserState();
 
     var foodDonationDispatch=useDonationDispatch();
-    var{areaWiseFoodDonation}=useDonationState();
+	var{goodQuality}=useDonationState();
+	
+	var volunteerDispatch=useVolunteerDispatch();
+    var{areaWiseVolunteers}=useVolunteerState();
 
     useEffect(async()=>
     {
@@ -27,21 +32,32 @@ function FoodDonation(props) {
        }
         
     },[user])
-
 	useEffect(async () => {
         if(user!=null)
         {
             //console.log(user.landmark_id._id)
-            await actions.areaWiseFoodDonation(foodDonationDispatch,user.landmark_id._id);
+			await actions.goodQuality(foodDonationDispatch,user.landmark_id._id);
+			await vactions.areaWise(volunteerDispatch,user.landmark_id._id);
+        }
+	}, [goodQuality,areaWiseVolunteers])
+
+	const addFoodDelivery=async(fid,vid)=>
+	{
+		let data={
+			food_listing_id:fid,
+			volunteer_id:vid,
+			landmark_id:user.landmark_id._id
 		}
-		console.log(areaWiseFoodDonation);
-	}, [areaWiseFoodDonation])
+		await actions.addFoodDelivery(foodDonationDispatch,data);
+		await actions.goodQuality(foodDonationDispatch,user.landmark_id._id);
+		window.location.reload();		
+	}
 
-
+	
 
 
 	var data = null;
-	data = areaWiseFoodDonation.map(v => {
+	data = goodQuality.map(v => {
 		const date = new Date(v.date);
 		var dd = date.getDate();
 		var mm = date.getMonth() + 1;
@@ -55,13 +71,32 @@ function FoodDonation(props) {
 				<td>{d}</td>
 				<td>{v.time}</td>
 				<td>{v.plates}</td>
-				{v.receiver_id==null?<td>-</td>:<td>{v.receiver_id.name}</td>}
-				{v.receiver_id==null?<td>-</td>:<td>{v.receiver_id.category_id.name}</td>}				
-				{v.receiver_id==null?<td>-</td>:<td>{v.receiver_id.population}</td>}
-				{v.receiver_id==null?<td>-</td>:<td>{v.receiver_id.phone_number}</td> }
-                <td>{v.donor_id.user_id.name}</td>
-                <td>{v.donor_id.donor_category_id.category}</td>
-                <td>{v.donor_id.user_id.phone_number}</td>
+				<td>{v.receiver_id.name}</td>
+				<td>{v.receiver_id.category_id.name}</td>				
+				<td>{v.receiver_id.address}</td>
+                <td>{v.receiver_id.phone_number}</td>
+                
+				<td>
+						<div class="dropdown"  >
+							<a href="#" class="badge badge-flat border-indigo text-indigo-600 dropdown-toggle" data-toggle="dropdown"
+							 style={{fontSize:"93%"}}>Unassigned</a>
+
+							<div class="dropdown-menu dropdown-menu-right">
+							{
+								areaWiseVolunteers.map(x=>
+								{
+									let volunteers=(
+										<a onClick={()=>addFoodDelivery(v._id,x._id)} class="dropdown-item">
+											<span class="badge badge-mark mr-2 border-danger"></span>
+											{x.user_id.name}
+										</a>
+									)
+									return volunteers;
+								})
+							}
+							</div>
+						</div>
+					</td>
 				
 			</tr>
 
@@ -80,7 +115,7 @@ function FoodDonation(props) {
 					<div class="page-header page-header-light">
 						<div class="page-header-content header-elements-md-inline" style={{ height: "55px" }}>
 							<div class="page-title d-flex">
-								<h4> <span class="font-weight-semibold">Food Donation</span></h4>
+								<h4> <span class="font-weight-semibold">Pickup and Deliver</span></h4>
 								<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 							</div>
 
@@ -91,7 +126,7 @@ function FoodDonation(props) {
 							<div class="d-flex">
 								<div class="breadcrumb">
 									<a href="/volunteer" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
-									<a href="/volunteer/fooddonationlist" class="breadcrumb-item">Food Donation</a>
+									<a href="/volunteer/pickupdeliver" class="breadcrumb-item">Pickup and Deliver</a>
 
 								</div>
 
@@ -116,11 +151,9 @@ function FoodDonation(props) {
                                                 <th>Plates</th>
                                                 <th>Receiver Name</th>
 												<th>Receiver Categoory</th>
-                                                <th>Receiver Population</th>
+                                                <th>Receiver Address</th>
                                                 <th>Receiver Phone Number</th>
-                                                <th>donor Name</th>
-                                                <th>donor Category</th>
-                                                <th>donor Phone Number</th>
+                                                <th>Assign Volunteer?</th>
 												
 											</tr>
 										</thead>
@@ -138,4 +171,4 @@ function FoodDonation(props) {
 		</>
 	)
 }
-export default FoodDonation;
+export default PickupDeliver;

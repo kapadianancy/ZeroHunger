@@ -213,15 +213,50 @@ exports.deleteLandmarkManager = async (req, res) => {
     }
 }
 
-exports.areaWise = async (req, res) => {
-    try {
-        var volunteer = await User.find({ is_deleted: false, role_id: "5fb3be8ccb07c31f57ab2908", landmark_id: "5fb3be57cb07c31f57ab2905" });
+exports.areaWise=async(req,res)=>
+{
+    try{
+    
+        var land_id = req.params.id;
+        volunteer.find({
+            is_deleted:0
+         })
+        .populate('user_id')
+        .exec(async (err, requests) => {
+            if (err) {
+                return res.status(400).send(err);
+            }
+            else {
+                if(requests.length!=0)
+                {
+                 
+                var userIds = requests.map((r) => { return r.user_id._id });
+                User.find({ _id: { $in: userIds }, landmark_id: land_id }, async (err, users) => {
+                    if (err) {
 
+                        return res.status(400).send(err);
+                    }
+                    else {
+                        if (users.length == 0) {
+                            return res.status(200).send("");
+                        }
+                        var uids = users.map((u) => { return u._id.toString() })
+                        var result = requests.filter(function (x) {
+                            return uids.includes(x.user_id._id.toString());
+                        })
+                        res.status(200).send(result);
+                    }
+                })
+                }
+                else
+                {
+                    return res.status(200).send("");
+                }
+                
 
-        if (volunteer.length == 0) {
-            return res.status(200).send(`No data found`);
-        }
-        return res.status(200).send(volunteer);
+                //res.status(200).send(userIds);
+            }
+        })
 
     } catch (err) {
         return res.status(400).send("bad request");

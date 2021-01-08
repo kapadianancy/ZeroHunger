@@ -91,9 +91,7 @@ function Sidebar(proprs) {
 							<li className="nav-item">
 								<a  className="nav-link"><i className="icon-graph"></i> <span>Graphs</span></a>
 							</li>
-							<li className="nav-item">
-								<a className="nav-link"><i className="icon-table"></i> <span>Reports</span></a>
-							</li>
+							
 						</ul>
 					</div>
 

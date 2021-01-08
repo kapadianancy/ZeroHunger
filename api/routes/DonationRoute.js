@@ -57,4 +57,12 @@ router.get('/checkedquality/:id',auth,Donation.checkedQuality);
 
 router.put('/updatequality/:id',auth,Donation.updateQuality);
 
+router.get('/pickupdeliver/:id',auth,Donation.pickupDeliver);
+
+router.get('/getAllPendingFood/:id',Donation.getAllPendingFood);
+
+router.put('/updatedeliverystatus/:id',auth,Donation.updateDeliverystatus);
+
+router.put('/redirectfood/:id',auth,Donation.redirectfood)
+
 module.exports = router;

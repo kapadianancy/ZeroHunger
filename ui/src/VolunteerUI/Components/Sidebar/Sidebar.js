@@ -41,8 +41,13 @@ function Sidebar(proprs) {
 									<li class="nav-item"><a href="/volunteer/redirectfood" class="nav-link">Redirect Food</a></li>
 								</ul>
 							</li>
-							<li class="nav-item">
-								<a href="#" class="nav-link"><i class="icon-truck"></i><span>Pickup and Delivery</span></a>							
+							
+							<li class="nav-item nav-item-submenu">
+								<a href="#" class="nav-link"><i class="icon-truck"></i><span>Pickup and Delivery</span></a>	
+								<ul class="nav nav-group-sub" data-submenu-title="Pickup and Delivery">
+									<li class="nav-item"><a href="/volunteer/pickupdeliver" class="nav-link">Pickup-Deliver Food</a></li>
+									<li class="nav-item"><a href="/volunteer/deliverystatus" class="nav-link">Manage delivery status</a></li>
+								</ul>						
 							</li>
 		
 							
@@ -57,9 +62,7 @@ function Sidebar(proprs) {
 							<li class="nav-item">
 								<a href="#" class="nav-link"><i class="icon-graph"></i> <span>Graphs</span></a>
 							</li>
-							<li class="nav-item">
-								<a href="#" class="nav-link"><i class="icon-table"></i> <span>Reports</span></a>
-							</li>
+							
 						</ul>
 					</div>
 

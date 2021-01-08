@@ -88,3 +88,18 @@ export const getAllVolunteer = async (volunteerDispatch) => {
             throw new Error(error);
         })
 };
+
+export const areaWise = async (volunteerDispatch,id) => {
+
+    await axios.get('/volunteer/areaWise/'+id)
+        .then(async (response) => {
+            volunteerDispatch({
+                type: ActionNames.AREAWSIE_VOLUNTEER,
+                data: {
+                    volunteers: response.data
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};

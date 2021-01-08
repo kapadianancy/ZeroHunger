@@ -14,7 +14,7 @@ router.delete('/delete/:id',auth,volunteer.delete);
 
 router.get('/areaWiseTotal/:id',volunteer.areaWiseTotal)
 
-router.get('/areaWise',volunteer.areaWise)
+router.get('/areaWise/:id',volunteer.areaWise)
 
 router.get('/getVolunteerById/:id',auth,volunteer.getVolunteerById);
 
