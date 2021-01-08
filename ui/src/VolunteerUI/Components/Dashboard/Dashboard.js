@@ -105,7 +105,7 @@ function Dashboard(props) {
                 <div class="row">
                     
 
-                    <div class="col-lg-3" >
+                    <div class="col-lg-4" >
                         <div class="card bg-indigo-400" style={style}>
                             <div class="card-body">
                                 <div class="d-flex">
@@ -120,7 +120,7 @@ function Dashboard(props) {
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="card bg-pink-400" style={style}>
                             <div class="card-body">
                                 <div class="d-flex">
@@ -137,7 +137,7 @@ function Dashboard(props) {
                     </div>
 
 
-                    <div class="col-lg-3" >
+                    <div class="col-lg-4" >
                         <div class="card bg-green-600" style={style}>
                             <div class="card-body">
                                 <div class="d-flex">
@@ -148,25 +148,6 @@ function Dashboard(props) {
 
                                 <div>
                                     Total Food Request
-								 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                    
-
-                    <div class="col-lg-3">
-                        <div class="card bg-primary-600"  style={style}>
-                            <div class="card-body">
-                                <div class="d-flex">
-                                    <h3 class="font-weight-semibold mb-0">0</h3>
-                                    <div class="list-icons ml-auto"><i class="icon-coffee mr-3 icon-2x"></i>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    Total Food Donation
 								 </div>
                             </div>
                         </div>

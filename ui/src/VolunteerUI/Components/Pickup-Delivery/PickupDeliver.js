@@ -49,7 +49,7 @@ function PickupDeliver(props) {
 			landmark_id:user.landmark_id._id
 		}
 		await actions.addFoodDelivery(foodDonationDispatch,data);
-		await actions.uncheckedQuality(foodDonationDispatch,user.landmark_id._id);
+		await actions.goodQuality(foodDonationDispatch,user.landmark_id._id);
 		window.location.reload();		
 	}
 

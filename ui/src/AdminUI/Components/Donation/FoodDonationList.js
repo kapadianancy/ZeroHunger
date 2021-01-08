@@ -28,7 +28,7 @@ function FoodDonationList(props) {
                 <td>{f.time}</td>
                 <td>{f.donor_id.user_id.name}</td>
                 <td>{f.event}</td>
-                <td>{f.receiver_id.name}</td>
+                {f.receiver_id!=null?<td>{f.receiver_id.name}</td>:<td>-</td>}
                 <td>{f.plates}</td>
             </tr>
 
