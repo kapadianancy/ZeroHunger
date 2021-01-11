@@ -18,6 +18,7 @@ beforeEach(async () => {
     const user = await User.findOne({
         "email": "user1@gmail.com"
     });
+  //  console.log(user);
     token = await utils.generateToken(user);
 })
 

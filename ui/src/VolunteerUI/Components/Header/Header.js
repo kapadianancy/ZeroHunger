@@ -13,7 +13,8 @@ function Header(props) {
 		<div className="navbar navbar-expand-md navbar-dark" style={style}>
 		<div className="navbar-brand">
 			<a href="#" className="d-inline-block">
-				<img src="../assets/images/logo_light.png" alt=""/>
+					{/* <img src="../assets/images/logo_light.png" alt="" /> */}
+					<h1 style={{color:"white",fontWeight:"bold",fontStyle:"italic"}}>ZeroHunger</h1>
 			</a>
 		</div>
 
