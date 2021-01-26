@@ -4,8 +4,9 @@ const Food_request = require('../models/Food_request');
 const Donation = require('../models/Donation');
 const User = require('../models/User');
 const Receiver = require('../models/Receiver');
-const Donor = require('../models/Donor');
-const { populate } = require('../models/Food_delivery');
+const Landmark = require('../models/Landmark');
+const { populate, count } = require('../models/Food_delivery');
+const Volunteer = require('../models/Volunteer');
 
 exports.getAllFoodDonation = async (req, res) => {
     try {
@@ -68,7 +69,7 @@ exports.getAllDeliveredFood = async (req, res) => {
                     model: 'Donor',
                     populate: {
                         path: 'user_id',
-                        model: 'User',
+                        model: 'User'
                     }
                 }
             })
@@ -104,13 +105,13 @@ exports.addMoneyDonation = async (req, res) => {
 }
 
 exports.addFoodDelivery = async (req, res) => {
-    
+
     try {
-        
+
         const data = new Food_delivery(req.body);
         await data.save();
-        const f=await Food_listing.findOne({_id:req.body.food_listing_id});
-        f.assigned=true;
+        const f = await Food_listing.findOne({ _id: req.body.food_listing_id });
+        f.assigned = true;
         await f.save();
         return res.status(201).send(data)
     } catch (e) {
@@ -331,39 +332,39 @@ exports.areaWiseTotalDonation = async (req, res) => {
 exports.areaWiseRequest = async (req, res) => {
     try {
         var land_id = req.params.id;
-        Food_request.find({is_deleted:0}).populate({
+        Food_request.find({ is_deleted: 0 }).populate({
             path: 'receiver_id',
             populate: {
                 path: 'category_id',
                 model: 'Receiver_category'
             }
         })
-        .exec(async (err, requests) => {
-            if (err) {
-                return res.status(400).send(err);
-            }
-            else {
-                var userIds = requests.map((r) => { return r.receiver_id._id });
-                Receiver.find({ _id: { $in: userIds }, landmark_id: land_id }, async (err, users) => {
-                    if (err) {
+            .exec(async (err, requests) => {
+                if (err) {
+                    return res.status(400).send(err);
+                }
+                else {
+                    var userIds = requests.map((r) => { return r.receiver_id._id });
+                    Receiver.find({ _id: { $in: userIds }, landmark_id: land_id }, async (err, users) => {
+                        if (err) {
 
-                        return res.status(400).send(err);
-                    }
-                    else {
-                        if (users.length == 0) {
-                            return res.status(400).send("No data found");
+                            return res.status(400).send(err);
                         }
-                        var uids = users.map((u) => { return u._id.toString() })
-                        var result = requests.filter(function (x) {
-                            return uids.includes(x.receiver_id._id.toString());
-                        })
-                        res.status(200).send(result);
-                    }
-                })
+                        else {
+                            if (users.length == 0) {
+                                return res.status(400).send("No data found");
+                            }
+                            var uids = users.map((u) => { return u._id.toString() })
+                            var result = requests.filter(function (x) {
+                                return uids.includes(x.receiver_id._id.toString());
+                            })
+                            res.status(200).send(result);
+                        }
+                    })
 
-                //res.status(200).send(userIds);
-            }
-        })
+                    //res.status(200).send(userIds);
+                }
+            })
 
     } catch (err) {
         return res.status(400).send("bad request");
@@ -373,124 +374,122 @@ exports.areaWiseRequest = async (req, res) => {
 exports.areaWiseFoodDonation = async (req, res) => {
     try {
         var land_id = req.params.id;
-        Food_listing.find({is_deleted:0})
-        .populate({
-            path: 'receiver_id',
-            populate: {
-                path: 'category_id',
-                model: 'Receiver_category'
-            }
-        })
-        .populate({
-            path: 'donor_id',
-            populate: {
-                path: 'donor_category_id',
-                model: 'Donor_category'
-            }
-        })
-        .populate({
-            path: 'donor_id',
-            populate: {
-                path: 'user_id',
-                model: 'User'
-            }
-        })
-        .exec(async (err, requests) => {
-            if (err) {
-                return res.status(400).send(err);
-            }
-            else {
-                var userIds = requests.map((r) => { return r.donor_id.user_id });
-                User.find({ _id: { $in: userIds }, landmark_id: land_id }, async (err, users) => {
-                    if (err) {
+        Food_listing.find({ is_deleted: 0 })
+            .populate({
+                path: 'receiver_id',
+                populate: {
+                    path: 'category_id',
+                    model: 'Receiver_category'
+                }
+            })
+            .populate({
+                path: 'donor_id',
+                populate: {
+                    path: 'donor_category_id',
+                    model: 'Donor_category'
+                }
+            })
+            .populate({
+                path: 'donor_id',
+                populate: {
+                    path: 'user_id',
+                    model: 'User'
+                }
+            })
+            .exec(async (err, requests) => {
+                if (err) {
+                    return res.status(400).send(err);
+                }
+                else {
+                    var userIds = requests.map((r) => { return r.donor_id.user_id });
+                    User.find({ _id: { $in: userIds }, landmark_id: land_id }, async (err, users) => {
+                        if (err) {
 
-                        return res.status(400).send(err);
-                    }
-                    else {
-                        if (users.length == 0) {
-                            return res.status(400).send("No data found");
+                            return res.status(400).send(err);
                         }
-                        var uids = users.map((u) => { return u._id.toString() })
-                        var result = requests.filter(function (x) {
-                            return uids.includes(x.donor_id.user_id._id.toString());
-                        })
-                        res.status(200).send(result);
-                    }
-                })
+                        else {
+                            if (users.length == 0) {
+                                return res.status(400).send("No data found");
+                            }
+                            var uids = users.map((u) => { return u._id.toString() })
+                            var result = requests.filter(function (x) {
+                                return uids.includes(x.donor_id.user_id._id.toString());
+                            })
+                            res.status(200).send(result);
+                        }
+                    })
 
-                //res.status(200).send(userIds);
-            }
-        })
+                    //res.status(200).send(userIds);
+                }
+            })
 
 
     } catch (err) {
         return res.status(400).send("bad request");
     }
-}   
+}
 
 exports.uncheckedQuality = async (req, res) => {
     try {
         var land_id = req.params.id;
         Food_listing.find({
-            is_deleted:0,
-            quality_status:"unchecked"
+            is_deleted: 0,
+            quality_status: "unchecked"
         })
-        .populate({
-            path: 'receiver_id',
-            populate: {
-                path: 'category_id',
-                model: 'Receiver_category'
-            }
-        })
-        .populate({
-            path: 'donor_id',
-            populate: {
-                path: 'donor_category_id',
-                model: 'Donor_category'
-            }
-        })
-        .populate({
-            path: 'donor_id',
-            populate: {
-                path: 'user_id',
-                model: 'User'
-            }
-        })
-        .exec(async (err, requests) => {
-            if (err) {
-                return res.status(400).send(err);
-            }
-            else {
-                if(requests.length!=0)
-                {
-                 
-                var userIds = requests.map((r) => { return r.donor_id.user_id });
-                User.find({ _id: { $in: userIds }, landmark_id: land_id }, async (err, users) => {
-                    if (err) {
+            .populate({
+                path: 'receiver_id',
+                populate: {
+                    path: 'category_id',
+                    model: 'Receiver_category'
+                }
+            })
+            .populate({
+                path: 'donor_id',
+                populate: {
+                    path: 'donor_category_id',
+                    model: 'Donor_category'
+                }
+            })
+            .populate({
+                path: 'donor_id',
+                populate: {
+                    path: 'user_id',
+                    model: 'User'
+                }
+            })
+            .exec(async (err, requests) => {
+                if (err) {
+                    return res.status(400).send(err);
+                }
+                else {
+                    if (requests.length != 0) {
 
-                        return res.status(400).send(err);
+                        var userIds = requests.map((r) => { return r.donor_id.user_id });
+                        User.find({ _id: { $in: userIds }, landmark_id: land_id }, async (err, users) => {
+                            if (err) {
+
+                                return res.status(400).send(err);
+                            }
+                            else {
+                                if (users.length == 0) {
+                                    return res.status(200).send("");
+                                }
+                                var uids = users.map((u) => { return u._id.toString() })
+                                var result = requests.filter(function (x) {
+                                    return uids.includes(x.donor_id.user_id._id.toString());
+                                })
+                                res.status(200).send(result);
+                            }
+                        })
                     }
                     else {
-                        if (users.length == 0) {
-                            return res.status(200).send("");
-                        }
-                        var uids = users.map((u) => { return u._id.toString() })
-                        var result = requests.filter(function (x) {
-                            return uids.includes(x.donor_id.user_id._id.toString());
-                        })
-                        res.status(200).send(result);
+                        return res.status(200).send("");
                     }
-                })
-                }
-                else
-                {
-                    return res.status(200).send("");
-                }
-                
 
-                //res.status(200).send(userIds);
-            }
-        })
+
+                    //res.status(200).send(userIds);
+                }
+            })
 
 
     } catch (err) {
@@ -503,56 +502,56 @@ exports.checkedQuality = async (req, res) => {
     try {
         var land_id = req.params.id;
         Food_listing.find({
-            is_deleted:0,
+            is_deleted: 0,
             quality_status: { $ne: "unchecked" }
         })
-        .populate({
-            path: 'receiver_id',
-            populate: {
-                path: 'category_id',
-                model: 'Receiver_category'
-            }
-        })
-        .populate({
-            path: 'donor_id',
-            populate: {
-                path: 'donor_category_id',
-                model: 'Donor_category'
-            }
-        })
-        .populate({
-            path: 'donor_id',
-            populate: {
-                path: 'user_id',
-                model: 'User'
-            }
-        })
-        .exec(async (err, requests) => {
-            if (err) {
-                return res.status(400).send(err);
-            }
-            else {
-                var userIds = requests.map((r) => { return r.donor_id.user_id });
-                User.find({ _id: { $in: userIds }, landmark_id: land_id }, async (err, users) => {
-                    if (err) {
+            .populate({
+                path: 'receiver_id',
+                populate: {
+                    path: 'category_id',
+                    model: 'Receiver_category'
+                }
+            })
+            .populate({
+                path: 'donor_id',
+                populate: {
+                    path: 'donor_category_id',
+                    model: 'Donor_category'
+                }
+            })
+            .populate({
+                path: 'donor_id',
+                populate: {
+                    path: 'user_id',
+                    model: 'User'
+                }
+            })
+            .exec(async (err, requests) => {
+                if (err) {
+                    return res.status(400).send(err);
+                }
+                else {
+                    var userIds = requests.map((r) => { return r.donor_id.user_id });
+                    User.find({ _id: { $in: userIds }, landmark_id: land_id }, async (err, users) => {
+                        if (err) {
 
-                        return res.status(400).send(err);
-                    }
-                    else {
-                        if (users.length == 0) {
-                            return res.status(400).send("No data found");
+                            return res.status(400).send(err);
                         }
-                        var uids = users.map((u) => { return u._id.toString() })
-                        var result = requests.filter(function (x) {
-                            return uids.includes(x.donor_id.user_id._id.toString());
-                        })
-                        res.status(200).send(result);
-                    }
-                })
+                        else {
+                            if (users.length == 0) {
+                                return res.status(400).send("No data found");
+                            }
+                            var uids = users.map((u) => { return u._id.toString() })
+                            var result = requests.filter(function (x) {
+                                return uids.includes(x.donor_id.user_id._id.toString());
+                            })
+                            res.status(200).send(result);
+                        }
+                    })
 
-                //res.status(200).send(userIds);
-            }
-        })
+                    //res.status(200).send(userIds);
+                }
+            })
 
 
     } catch (err) {
@@ -582,53 +581,51 @@ exports.pickupDeliver = async (req, res) => {
     try {
         var land_id = req.params.id;
         Food_listing.find({
-            is_deleted:false,
-            quality_status:"good",
-            receiver_id:{$ne:null},
-            assigned:false
+            is_deleted: false,
+            quality_status: "good",
+            receiver_id: { $ne: null },
+            assigned: false
         })
-        .populate({
-            path: 'receiver_id',
-            populate: {
-                path: 'category_id',
-                model: 'Receiver_category'
-            }
-        })
-        .exec(async (err, requests) => {
-            if (err) {
-                return res.status(400).send(err);
-            }
-            else {
-                if(requests.length!=0)
-                {
-                 
-                var userIds = requests.map((r) => { return r.receiver_id._id });
-                Receiver.find({ _id: { $in: userIds }, landmark_id: land_id }, async (err, users) => {
-                    if (err) {
+            .populate({
+                path: 'receiver_id',
+                populate: {
+                    path: 'category_id',
+                    model: 'Receiver_category'
+                }
+            })
+            .exec(async (err, requests) => {
+                if (err) {
+                    return res.status(400).send(err);
+                }
+                else {
+                    if (requests.length != 0) {
 
-                        return res.status(400).send(err);
+                        var userIds = requests.map((r) => { return r.receiver_id._id });
+                        Receiver.find({ _id: { $in: userIds }, landmark_id: land_id }, async (err, users) => {
+                            if (err) {
+
+                                return res.status(400).send(err);
+                            }
+                            else {
+                                if (users.length == 0) {
+                                    return res.status(200).send("");
+                                }
+                                var uids = users.map((u) => { return u._id.toString() })
+                                var result = requests.filter(function (x) {
+                                    return uids.includes(x.receiver_id._id.toString());
+                                })
+                                res.status(200).send(result);
+                            }
+                        })
                     }
                     else {
-                        if (users.length == 0) {
-                            return res.status(200).send("");
-                        }
-                        var uids = users.map((u) => { return u._id.toString() })
-                        var result = requests.filter(function (x) {
-                            return uids.includes(x.receiver_id._id.toString());
-                        })
-                        res.status(200).send(result);
+                        return res.status(200).send("");
                     }
-                })
-                }
-                else
-                {
-                    return res.status(200).send("");
-                }
-                
 
-                //res.status(200).send(userIds);
-            }
-        })
+
+                    //res.status(200).send(userIds);
+                }
+            })
 
 
     } catch (err) {
@@ -638,11 +635,11 @@ exports.pickupDeliver = async (req, res) => {
 
 exports.getAllPendingFood = async (req, res) => {
     try {
-        let land_id=req.params.id;
+        let land_id = req.params.id;
         const data = await Food_delivery.find({
             status: "Pending",
             is_deleted: 0,
-            landmark_id:land_id
+            landmark_id: land_id
         }).populate("food_listing_id")
             .populate({
                 path: 'volunteer_id',
@@ -715,6 +712,88 @@ exports.redirectfood = async (req, res) => {
         return res.status(400).send("Not Updated")
     }
 }
+
+exports.areaWiseFoodDonationCount = async (req, res) => {
+    try {
+        var final = [];
+        await Landmark.find({ is_deleted: 0 })
+            .exec()
+            .then(async (data1) => {
+                var i = 0;
+                await data1.forEach(async (d) => {
+
+                    await Food_listing.find({ is_deleted: 0 })
+                        .populate({
+                            path: 'donor_id',
+                            populate: {
+                                path: 'user_id',
+                                model: 'User',
+                                populate: {
+                                    path: 'landmark_id',
+                                    model: 'Landmark',
+                                }
+                            }
+                        })
+                        .exec()
+                        .then((ans) => {
+                            i++;
+                            let count = 0;
+                            ans.map((d1) => {
+                                if (d1.donor_id.user_id.landmark_id.name == d.name) {
+                                    count += 1;
+                                }
+                            })
+                            final.push({ data: d, count })
+                        })
+                    if (i == data1.length) {
+                        res.status(200).send(final)
+                    }
+                })
+            })
+    } catch (err) {
+        return res.status(400).send("bad request");
+    }
+}
+
+exports.areaWiseVoluneerCount = async (req, res) => {
+    try {
+        var final = [];
+        await Landmark.find({ is_deleted: 0 })
+            .exec()
+            .then(async (data1) => {
+                var i = 0;
+                await data1.forEach(async (d) => {
+
+                    await Volunteer.find({ is_deleted: 0 })
+                        .populate({
+                            path: 'user_id',
+                            model: 'User',
+                            populate: {
+                                path: 'landmark_id',
+                                model: 'Landmark',
+                            }
+                        })
+                        .exec()
+                        .then((ans) => {
+                            i++;
+                            let count = 0;
+                            ans.map((d1) => {
+                                if (d1.user_id.landmark_id.name == d.name) {
+                                    count += 1;
+                                }
+                            })
+                            final.push({ data: d, count })
+                        })
+                    if (i == data1.length) {
+                        res.status(200).send(final)
+                    }
+                })
+            })
+    } catch (err) {
+        return res.status(400).send("bad request");
+    }
+}
+
 
 
 

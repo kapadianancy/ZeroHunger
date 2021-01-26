@@ -213,3 +213,43 @@ export const updatedeliverystatus = async (donationDispatch,id,status) => {
             throw new Error(error);
         })
 };
+
+export const areaWiseFoodDonationCount = async (donationDispatch) => {
+    const token = localStorage.getItem("token");
+    await axios.get('/donation/areaWiseFoodDonationCount',{
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    })
+        .then(async (response) => {
+            //console.log(response)
+            donationDispatch({
+                type: ActionNames.AREAWSIE_FOODDONATION_COUNT,
+                data: {
+                    areawisefooddonation: response.data
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};
+
+export const areaWiseVolunteerCount = async (donationDispatch) => {
+    const token = localStorage.getItem("token");
+    await axios.get('/donation/areaWiseVolunteerCount',{
+        headers: {
+            authorization: 'Bearer ' + token
+        }
+    })
+        .then(async (response) => {
+            //console.log(response)
+            donationDispatch({
+                type: ActionNames.AREAWSIE_VOLUNTEER_COUNT,
+                data: {
+                    areawisevolunteercount: response.data
+                }
+            });
+        }).catch(error => {
+            throw new Error(error);
+        })
+};

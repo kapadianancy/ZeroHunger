@@ -65,4 +65,10 @@ router.put('/updatedeliverystatus/:id',auth,Donation.updateDeliverystatus);
 
 router.put('/redirectfood/:id',auth,Donation.redirectfood)
 
+//graph
+
+router.get('/areaWiseFoodDonationCount',auth,Donation.areaWiseFoodDonationCount);
+
+router.get('/areaWiseVolunteerCount',auth,Donation.areaWiseVoluneerCount);
+
 module.exports = router;

@@ -18,21 +18,26 @@ function DonationReducer(state, action) {
         case ActionNames.FOOD_DELIVERY_LIST:
             return { ...state, fooddelivery: action.data.fooddelivery }
         case ActionNames.AREAWSIE_FOODDONATION:
-            return{...state,areaWiseFoodDonation:action.data.areaWiseFoodDonation}
+            return { ...state, areaWiseFoodDonation: action.data.areaWiseFoodDonation }
         case ActionNames.UNCHECKED_QUALITY:
-            return{...state,uncheckedQuality:action.data.uncheckedQuality}
+            return { ...state, uncheckedQuality: action.data.uncheckedQuality }
         case ActionNames.UPDATE_QUALITY:
-            return{...state}
+            return { ...state }
         case ActionNames.GOOD_QUALITY:
-            return{...state,goodQuality:action.data.goodQuality}
+            return { ...state, goodQuality: action.data.goodQuality }
         case ActionNames.ADD_FOOD_DELIVERY:
-            return{...state}
+            return { ...state }
         case ActionNames.UPDATE_DELIVERY_STATUS:
-            return{...state}
+            return { ...state }
         case ActionNames.REDIRECT_FOOD:
-            return{...state}
+            return { ...state }
         case ActionNames.PENDING_DELIVERY:
-            return{...state,pendingDelivery :action.data.pendingDelivery}
+            return { ...state, pendingDelivery: action.data.pendingDelivery }
+        case ActionNames.AREAWSIE_FOODDONATION_COUNT:
+            return { ...state, areawisefooddonation: action.data.areawisefooddonation }
+        case ActionNames.AREAWSIE_VOLUNTEER_COUNT:
+            return { ...state, areawisevolunteercount: action.data.areawisevolunteercount }
+
         default: {
             throw new Error(`Unhandled action type: ${action.type}`)
         }
@@ -46,10 +51,12 @@ function DonationProvider({ children }) {
         moneydonation: [],
         fooddonation: [],
         fooddelivery: [],
-        areaWiseFoodDonation:[],
-        uncheckedQuality:[],
-        goodQuality:[],
-        pendingDelivery:[]
+        areaWiseFoodDonation: [],
+        uncheckedQuality: [],
+        goodQuality: [],
+        pendingDelivery: [],
+        areawisefooddonation: [],
+        areawisevolunteercount:[]
 
     })
 

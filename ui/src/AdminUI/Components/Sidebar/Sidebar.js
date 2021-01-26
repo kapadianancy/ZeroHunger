@@ -88,9 +88,14 @@ function Sidebar(proprs) {
 								</ul>
 							</li>
 
-							<li className="nav-item">
-								<a  className="nav-link"><i className="icon-graph"></i> <span>Graphs</span></a>
+							<li className="nav-item nav-item-submenu">
+							<a  className="nav-link"><i className="icon-graph"></i> <span>Graphs</span></a>
+								<ul className="nav nav-group-sub" data-submenu-title="Graphs">
+									<li className="nav-item"><a href="/admin/areawisefooddonation" className="nav-link">Area Wise Food Donation</a></li>
+									<li className="nav-item"><a href="/admin/areawisevolunteer" className="nav-link">Area Wise Volunteer</a></li>
+								</ul>
 							</li>
+
 							
 						</ul>
 					</div>
