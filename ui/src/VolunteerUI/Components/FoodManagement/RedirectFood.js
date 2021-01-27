@@ -72,7 +72,7 @@ function FoodDonation(props) {
     
 	data = areaWiseFoodDonation.map(v => {
 
-        if(v.receiver_id==null)
+        if(v.receiver_id==null && v.quality_status=="good")
         {
             const date = new Date(v.date);
             var dd = date.getDate();

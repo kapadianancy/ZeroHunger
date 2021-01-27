@@ -562,7 +562,20 @@ exports.checkedQuality = async (req, res) => {
 
 exports.updateQuality = async (req, res) => {
     try {
-        await Food_listing.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true }, (err) => {
+        if(req.body.quality_status=="bad")
+        {
+            data={
+                "quality_status":"bad",
+                "receiver_id":"5fd9e10110c2191f736c0b3a"
+            }
+        }
+        else
+        {
+            data={
+                "quality_status":"good"
+            } 
+        }
+        await Food_listing.findByIdAndUpdate(req.params.id, data, { new: true, runValidators: true }, (err) => {
             if (err) {
                 return res.status(400).send(err)
             }

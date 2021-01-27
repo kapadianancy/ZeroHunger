@@ -27,8 +27,7 @@ const fooddeliverySchema=mongoose.Schema({
     {
         type:mongoose.Schema.Types.ObjectId,
         required:true,
-        ref:'Landmark',
-        unique:true
+        ref:'Landmark'
     },
     is_deleted:
     {
