@@ -30,7 +30,7 @@ function FoodDeliveryList(props) {
                 <td>{f.food_listing_id.receiver_id.name}</td>
                 <td>{f.food_listing_id.plates}</td>
                 <td>{f.volunteer_id.user_id.name}</td>
-                <td>{f.status}</td>
+                <td><span class="badge bg-success-400" style={{height:"20px"}}>{f.status}</span></td>
             </tr>
 
         )
